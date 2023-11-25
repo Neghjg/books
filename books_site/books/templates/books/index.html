@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link type="text/css" href="{% static 'books/css/style.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'books/css/style.css' %}">
+    
+</head>
+
+<body>
+    {% for i in books %}
+        {{ i.title }}
+        {% if i.photo %}
+            <p><img class="photo" src="{{contact.photo.url}}"></p>
+        {% endif %}
+
+        {{ i.price }}
+
+    {% endfor %}
+</body>
+</html>
