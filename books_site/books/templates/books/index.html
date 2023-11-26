@@ -1,15 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    
-    <link type="text/css" href="{% static 'books/css/style.css' %}" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'books/css/style.css' %}">
-    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
-    
-</head>
+{% extends 'books/base.html' %}
 
-<body>
+{% load static %}
+{% block content %}
+
     {% for i in books %}
         {{ i.title }}
         {% if i.photo %}
@@ -19,5 +12,5 @@
         {{ i.price }}
 
     {% endfor %}
-</body>
-</html>
+
+{% endblock %}
