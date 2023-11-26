@@ -7,7 +7,7 @@ class Book(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название')
     description = models.TextField(blank=True, verbose_name='Описание')
     cat = models.ForeignKey('Category', on_delete=models.PROTECT)
-    photo = models.ImageField(upload_to='media/photos/', default='photos/book-preload.svg', verbose_name='Изображение')
+    photo = models.ImageField(upload_to='photos/', default='photos/book-preload.svg', verbose_name='Изображение')
     price = models.IntegerField(verbose_name='Цена')
     is_published = models.BooleanField(default=True)
     count_buy = models.IntegerField(verbose_name='Количесвто покупок')
