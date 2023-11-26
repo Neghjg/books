@@ -3,6 +3,6 @@ from .models import *
 
 
 # Create your views here.
-def idex(request):
+def index(request):
     books = Book.objects.all()
     return render(request, 'books/index.html', {'books': books})
