@@ -3,6 +3,16 @@
 {% load static %}
 {% block content %}
 
+<form action="{% url "classical_prose" %}" method="get">
+    <label for="sort">Сортировать по:</label>
+    <select name="sort" id="sort">
+        <option value="default">По умолчанию</option>
+        <option value="price_to_low">Дешевле</option>
+        <option value="price_to_hight">Дороже</option>
+    </select>
+    <input type="submit" value="Сортировать">
+</form>
+
     {% for i in books %}
         {{ i.title }}
         {% if i.photo %}

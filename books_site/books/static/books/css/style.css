@@ -1,0 +1,66 @@
+html, body {
+    height: 100%;
+    font-family: Arial, Tahoma;
+    color: rgb(236, 233, 233);
+    
+    
+}
+
+.header {
+    
+    height: 45px;
+    
+    border-radius: 20px 20px 20px 20px;
+    
+}
+
+.wrapper {
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page {
+    min-height: 100%;
+    padding-bottom: 90px;
+    min-width: 1000px;
+    box-sizing: border-box;
+}
+
+.nav-tabs{
+    position: fixed;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.card{
+    float: left;
+    margin: 5px;
+    width: 700px;
+    height: 900px;
+    display: block;
+    
+}
+
+.cart_table{
+    min-width: 1000px;
+    z-index: 1;
+}
+
+.img-fluid.rounded-start{
+    height: 248px;
+    width: 175px;
+
+}
+
+select#sort.form-select{
+    width: 200px;
+    display: block;
+    float:left;
+    
+}
+
+.input_div{
+    margin: 0px 50px 0 0;
+    padding: 0px 50px 0 0;
+}
