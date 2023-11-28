@@ -4,6 +4,7 @@ html, body {
     color: rgb(236, 233, 233);
     
     
+    
 }
 
 .header {
@@ -28,6 +29,7 @@ html, body {
 }
 
 .nav-tabs{
+    
     position: fixed;
     background-color: #fff;
     z-index: 2;
@@ -60,7 +62,6 @@ select#sort.form-select{
     
 }
 
-.input_div{
-    margin: 0px 50px 0 0;
-    padding: 0px 50px 0 0;
+.nav-item{
+    padding: 3px 0 0 0;
 }

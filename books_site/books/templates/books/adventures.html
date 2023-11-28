@@ -9,7 +9,7 @@
         <option value="price_to_low">Дешевле</option>
         <option value="price_to_hight">Дороже</option>
     </select></div>
-    <div class = 'input_div'><input type="submit" value="Сортировать"></div>
+    <div class = 'input_div'><input type="submit" class="btn btn-primary" value="Сортировать"></div>
 </form>
 <div style = 'clear: both;'></div>
 <!--{% for i in books %}
@@ -30,14 +30,14 @@
   
   {% for i in books %}
   
-  <a href='#'><div class="card mb-3" style="width: 540px; height: 250px">
+  <a href='#'><div class="card mb-3" style="width: 540px; height: 250px ">
     <div class="row g-0">
-      <div class="col-md-4">
+      <div class="col-md-4"  >
         {% if i.photo %}
         <img class="img-fluid rounded-start" src="{{i.photo.url}}">
         {% endif %}
       </div>
-      <div class="col-md-8">
+      <div class="col-md-8" >
         <div class="card-body">
           <h5 class="card-title">{{ i.title|truncatechars:53 }}</h5>
           <p class="card-text">{{ i.author }}</p>
