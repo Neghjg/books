@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import *
 import requests
 
@@ -58,3 +58,23 @@ def modern_prose(request):
     elif sort == 'price_to_hight':
         books = Book.objects.filter(cat = 1).order_by('-price')
     return render(request, 'books/modern_prose.html', {'books': books})
+
+def search(request):
+    result = []
+    if request.method == 'GET':
+        query = request.GET.get('search')
+        if query == '':
+            query = 'None'
+        result = Book.objects.filter(title__istartswith = query)
+        return render(request, 'books/search.html', {'query': query, 'result': result})
+    
+    
+def book(request, post_slug):
+    book = Book.objects.filter(slug = post_slug)
+    get_book = get_object_or_404(Book, slug=post_slug)
+    return render(request, 'books/book.html', {'book': book, 'get_book': get_book})
+
+def author(request, book_author):
+    books = Book.objects.filter(author=book_author)
+    return render(request, 'books/author.html', {'books': books})
+#<!--{% url 'author' i.author %}-->

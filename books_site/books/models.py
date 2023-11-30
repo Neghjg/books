@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
 class Book(models.Model):
@@ -15,6 +16,9 @@ class Book(models.Model):
     year_of_publication = models.IntegerField(verbose_name='Год издания')
     publisher = models.CharField(max_length=100, verbose_name='Издательсво')
     rev = models.ForeignKey('Reviews', on_delete=models.PROTECT, null=True, blank=True)
+    
+    def get_absolute_url(self):
+        return reverse('book', kwargs={'post_slug': self.slug})
     
     class Meta:
         verbose_name = 'Книги'

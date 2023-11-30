@@ -1,0 +1,16 @@
+{% extends 'books/base.html' %}
+
+{% load static %}
+{% block content %}
+
+{% if query %}
+{{query}}
+{% for c in results %}
+
+{{ c.title }}
+
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}

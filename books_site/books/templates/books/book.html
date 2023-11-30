@@ -1,0 +1,34 @@
+{% extends 'books/base.html' %}
+
+{% load static %}
+{% block content %}
+
+{% for i in book %}
+<br>
+<br>
+<div class='book_div'>
+        {% if i.photo %}
+            <div class='div_img_book'><p><img class="photo_book" src="{{i.photo.url}}"></p></div>
+        {% endif %}
+        <h1 class='title_h1_book'>{{i.title}}</h1>
+        <div class='a_book'><a href="#">{{ i.author }}</a></div>
+        <div class='book_box'>
+            <div class='book_box_left'>
+                <h6>Издательсвто</h6>
+                <h6>Год издания</h6>
+            </div>
+            <div class='book_box_right'>
+                <h6>{{i.publisher}}</h6>
+                <h6>{{i.year_of_publication}}</h6>
+            </div>
+            <div style='clear:both;'></div>
+        </div>
+        <div><h6 class="book_description">{{i.description}}</h6></div>
+        
+        <h3 class="prod_price">Цена товара:{{i.price}} р.</h3>
+
+
+</div>
+{% endfor %}
+
+{% endblock %}
