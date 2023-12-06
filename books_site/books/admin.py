@@ -15,9 +15,15 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ("name",)
     list_display_links = ("id", "name")
     
+class ReviewsAdmin(admin.ModelAdmin):
+    #prepopulated_fields = {'slug':('id',)}
+    list_display = ('id', 'user', 'rating', 'comment')
+    list_display_links = ("id", "user")
+    search_fields = ("user", 'id')
+    
     
 admin.site.register(Book, BookAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Reviews)
+admin.site.register(Reviews, ReviewsAdmin)
 
 admin.site.site_header = "Админ-панель"

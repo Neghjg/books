@@ -31,15 +31,15 @@ html, body {
 .nav-tabs{
     position: fixed;
     width: 100%;
-    max-width: 975px;
+    max-width: 1200px;
     position: fixed;
     background-color: #fff;
     z-index: 2;
-    min-width: 975px;
+    min-width: 1200px;
 }
 
 #authenticate{
-    margin: 0 0 0 200px;
+    margin: 0 0 0 420px;
 
     
 }
@@ -98,6 +98,8 @@ select#sort.form-select{
     vertical-align: top;
 }
 
+
+
 .div_img_book{
     width: 300px;
     height: 500px;
@@ -135,3 +137,5 @@ select#sort.form-select{
 .book_description{
     margin: 35px 0 0 0;
 }
+
+ 

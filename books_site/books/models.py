@@ -15,7 +15,10 @@ class Book(models.Model):
     author = models.CharField(max_length=255, verbose_name='автор')
     year_of_publication = models.IntegerField(verbose_name='Год издания')
     publisher = models.CharField(max_length=100, verbose_name='Издательсво')
-    rev = models.ForeignKey('Reviews', on_delete=models.PROTECT, null=True, blank=True)
+
+    
+    def __str__(self):
+        return self.title
     
     def get_absolute_url(self):
         return reverse('book', kwargs={'post_slug': self.slug})
@@ -38,10 +41,17 @@ class Category(models.Model):
     
 
 class Reviews(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #user = models.ManyToManyField(User)
+    article_id = models.ForeignKey(Book, on_delete=models.CASCADE, null=True, blank=True, related_name='comments_book')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    
     rating = models.IntegerField(verbose_name='Оценка')
     comment = models.CharField(max_length=255, verbose_name='Комментарий')
+    
+    def __str__(self):
+        return str(self.user)
+    
+    
+    
     
     class Meta:
         verbose_name = 'Отзыв'
