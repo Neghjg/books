@@ -138,4 +138,8 @@ select#sort.form-select{
     margin: 35px 0 0 0;
 }
 
- 
+#comments{
+    background-color: rgb(216, 255, 220);
+    width: 80%;
+    
+}

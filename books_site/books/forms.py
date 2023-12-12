@@ -8,8 +8,8 @@ from django.contrib.auth.forms import AuthenticationForm
 class Comment(forms.ModelForm):
     #def __init__(self, *args, **kwargs):
     #    super().__init__(*args, **kwargs)
-    #CHOICES = [('1','1'),('2','2'), ('3','3'),('4','4'), ('5', '5')]
-    CHOICES = zip([1,2,3, 4, 5], ['1','2','3', '4', '5'])
+    CHOICES = [('1','1'),('2','2'), ('3','3'),('4','4'), ('5', '5')]
+    #CHOICES = zip([1,2,3, 4, 5], ['1','2','3', '4', '5'])
     rating = forms.IntegerField(max_value= 5, widget=forms.RadioSelect(choices=CHOICES, attrs={"id": "rating-input"}))
     comment = forms.CharField( widget=forms.Textarea(attrs={"class": "form_label"}))
     

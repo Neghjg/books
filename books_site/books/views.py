@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
 import requests
+from django.db.models import Q
+from django.db.models import Avg
 
 
 # Create your views here.
@@ -67,7 +69,7 @@ def search(request):
         query = request.GET.get('search')
         if query == '':
             query = 'None'
-        result = Book.objects.filter(title__istartswith = query)
+        result = Book.objects.filter(title__icontains = query) | Book.objects.filter(author__icontains = query)
         return render(request, 'books/search.html', {'query': query, 'result': result})
     
     
@@ -75,7 +77,8 @@ def book(request, post_slug):
     book = Book.objects.filter(slug = post_slug)
     get_book = get_object_or_404(Book, slug=post_slug)
     new_comment = None
-    
+    comments = Reviews.objects.filter(article_id__slug=post_slug)
+    avg_rating = Reviews.objects.filter(article_id__slug=post_slug).aggregate(Avg("rating"))
     if request.method == 'POST':
         comment_form = Comment(data=request.POST)
         if comment_form.is_valid():
@@ -89,7 +92,8 @@ def book(request, post_slug):
     return render(request, 'books/book.html', {'book': book, 'get_book': get_book, 
                                                
                                                'new_comment': new_comment,
-                                               'comment_form': comment_form})
+                                               'comment_form': comment_form,
+                                               'comments': comments})
 
 def author(request, book_author):
     books = Book.objects.filter(author=book_author)
