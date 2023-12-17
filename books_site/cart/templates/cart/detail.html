@@ -1,0 +1,76 @@
+{% extends "books/base.html" %}
+{% load static %}
+{% block title %}
+    Your shopping cart
+{% endblock %}
+{% block content %}
+{% if cart %}
+<h1></h1>
+<div>
+    {% for item in cart %}
+            {% with product=item.product %}
+    <div class="card" id="cart_product" style="width: 70%;  min-width:780px;">
+        <a href="{{ product.get_absolute_url }}">
+        <img src="{{ product.photo.url }}" class="card-img-top" id="cart_product_photo" alt="...">
+        </a>
+        <div class="card-body" style="min-width:250px;">
+            <a class="a_title_cart" href="{{ product.get_absolute_url }}"><h5 class="card-title">{{product.title}}</h5></a>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{product.author}}</h6>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} шт.</h6>
+        </div>
+        <div class="card-body" id="cart-body2">
+            <h4 class="card-subtitle" id="price_product_cart">{{ item.price }} р.</h4>
+            <a class="btn btn-primary" id="delete_product" href="{% url "cart_remove" product.id%}"><div class = "tab_a_rem">Удалить</div></a>
+        </div>
+      </div>
+      {% endwith %}
+        {% endfor %}
+</div>
+<!--<table class="cart">
+    <thead>
+    <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Remove</th>
+        <th>Unit price</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in cart %}
+        {% with product=item.product %}
+            <tr>
+                <td>
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="
+                            {% if product.image %}
+                                {{ product.image.url }}
+                            {% else %}
+                                {% static "img/no_image.png" %}
+                            {% endif %}">
+                    </a>
+                </td>
+                <td>{{ product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td><a href="{% url "cart_remove" product.id%}">Remove</a></td>
+                <td class="num">${{ item.price }}</td>
+                <td class="num">${{ item.total_price }}</td>
+            </tr>
+        {% endwith %}
+    {% endfor %}
+    <tr class="total">
+        <td>Total</td>
+        <td colspan="4"></td>
+        <td class="num">${{ cart.get_total_price }}</td>
+    </tr>
+    </tbody>
+</table>
+<p class="text-right">
+    <a href="#" class="button light">Continue shopping</a>
+    <a href="#" class="button">Checkout</a>
+</p>-->
+{% else %}
+        <p>Ваша корзина пуста. </p>
+{% endif %}
+{% endblock %}

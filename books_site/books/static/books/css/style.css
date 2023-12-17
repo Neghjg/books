@@ -39,7 +39,7 @@ html, body {
 }
 
 #authenticate{
-    margin: 0 0 0 420px;
+    margin: 0 12px 0 350px;
 
     
 }
@@ -118,7 +118,8 @@ select#sort.form-select{
 }
 
 .book_box{
-    margin: 40px 0 0 0;
+    margin: 20px 0 0 0;
+    
     
 }
 
@@ -142,4 +143,120 @@ select#sort.form-select{
     background-color: rgb(216, 255, 220);
     width: 80%;
     
+}
+
+.book_rating_p{
+    margin: 10px 0 0 0;
+
+}
+
+.a_book{
+    text-decoration: none;
+    color: #0d6efd;
+}
+
+.a_book:hover{
+    text-decoration: none;
+    color: #0056d6;
+}
+
+#book_price_cart{
+    width: 22rem;
+    height: 21rem;
+}
+
+#btn_card_price{
+    width: 250px;
+    height: 40px;
+    margin: 0 0 0 33px;
+}
+
+#h6_card_book{
+    color: #37ceb4;
+    margin: 0 0 10px 33px;
+}
+
+#h3_price_card{
+    margin: 10px 0 10px 33px;
+}
+
+#card_p{
+    margin: 15px 33px 10px 33px;
+}
+
+.div_select{
+    margin: 10px 0 0 0;
+    display: block;
+}
+
+.input_div{
+    display: inline-block;
+    margin: 0 0 0 10px;
+}
+
+.form-select{
+    margin: 0 0 30px 0;
+    max-width: 200px;
+}
+
+.form-control {
+    max-width: 700px;
+}
+
+#cart_product_photo {
+    width: 92px;
+    margin: 15px 15px;
+}
+
+#cart_product {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.a_title_cart {
+    text-decoration: none;
+    color: #000000;
+}
+
+#price_product_cart{
+    color: #f34a57;
+    
+}
+
+#cart-body2{
+    padding: 25px 0 0 300px;
+}
+
+#delete_product{
+    margin: 50px 0 0 0;
+}
+
+.btn .badge {
+    position: relative;
+    top: -1px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    margin: 8px 0 0 0;
+    font-size: .75em;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+#icon_cart{
+    height: 30px;
+    margin: 10px 0 0 0;
+}
+
+svg.bi.bi-cart3{
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
 }

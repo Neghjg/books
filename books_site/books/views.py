@@ -4,6 +4,7 @@ from .forms import *
 import requests
 from django.db.models import Q
 from django.db.models import Avg
+from cart.forms import CartAddProductForm
 
 
 # Create your views here.
@@ -78,7 +79,7 @@ def book(request, post_slug):
     get_book = get_object_or_404(Book, slug=post_slug)
     new_comment = None
     comments = Reviews.objects.filter(article_id__slug=post_slug)
-    avg_rating = Reviews.objects.filter(article_id__slug=post_slug).aggregate(Avg("rating"))
+    avg_rating = Reviews.objects.filter(article_id__slug=post_slug).aggregate(avg = Avg("rating"))
     if request.method == 'POST':
         comment_form = Comment(data=request.POST)
         if comment_form.is_valid():
@@ -89,16 +90,18 @@ def book(request, post_slug):
             new_comment.save()
     else:
         comment_form = Comment()
+        
+    cart_product_form = CartAddProductForm()
+    
     return render(request, 'books/book.html', {'book': book, 'get_book': get_book, 
-                                               
+                                               'cart_product_form': cart_product_form,
                                                'new_comment': new_comment,
                                                'comment_form': comment_form,
-                                               'comments': comments})
+                                               'comments': comments,
+                                               "avg_rating":avg_rating})
 
 def author(request, book_author):
     books = Book.objects.filter(author=book_author)
     return render(request, 'books/author.html', {'books': books})
 #<!--{% url 'author' i.author %}-->
 
-
-            
