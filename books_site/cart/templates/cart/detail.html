@@ -14,13 +14,16 @@
 
     <div class="card" id="card_buy" style="width: 21rem;">
         <div class="card-body">
-            <div class="float_right">
-                {% if my_promo == "1" %}
-                <h5 class="card-title">{{ cart.get_total_price|div:10|mul:9 }} ₽</h5>
-                {% else %}
-                <h5 class="card-title">{{ cart.get_total_price }} ₽</h5>
-                {% endif %}
-            </h5></div><div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
+            {% if my_promo == "1" %}
+            <div class="float_right"><h5 class="card-title" id="price_product_cart">{{ cart.get_total_price|div:10|mul:9 }} ₽</h5></div>
+            <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
+            <div class="float_right"><h6 class="card-subtitle mb-2 text-body-secondary"><del>{{ cart.get_total_price }}</del> ₽</h6></div>
+            <div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">Итого без учета скидки: </h6></div>
+            {% else %}
+            <div class="float_right"><h5 class="card-title">{{ cart.get_total_price }} ₽</h5></div>
+            <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
+            {% endif %}
+            
           {% with total_items=cart|length %}
           <div class="float_right"><h6 class="card-subtitle mb-2 text-body-secondary">{{ total_items }} шт.</h6></div><div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">Количество: </h6></div>
           {% endwith %}
@@ -58,12 +61,24 @@
             <a class="a_title_cart" href="{{ product.get_absolute_url }}"><h5 class="card-title">{{product.title|truncatechars:53}}</h5></a>
             <h6 class="card-subtitle mb-2 text-body-secondary">{{product.author}}</h6>
             <h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} шт.</h6>
+            {% if my_promo == "1" %}
+            <h6 class="card-subtitle mb-2 text-body-secondary"><del>{{ item.price }}</del> {{ item.price|div:10|mul:9 }} р. за шт.</h6>
+            {% else %}
             <h6 class="card-subtitle mb-2 text-body-secondary">{{ item.price }} р. за шт.</h6>
+            {% endif %}
         </div>
+        {% if my_promo == "1" %}
+        <div class="card-body" id="cart-body3">
+            <del><h5 class="card-subtitle" >{{ item.total_price }} р.</h5></del>
+            <h4 class="card-subtitle" id="price_product_cart">{{ item.total_price|div:10|mul:9 }} р.</h4>
+            <a class="btn btn-primary" id="delete_product" href="{% url "cart_remove" product.id%}"><div class = "tab_a_rem">Удалить</div></a>
+        </div>
+        {% else %}
         <div class="card-body" id="cart-body2">
             <h4 class="card-subtitle" id="price_product_cart">{{ item.total_price }} р.</h4>
             <a class="btn btn-primary" id="delete_product" href="{% url "cart_remove" product.id%}"><div class = "tab_a_rem">Удалить</div></a>
         </div>
+        {% endif %}
       </div>
       {% endwith %}
         {% endfor %}

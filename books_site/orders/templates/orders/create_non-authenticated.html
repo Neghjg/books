@@ -9,15 +9,27 @@
 
 <div class="card" id="card_buy" style="width: 21rem;">
     <div class="card-body">
-        
-        <div class="float_right"><h5 class="card-title">{{ cart.get_total_price }} ₽</h5></div><div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
+        {% if my_promo == "1" %}
+        <div class="float_right"><h5 class="card-title">{{ cart.get_total_price|div:10|mul:9 }} ₽</h5></div>
+        <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
+        {% else %}
+        <div class="float_right"><h5 class="card-title">{{ cart.get_total_price }} ₽</h5></div>
+        <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
+        {% endif %}
         {% with total_items=cart|length %}
         <div class="float_right"><h6 class="card-subtitle">{{ total_items }} шт.</h6></div><div class="card_title_div"><h6 class="card-subtitle mb-2">Количество: </h6></div>
         {% endwith %}
+        {% if my_promo == "1" %}
         {% for item in cart %}
-        <div><div class="float_right">{{ item.total_price }}₽</div><div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} x {{ item.product.title|truncatechars:23 }}</h6></div>
-        </div> 
-        {% endfor %}
+        <div><div class="float_right">{{ item.total_price|div:10|mul:9 }}₽</div>
+        <div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} x {{ item.product.title|truncatechars:23 }}</h6></div>
+        {% endfor %}  
+        {% else %}
+        {% for item in cart %}
+        <div><div class="float_right">{{ item.total_price }}₽</div>
+        <div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} x {{ item.product.title|truncatechars:23 }}</h6></div>
+        {% endfor %}    
+        {% endif %}
         <!--{% with total_items=cart|length %}
       <div class="float_right"><h6 class="card-subtitle mb-2 text-body-secondary">{{ total_items }} шт.</h6></div><div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">Количество: </h6></div>
       {% endwith %}-->

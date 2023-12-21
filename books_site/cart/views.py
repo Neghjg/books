@@ -40,6 +40,7 @@ def cart_detail(request):
                     request.session['promokod'] = "2"
                     my_promo = request.session.get('promokod', '0')
             
+            
                 return redirect('cart_detail')
             
     else:

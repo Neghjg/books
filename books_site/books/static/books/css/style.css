@@ -228,6 +228,10 @@ select#sort.form-select{
     padding: 25px 0 0 140px;
 }
 
+#cart-body3{
+    padding: 17px 0 0 140px;
+}
+
 #delete_product{
     margin: 50px 0 0 0;
 }

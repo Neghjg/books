@@ -38,6 +38,7 @@ def order_create_authenticated_users(request):
     us = request.user
     user_em = us.email
     cart = Cart(request)
+    my_promo = request.session.get('promokod', '0')
     if request.method == 'POST':
         form = AuthenticatedUserForm(request.POST)
         if form.is_valid():
@@ -60,11 +61,11 @@ def order_create_authenticated_users(request):
             cart.clear()
             order_created(order.id, user_em)
             return render(request, 'orders/created.html',
-                          {'order': order})
+                          {'order': order, "my_promo": my_promo})
     else:
         form = AuthenticatedUserForm()
     return render(request, 'orders/create.html',
-                  {'cart': cart, 'form': form})
+                  {'cart': cart, 'form': form, "my_promo": my_promo})
     
     
 def order_create_non_authenticated_users(request):
