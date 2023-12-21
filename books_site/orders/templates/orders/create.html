@@ -1,0 +1,57 @@
+{% extends "books/base.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<br>
+<h3 class="title_h1">Заказ</h3>
+
+
+<div class="card" id="card_buy" style="width: 21rem;">
+    <div class="card-body">
+        
+        <div class="float_right"><h5 class="card-title">{{ cart.get_total_price }} ₽</h5></div><div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
+        {% with total_items=cart|length %}
+        <div class="float_right"><h6 class="card-subtitle">{{ total_items }} шт.</h6></div><div class="card_title_div"><h6 class="card-subtitle mb-2">Количество: </h6></div>
+        {% endwith %}
+        {% for item in cart %}
+        <div><div class="float_right">{{ item.total_price }}₽</div><div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} x {{ item.product.title|truncatechars:23 }}</h6></div>
+        </div> 
+        {% endfor %}
+        <!--{% with total_items=cart|length %}
+      <div class="float_right"><h6 class="card-subtitle mb-2 text-body-secondary">{{ total_items }} шт.</h6></div><div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">Количество: </h6></div>
+      {% endwith %}-->
+      
+      
+
+
+    
+    
+    
+    
+    </div>
+  </div>
+
+
+    <!--<div class="order-info">
+        <h3 class = "h3_order_info">Ваш заказ</h3>
+        <ul class = "ul_create">
+            {% for item in cart %}
+                <li class = "li_create">
+                    {{ item.quantity }} x {{ item.product.title|truncatechars:25 }}
+                    <span class = "span_order_info">{{ item.total_price }}₽</span>
+                </li>
+            {% endfor %}
+        </ul>
+        <h3 class = "h3_o_f">Итого: {{ cart.get_total_price }} ₽</h3>
+    </div>-->
+    <form action="." method="post" class="order-form">
+        {% for f in form %}
+        <p><label class="form_label" for="{{ f.id_for_label }}"></label>{{ f }}</p>
+        <div class="form_error">{{ f.errors }}</div>
+        {% endfor %}
+        <!--<label class="form_label">{{ form.as_p }}</label>-->
+        <p><input type="submit" class="btn btn-primary mb-3" value="Заказать"></p>
+        {% csrf_token %}
+    </form>
+{% endblock %}

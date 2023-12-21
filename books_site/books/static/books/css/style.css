@@ -225,7 +225,7 @@ select#sort.form-select{
 }
 
 #cart-body2{
-    padding: 25px 0 0 300px;
+    padding: 25px 0 0 140px;
 }
 
 #delete_product{
@@ -259,4 +259,47 @@ select#sort.form-select{
 svg.bi.bi-cart3{
     padding: 0 0 0 0;
     margin: 0 0 0 0;
+}
+
+.order_buy {
+    margin: 0 0 0 710px;
+}
+
+#card_buy{
+    display: block;
+    float: right;
+}
+
+#cart_div{
+    min-width: 1150px;
+}
+
+.float_right{
+    float: right;
+}
+
+.card_title_div{
+    margin: 0 0 20px 0;
+}
+
+#promo{
+    width: 190px;
+}
+
+#order_form{
+    width: 400px;
+}
+
+.empty_cart_parent{
+    display: flex;
+    justify-content: center;
+}
+
+.empty_cart{
+    margin: 200px 0 0 0;
+    font-family: Inter, sans-serif;
+}
+
+.p_cart_empty{
+    text-align: center;
 }

@@ -22,7 +22,7 @@ from books.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+    path('orders/', include('orders.urls')),
     path("", include('books.urls')),
     path('authorization/', include('authorization.urls')),
     path('cart/', include('cart.urls')),

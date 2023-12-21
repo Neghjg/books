@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'books.apps.BooksConfig',
     'authorization.apps.AuthorizationConfig',
-    'cart'
+    'cart',
+    'orders',
+    'mathfilters',
     
 ]
 
@@ -133,3 +135,22 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CART_SESSION_ID = 'cart'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_HOST_USER = 'jovannymoriarty@yandex.ru'
+EMAIL_HOST_PASSWORD = 'zmcjnykyitsuyscr' 
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+HUEY = {
+    "name": "mydjangoproject",
+    "url": "redis://localhost:6379/?db=1",
+}
+
+HUEY["immediate_use_memory"] = False
+HUEY["immediate"] = False
+

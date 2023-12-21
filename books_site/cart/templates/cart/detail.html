@@ -1,4 +1,5 @@
 {% extends "books/base.html" %}
+{% load mathfilters %}
 {% load static %}
 {% block title %}
     Your shopping cart
@@ -6,25 +7,69 @@
 {% block content %}
 {% if cart %}
 <h1></h1>
-<div>
+
+<div id="cart_div">
+    
+   
+
+    <div class="card" id="card_buy" style="width: 21rem;">
+        <div class="card-body">
+            <div class="float_right">
+                {% if my_promo == "1" %}
+                <h5 class="card-title">{{ cart.get_total_price|div:10|mul:9 }} ₽</h5>
+                {% else %}
+                <h5 class="card-title">{{ cart.get_total_price }} ₽</h5>
+                {% endif %}
+            </h5></div><div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
+          {% with total_items=cart|length %}
+          <div class="float_right"><h6 class="card-subtitle mb-2 text-body-secondary">{{ total_items }} шт.</h6></div><div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">Количество: </h6></div>
+          {% endwith %}
+          <div class="form_promo">
+          <form method="post">
+            {% csrf_token %}
+            
+            <div class="float_right"><button type="submit" class="btn btn-primary mb-3">Применить</button></div>
+            <input class="form-control" id="promo" type="text" name ="promo" placeholder="Промокод" aria-label="default input example">
+            
+            </div>
+          </form>
+
+        
+
+          {% if request.user.is_authenticated %}
+        <a class="btn btn-primary" id="btn_card_price" href="{% url "order_create" %}" class="button">
+            <div class="buy_deatail_div">Заказать</div>
+        </a>
+        {% else %}
+        <a class="btn btn-primary" id="btn_card_price" href="{% url "order_create_non_authenticated" %}" class="button">
+            <div class="buy_deatail_div">Заказать</div>
+        </a>
+        {% endif %}
+        </div>
+      </div>
+
     {% for item in cart %}
             {% with product=item.product %}
-    <div class="card" id="cart_product" style="width: 70%;  min-width:780px;">
+    <div class="card" id="cart_product" style="width: 60%;  min-width:780px;">
         <a href="{{ product.get_absolute_url }}">
         <img src="{{ product.photo.url }}" class="card-img-top" id="cart_product_photo" alt="...">
         </a>
-        <div class="card-body" style="min-width:250px;">
-            <a class="a_title_cart" href="{{ product.get_absolute_url }}"><h5 class="card-title">{{product.title}}</h5></a>
+        <div class="card-body" style="width:50%;">
+            <a class="a_title_cart" href="{{ product.get_absolute_url }}"><h5 class="card-title">{{product.title|truncatechars:53}}</h5></a>
             <h6 class="card-subtitle mb-2 text-body-secondary">{{product.author}}</h6>
             <h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} шт.</h6>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{ item.price }} р. за шт.</h6>
         </div>
         <div class="card-body" id="cart-body2">
-            <h4 class="card-subtitle" id="price_product_cart">{{ item.price }} р.</h4>
+            <h4 class="card-subtitle" id="price_product_cart">{{ item.total_price }} р.</h4>
             <a class="btn btn-primary" id="delete_product" href="{% url "cart_remove" product.id%}"><div class = "tab_a_rem">Удалить</div></a>
         </div>
       </div>
       {% endwith %}
         {% endfor %}
+        
+        
+
 </div>
 <!--<table class="cart">
     <thead>
@@ -70,7 +115,27 @@
     <a href="#" class="button light">Continue shopping</a>
     <a href="#" class="button">Checkout</a>
 </p>-->
-{% else %}
-        <p>Ваша корзина пуста. </p>
-{% endif %}
+
+
+
+<!--{% if request.user.is_authenticated %}
+        <a class="btn btn-primary" id="delete_product" href="{% url "order_create" %}" class="button">
+            <div class="buy_deatail_div"><h5 class="buy_h3">Заказать</h5></div>
+        </a>
+        {% else %}
+        <a class="btn btn-primary" id="delete_product" href="{% url "order_create_non_authenticated" %}" class="button">
+            <div class="buy_deatail_div"><h5 class="buy_h3">Заказать</h5></div>
+        </a>
+        {% endif %}-->
+        {% else %}
+        <div class="empty_cart_parent">
+        <div class="empty_cart">
+        <img  src="{% static 'books/img/empty-cart.png' %}" >
+        <p class="p_cart_empty">Ваша корзина пуста</p>
+        </div>
+        </div>
+        {% endif %}
+
+       
+
 {% endblock %}
