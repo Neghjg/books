@@ -5,7 +5,7 @@ import requests
 from django.db.models import Q
 from django.db.models import Avg
 from cart.forms import CartAddProductForm
-
+from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
@@ -18,11 +18,14 @@ def adventures(request):
     sort = request.GET.get('sort', 'default')
     if sort == 'default':
         books = Book.objects.filter(cat = 5)
+        paginator = Paginator(books, 12)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
     elif sort == 'price_to_low':
         books = Book.objects.filter(cat = 5).order_by('price')
     elif sort == 'price_to_hight':
         books = Book.objects.filter(cat = 5).order_by('-price')
-    return render(request, 'books/adventures.html', {'books': books})
+    return render(request, 'books/adventures.html', {'books': books,})
 
 def detective(request):
     sort = request.GET.get('sort', 'default')

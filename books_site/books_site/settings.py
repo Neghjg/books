@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'books.apps.BooksConfig',
     'authorization.apps.AuthorizationConfig',
+    "debug_toolbar",
     'cart',
     'orders',
     'mathfilters',
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'books_site.urls'
@@ -154,3 +156,6 @@ HUEY = {
 HUEY["immediate_use_memory"] = False
 HUEY["immediate"] = False
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
