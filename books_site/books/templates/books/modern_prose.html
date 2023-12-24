@@ -5,9 +5,9 @@
 
 <form action="{% url "adventures" %}" method="get">
     <div class = 'div_select'><select name="sort" id="sort" class="form-select" aria-label="Пример выбора по умолчанию">
-        <option value="default">По умолчанию</option>
-        <option value="price_to_low">Дешевле</option>
-        <option value="price_to_hight">Дороже</option>
+        <option value="-count_buy">По популярности</option>
+        <option value="price">Дешевле</option>
+        <option value="-price">Дороже</option>
     </select></div>
     <div class = 'input_div'><input type="submit" class="btn btn-primary" value="Сортировать"></div>
 </form>
@@ -29,7 +29,7 @@
   </div>
   {% endfor %}-->
   
-  {% for i in books %}
+  {% for i in page_obj %}
   
   <a href="{{ i.get_absolute_url }}"><div class="card mb-3" style="width: 540px; height: 250px ">
     <div class="row g-0">
@@ -53,7 +53,6 @@
   {% endfor %}
 
   
-    
     <!--{% for i in books %}
         {{ i.title }}
         {% if i.photo %}

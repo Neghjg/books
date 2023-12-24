@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import OrderItem
+from .models import OrderItem, Book
 #from .forms import OrderCreateForm
 from cart.cart import Cart
 from .tasks import order_created
@@ -50,6 +50,7 @@ def order_create_authenticated_users(request):
                                              product=item['product'],
                                              price=((item['price'])/10)*9,
                                              quantity=item['quantity'])
+                    
                 request.session["promokod"] = "2"
             else:
                 for item in cart:
@@ -57,6 +58,11 @@ def order_create_authenticated_users(request):
                                              product=item['product'],
                                              price=item['price'],
                                              quantity=item['quantity'])
+                #print(item['product'])
+                #item_id[]
+                    book = Book.objects.get(title = item['product'])
+                    book.count_buy += item['quantity'] 
+                    book.save()
             # очистка корзины
             cart.clear()
             order_created(order.id, user_em)

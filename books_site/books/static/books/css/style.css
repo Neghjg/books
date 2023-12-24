@@ -307,3 +307,15 @@ svg.bi.bi-cart3{
 .p_cart_empty{
     text-align: center;
 }
+
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 0 0;
+}
+
+.form_cart_create{
+    display: block;
+    float: left;
+}

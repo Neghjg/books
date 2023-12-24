@@ -22,16 +22,20 @@
         {% endwith %}
         {% if my_promo == "1" %}
         {% for item in cart %}
-        <div><div class="float_right">{{ item.total_price|div:10|mul:9 }}₽</div>
+        <div class="float_right">{{ item.total_price|div:10|mul:9 }}₽</div>
         <div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} x {{ item.product.title|truncatechars:23 }}</h6></div>
         {% endfor %}  
         {% else %}
         {% for item in cart %}
-        <div><div class="float_right">{{ item.total_price }}₽</div>
+        <div class="float_right">{{ item.total_price }}₽</div>
         <div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} x {{ item.product.title|truncatechars:23 }}</h6></div>
-        {% endfor %}    
+        
+        
+        {% endfor %}   
+        </div>  
         {% endif %}
-    </div> 
+        </div>
+    
         
         <!--{% with total_items=cart|length %}
       <div class="float_right"><h6 class="card-subtitle mb-2 text-body-secondary">{{ total_items }} шт.</h6></div><div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">Количество: </h6></div>
@@ -44,8 +48,8 @@
     
     
     
-    </div>
-  </div>
+    
+  
 
 
     <!--<div class="order-info">
@@ -60,6 +64,7 @@
         </ul>
         <h3 class = "h3_o_f">Итого: {{ cart.get_total_price }} ₽</h3>
     </div>-->
+    <div class="form_cart_create">
     <form action="." method="post" class="order-form">
         {% for f in form %}
         <p><label class="form_label" for="{{ f.id_for_label }}"></label>{{ f }}</p>
@@ -69,4 +74,5 @@
         <p><input type="submit" class="btn btn-primary mb-3" value="Заказать"></p>
         {% csrf_token %}
     </form>
+    </div>
 {% endblock %}

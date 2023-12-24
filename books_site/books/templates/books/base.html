@@ -85,10 +85,12 @@
                 <svg width="20" height="20" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
                   <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                 </svg>
+                {% if total_items > 0 %}
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                   {{ total_items }}
                   <span class="visually-hidden">unread messages</span>
                 </span>
+                {% endif %}
             </div></a></li>
                 <!--<a href="{% url "cart_detail" %}"><div class="cart_div_a">
                   <svg width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
@@ -121,6 +123,34 @@
     {% block content %}
     {% endblock %}
   
+    <div style="clear:both"></div>
+    <div class="pagination">
+    {% if page_obj.has_other_pages %}
+    <nav aria-label="Пример навигации по страницам">
+      <ul class="pagination">
+  
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}&sort={{sort}}">&laquo;</a></li>
+        {% endif %}
+  
+        {% for p in page_obj.paginator.page_range %}
+        {% if page_obj.number == p %}
+        <li class="page-item active"><a class="page-link" href="?page={{ p }}&sort={{sort}}">{{ p }}</a></li>
+        {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+        <li class="page-item"><a class="page-link" href="?page={{ p }}&sort={{sort}}">{{ p }}</a></li>
+        {% endif %}
+        
+        {% endfor %}
+  
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&sort={{sort}}">&raquo;</a></li>
+        {% endif %}
+  
+      </ul>
+    </nav>
+    {% endif %}
+    </div>
+
   </div>
 </div>
 </body>
