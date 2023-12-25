@@ -15,7 +15,12 @@ class Book(models.Model):
     author = models.CharField(max_length=255, verbose_name='автор')
     year_of_publication = models.IntegerField(verbose_name='Год издания')
     publisher = models.CharField(max_length=100, verbose_name='Издательсво')
-    
+    ISBN = models.CharField(max_length=255, verbose_name='ISBN', default="978-5-38-924083-4")
+    number_of_pages = models.IntegerField(verbose_name='Количесвто страниц', default=1760)
+    size = models.CharField(max_length=255, verbose_name='Размер' , default="21.5x14.5x8.8")
+    type_of_cover = models.CharField(max_length=255, verbose_name='Тип обложки', default="Твердый переплёт")
+    weight = models.IntegerField(verbose_name='Вес', default=2010)
+    age_restrictions = models.IntegerField(verbose_name='Возрастные ограничения', default=8)
 
     
     def __str__(self):

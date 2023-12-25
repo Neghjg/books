@@ -23,12 +23,24 @@
           {% endif %}
         <div class='book_box'>
             <div class='book_box_left'>
-                <h6>Издательсвто</h6>
-                <h6>Год издания</h6>
+                <h6 class="cart_disc">Издательсвто</h6>
+                <h6 class="cart_disc">Год издания</h6>
+                <h6 class="cart_disc">ISBN</h6>
+                <h6 class="cart_disc">Количество страниц</h6>
+                <h6 class="cart_disc">Размер</h6>
+                <h6 class="cart_disc">Тип обложки</h6>
+                <h6 class="cart_disc">Вес, г</h6>
+                <h6 class="cart_disc">Возрастные ограничение</h6>
             </div>
             <div class='book_box_right'>
-                <h6>{{i.publisher}}</h6>
-                <h6>{{i.year_of_publication}}</h6>
+                <h6 class="cart_disc">{{i.publisher}}</h6>
+                <h6 class="cart_disc">{{i.year_of_publication}}</h6>
+                <h6 class="cart_disc">{{i.ISBN}}</h6>
+                <h6 class="cart_disc">{{i.number_of_pages}}</h6>
+                <h6 class="cart_disc">{{i.size}}</h6>
+                <h6 class="cart_disc">{{i.type_of_cover}}</h6>
+                <h6 class="cart_disc">{{i.weight}}</h6>
+                <h6 class="cart_disc">{{i.age_restrictions}}+</h6>
             </div>
             <div class="card" id="book_price_cart">
                 <div class="card-body">
@@ -53,6 +65,7 @@
                     <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
                     <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                   </svg> В магазинах сети, Бесплатно </h6>
+                  <h6 class="card-text" id="card_p">{{ date_delivary|date:"d.m.Y" }}</h6>
                   
                   
                 </div>

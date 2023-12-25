@@ -162,8 +162,11 @@ select#sort.form-select{
 }
 
 #book_price_cart{
+    display: block;
+    position: absolute;
     width: 22rem;
     height: 21rem;
+    margin: 0 0 0 800px;
 }
 
 #btn_card_price{
@@ -401,4 +404,13 @@ svg.bi.bi-cart3{
 .form_book_buy{
     display: block;
     margin: 20px 0 0 0;
+}
+
+.cart_disc{
+    font-family: Inter,sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    width: 90%;
+    word-break: break-word;
+    color:#464958;
 }

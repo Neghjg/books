@@ -6,6 +6,8 @@ from django.db.models import Q
 from django.db.models import Avg
 from cart.forms import CartAddProductForm
 from django.core.paginator import Paginator
+from datetime import datetime 
+from datetime import timedelta 
 
 # Create your views here.
 def index(request):
@@ -84,12 +86,16 @@ def book(request, post_slug):
         
     cart_product_form = CartAddProductForm()
     
+    date_delivary = datetime.now() + timedelta(days=7)
+    
+    
     return render(request, 'books/book.html', {'book': book, 'get_book': get_book, 
                                                'cart_product_form': cart_product_form,
                                                'new_comment': new_comment,
                                                'comment_form': comment_form,
                                                'comments': comments,
-                                               "avg_rating":avg_rating})
+                                               'avg_rating':avg_rating,
+                                               'date_delivary':date_delivary})
 
 def author(request, book_author):
     books = Book.objects.filter(author=book_author)
