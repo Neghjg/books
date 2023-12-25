@@ -38,12 +38,13 @@
         <img class="img-fluid rounded-start" src="{{i.photo.url}}">
         {% endif %}
       </div>
-      <div class="col-md-8" >
+      <div class="col-md-8" id="flex_tab" >
         <div class="card-body">
           <h5 class="card-title">{{ i.title|truncatechars:53 }}</h5>
           <p class="card-text">{{ i.author }}</p>
           
-          <p class="card-text">{{ i.price }} ₽</p>
+          
+          <h5 class="card-subtitle" id="price_product_cart" >{{ i.price }} ₽</h5>
           
         </div>
         

@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
-    books = Book.objects.all().order_by('-count_buy')
+    books = Book.objects.all().order_by('-count_buy')[:10]
     return render(request, 'books/index.html', {'books': books})
 
 

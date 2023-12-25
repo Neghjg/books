@@ -15,6 +15,7 @@ class Book(models.Model):
     author = models.CharField(max_length=255, verbose_name='автор')
     year_of_publication = models.IntegerField(verbose_name='Год издания')
     publisher = models.CharField(max_length=100, verbose_name='Издательсво')
+    
 
     
     def __str__(self):

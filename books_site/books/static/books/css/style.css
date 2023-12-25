@@ -51,6 +51,7 @@ html, body {
     height: 900px;
     display: block;
     
+    
 }
 
 .cart_table{
@@ -168,7 +169,17 @@ select#sort.form-select{
 #btn_card_price{
     width: 250px;
     height: 40px;
-    margin: 0 0 0 33px;
+    margin: 0 0 0 0;
+}
+
+.btn_card_price{
+    display: block;
+    float: right;
+}
+
+.producr_quantity{
+    display: block;
+    float: left;
 }
 
 #h6_card_book{
@@ -181,7 +192,7 @@ select#sort.form-select{
 }
 
 #card_p{
-    margin: 15px 33px 10px 33px;
+    margin: 0px 33px 10px 33px;
 }
 
 .div_select{
@@ -318,4 +329,76 @@ svg.bi.bi-cart3{
 .form_cart_create{
     display: block;
     float: left;
+}
+
+#flex_tab{
+    flex-wrap: nowrap;
+    max-width: 350px;
+}
+
+.index_card{
+    display: flex;
+    flex-wrap: wrap;
+    float: left;
+    max-width: 1000px;
+    margin: 50px 0 0 260px;
+    
+    
+}
+
+.sidebar_index{
+    float: left;
+    width: 250px;
+    height: 855px;
+    background-color: rgb(232, 246, 255);
+    position: absolute;
+}
+
+
+.price_index{
+    display: block;
+    float: right;
+    margin: 25px 0 0 0;
+}
+
+.index_body_card{
+    height:71px;
+}
+
+#index_card_minicards{
+    width:177px;
+    height:400px;
+}
+
+.flex_index{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.sales{
+    margin: 15px 0 0 5px;
+}
+
+.hot_sales{
+    display: block;
+    margin: 0 0 0 12px;
+}
+
+.title_h1_div{
+    display: block;
+    margin: 10px 0 0 270px;
+    position: absolute;
+}
+
+.title_h1{
+    font-size: 24px;
+}
+
+.form-select.buy_count{
+    width: 60px;
+}
+
+.form_book_buy{
+    display: block;
+    margin: 20px 0 0 0;
 }
