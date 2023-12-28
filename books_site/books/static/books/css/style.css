@@ -464,3 +464,7 @@ svg.bi.bi-cart3{
     float:left;
     margin: 10px 0 0 150px;
 }
+
+.authorization_h5_center{
+    text-align: center;
+}

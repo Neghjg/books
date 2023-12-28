@@ -6,6 +6,8 @@
 <br>
 
 <div class="authorization">
+<div>
+<div><h5 class="authorization_h5_center">Авторизация</h5></div>
 <form method="post">
     {% csrf_token %}
     <div class="form_error">{{ form.non_field_errors }}</div>
@@ -15,5 +17,6 @@
     {% endfor %}
   <div class="login_btn"><button type="submit" class="btn btn-primary">Отправить</button></div><a href="{% url 'reset_password' %}"><div class="forgot_password"><h6>Забыл пароль?</h6></div></a>
 </form>
+</div>
 </div>
 {% endblock %}

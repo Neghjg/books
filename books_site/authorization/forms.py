@@ -57,5 +57,6 @@ class UserSetNewPasswordForm(SetPasswordForm):
         for field in self.fields:
             self.fields[field].widget.attrs.update({
                 'class': 'form-control',
+                "id": "order_form",
                 'autocomplete': 'off'
             })
