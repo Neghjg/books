@@ -1,7 +1,7 @@
 from django import forms
 from .models import Order
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-
+from django_recaptcha.fields import ReCaptchaField
 
 # class OrderCreateForm(forms.ModelForm):
 #     class Meta:
@@ -12,6 +12,7 @@ class NonAuthenticatedUserForm(forms.ModelForm):
     last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder" :"Фамилия", "id": "order_form"}))
     address = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder" :"Адрес", "id": "order_form"}))
     email = forms.EmailField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder" :"Адрес", "id": "order_form"}))
+    recaptcha = ReCaptchaField()
     
     class Meta:
         model = Order

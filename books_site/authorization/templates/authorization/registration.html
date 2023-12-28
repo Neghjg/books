@@ -13,10 +13,20 @@
 
   <div class="form_error">{{ form.non_field_errors }}</div>
 
-    {% for f in form %}
+    <!--{% for f in form %}
     <p><label class="form_label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
     <div class="form_error">{{ f.errors }}</div>
-    {% endfor %}
+    {% endfor %}-->
+    <p><label class="form_label" for="{{ form.username.id_for_label }}">{{form.username.label}}: </label>{{ form.username }}</p>
+    <div class="form_error">{{ form.username.errors }}</div>
+    <p><label class="form_label" for="{{ form.email.id_for_label }}">{{form.email.label}}: </label>{{ form.email }}</p>
+    <div class="form_error">{{ form.email.errors }}</div>
+    <p><label class="form_label" for="{{ form.password1.id_for_label }}">{{form.password1.label}}: </label>{{ form.password1 }}</p>
+    <div class="form_error">{{ form.password1.errors }}</div>
+    <p><label class="form_label" for="{{ form.password2.id_for_label }}">{{form.password2.label}}: </label>{{ form.password2 }}</p>
+    <div class="form_error">{{ form.password2.errors }}</div>
+    <p>{{ form.recaptcha }}</p>
+    <div class="form_error">{{ form.recaptcha.errors }}</div>
 
   <button type="sumbit" class="btn btn-primary">Регистрация</button>
 </form>

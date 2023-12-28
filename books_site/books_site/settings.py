@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'orders',
     'mathfilters',
     'huey.contrib.djhuey',
+    'django_recaptcha',
     
 ]
 
@@ -161,3 +162,7 @@ HUEY["immediate"] = False
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+
+RECAPTCHA_PUBLIC_KEY = '6LdRyD4pAAAAAIQPWTzrlzfdFnJq1ni3zJFDaTQW'
+RECAPTCHA_PRIVATE_KEY = '6LdRyD4pAAAAAAnFF2VVAn3QlDu0jlr2Ar-SJ8LJ'
