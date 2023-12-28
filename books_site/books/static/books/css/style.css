@@ -114,7 +114,7 @@ select#sort.form-select{
 }
 
 .title_h1_book{
-    font-size: 18px;
+    font-size: 20px;
     line-height: 24px;
 }
 
@@ -138,7 +138,17 @@ select#sort.form-select{
 
 .book_description{
     margin: 35px 0 0 0;
+    font-family: Inter,sans-serif;
+    
+
+    word-break: break-word;
+    color:#464958;
 }
+
+#btn_card_price{
+    margin: 0 0 0 33px;
+}
+
 
 #comments{
     background-color: rgb(216, 255, 220);
@@ -175,6 +185,12 @@ select#sort.form-select{
     margin: 0 0 0 0;
 }
 
+#btn_card_price2{
+    width: 250px;
+    height: 40px;
+    margin: 0 0 0 29px;
+}
+
 .btn_card_price{
     display: block;
     float: right;
@@ -196,6 +212,19 @@ select#sort.form-select{
 
 #card_p{
     margin: 0px 33px 10px 33px;
+    font-size: 1rem;
+    font-family: Inter,sans-serif;
+    
+    
+    
+    word-break: break-word;
+    color:#464958;
+}
+
+#card_p_date{
+    margin: 0px 33px 10px 33px;
+    font-size: 1.1rem;
+    word-break: break-word;
 }
 
 .div_select{
@@ -313,6 +342,12 @@ svg.bi.bi-cart3{
     justify-content: center;
 }
 
+.authorization{
+    display: flex;
+    justify-content: center;
+    margin: 150px 0 0 0;
+}
+
 .empty_cart{
     margin: 200px 0 0 0;
     font-family: Inter, sans-serif;
@@ -413,4 +448,19 @@ svg.bi.bi-cart3{
     width: 90%;
     word-break: break-word;
     color:#464958;
+}
+
+.form_book_buy2{
+    margin: 80px 0 0 0;
+}
+
+.login_btn{
+    display:block;
+    float:left;
+}
+
+.forgot_password{
+    display:block;
+    float:left;
+    margin: 10px 0 0 150px;
 }

@@ -40,11 +40,11 @@
         
 
           {% if request.user.is_authenticated %}
-        <a class="btn btn-primary" id="btn_card_price" href="{% url "order_create" %}" class="button">
+        <a class="btn btn-primary" id="btn_card_price2" href="{% url "order_create" %}" class="button">
             <div class="buy_deatail_div">Заказать</div>
         </a>
         {% else %}
-        <a class="btn btn-primary" id="btn_card_price" href="{% url "order_create_non_authenticated" %}" class="button">
+        <a class="btn btn-primary" id="btn_card_price2" href="{% url "order_create_non_authenticated" %}" class="button">
             <div class="buy_deatail_div">Заказать</div>
         </a>
         {% endif %}

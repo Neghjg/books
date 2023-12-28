@@ -22,8 +22,10 @@ def adventures(request):
     paginator = Paginator(books, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    cart_product_form = CartAddProductForm()
     
-    return render(request, 'books/adventures.html', {'books': books, "page_obj": page_obj, 'sort': sort})
+    return render(request, 'books/adventures.html', {'books': books, "page_obj": page_obj, 'sort': sort,
+                                                     'cart_product_form': cart_product_form})
 
 def detective(request):
     sort = request.GET.get('sort', '-count_buy')
@@ -87,6 +89,7 @@ def book(request, post_slug):
     cart_product_form = CartAddProductForm()
     
     date_delivary = datetime.now() + timedelta(days=7)
+    date_delivary_to_shop = datetime.now() + timedelta(days=3)
     
     
     return render(request, 'books/book.html', {'book': book, 'get_book': get_book, 
@@ -95,7 +98,8 @@ def book(request, post_slug):
                                                'comment_form': comment_form,
                                                'comments': comments,
                                                'avg_rating':avg_rating,
-                                               'date_delivary':date_delivary})
+                                               'date_delivary':date_delivary,
+                                               "date_delivary_to_shop":date_delivary_to_shop})
 
 def author(request, book_author):
     books = Book.objects.filter(author=book_author)
