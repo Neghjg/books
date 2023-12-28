@@ -4,7 +4,7 @@ from huey.contrib.djhuey import db_periodic_task
 from orders.models import Order
 from django.contrib.auth.models import User
 from huey import RedisHuey, crontab
-import huey
+#import huey
 from huey.contrib.djhuey import db_task
 import smtplib
 from email.mime.text import MIMEText
@@ -21,7 +21,7 @@ from huey.contrib import djhuey as huey
 #@huey_instance.task()
 #@huey.task()
 
-#@huey.db_task()
+@huey.db_task()
 def order_created(order_id, user_em):
     order = Order.objects.get(id=order_id)
     subject = 'Номер заказа: {}'.format(order_id)
@@ -38,7 +38,7 @@ def order_created(order_id, user_em):
     return mail_sent
 
 
-#@huey.db_task()
+@huey.db_task()
 def order_created_non_auth(order_id):
     order = Order.objects.get(id=order_id)
     subject = 'Номер заказа: {}'.format(order_id)

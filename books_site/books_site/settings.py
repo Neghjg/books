@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'cart',
     'orders',
     'mathfilters',
+    'huey.contrib.djhuey',
     
 ]
 
