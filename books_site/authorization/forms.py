@@ -12,6 +12,7 @@ from django_recaptcha.widgets import ReCaptchaV2Invisible
 
 
 
+
 class RegistrationUserForm(UserCreationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-control', "id": "order_form"}))
     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control', "id": "order_form"}))
@@ -19,6 +20,11 @@ class RegistrationUserForm(UserCreationForm):
     password2 = forms.CharField(label="Повтор пароля", widget=forms.PasswordInput(attrs={"class": "form-control", "id": "order_form"}))
     recaptcha = ReCaptchaField()
     
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Такой email уже зарегистрирован.")
+        return email
     
     class Meta:
         model = User
