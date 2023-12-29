@@ -4,7 +4,7 @@
 {% block content %}
 
 <form action="{% url "adventures" %}" method="get">
-    <div class = 'div_select'><select name="sort" id="sort" class="form-select" aria-label="Пример выбора по умолчанию">
+    <div class = 'div_select'><select name="adventures_sort" id="sort" class="form-select" aria-label="Пример выбора по умолчанию">
         <option value="-count_buy">По популярности</option>
         <option value="price">Дешевле</option>
         <option value="-price">Дороже</option>
@@ -31,16 +31,16 @@
   
   {% for i in page_obj %}
   
-  <a href="{{ i.get_absolute_url }}"><div class="card mb-3" style="width: 540px; height: 250px ">
+  <div class="card mb-3" style="width: 540px; height: 250px ">
     <div class="row g-0">
       <div class="col-md-4"  >
         {% if i.photo %}
-        <img class="img-fluid rounded-start" src="{{i.photo.url}}">
+        <a href="{{ i.get_absolute_url }}"><img class="img-fluid rounded-start" src="{{i.photo.url}}"></a>
         {% endif %}
       </div>
       <div class="col-md-8" id="flex_tab" >
         <div class="card-body">
-          <h5 class="card-title">{{ i.title|truncatechars:29 }}</h5>
+          <a class="a_href_title" href="{{ i.get_absolute_url }}"><h5 class="card-title">{{ i.title|truncatechars:29 }}</h5></a>
           <p class="card-text">{{ i.author }}</p>
           <h5 class="card-subtitle" id="price_product_cart" >{{ i.price }} ₽</h5>
           <div>
@@ -56,8 +56,9 @@
         
       </div>
     </div>
-  </div></a>
+  </div>
   {% endfor %}
+  
 
   
     <!--{% for i in books %}

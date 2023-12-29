@@ -18,6 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -166,3 +167,12 @@ INTERNAL_IPS = [
 
 RECAPTCHA_PUBLIC_KEY = '6LdRyD4pAAAAAIQPWTzrlzfdFnJq1ni3zJFDaTQW'
 RECAPTCHA_PRIVATE_KEY = '6LdRyD4pAAAAAAnFF2VVAn3QlDu0jlr2Ar-SJ8LJ'
+
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'book_cache'),
+    }
+}

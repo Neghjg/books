@@ -180,7 +180,7 @@ select#sort.form-select{
 }
 
 #btn_card_price{
-    width: 250px;
+    width: 230px;
     height: 40px;
     margin: 0 0 0 0;
 }
@@ -433,7 +433,7 @@ svg.bi.bi-cart3{
 }
 
 .form-select.buy_count{
-    width: 60px;
+    width: 80px;
 }
 
 .form_book_buy{
@@ -467,4 +467,9 @@ svg.bi.bi-cart3{
 
 .authorization_h5_center{
     text-align: center;
+}
+
+.a_href_title{
+    text-decoration: none;
+    color: #000000;
 }

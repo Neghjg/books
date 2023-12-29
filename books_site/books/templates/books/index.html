@@ -40,6 +40,8 @@
       </div>
     </div>
     <div class="index_card">
+      {% load cache %}
+{% cache 600 books_index %}
 {% for i in books  %}
   
 <a href="{{ i.get_absolute_url }}"><div class="card" id="index_card_minicards" >
@@ -62,6 +64,7 @@
     
 </div></a>
 {% endfor %}
+{% endcache %}
 <div>
 </div>
 
