@@ -19,11 +19,10 @@ def index(request):
 
 def adventures(request):
     adventures_sort = request.GET.get('adventures_sort', '-count_buy')
-    print(adventures_sort)
     adventures_books = cache.get(adventures_sort + "adventures")
     if not adventures_books:
         adventures_books = Book.objects.filter(cat = 5).order_by(adventures_sort)
-        cache.set(adventures_sort + "adventures", adventures_books, 3)
+        cache.set(adventures_sort + "adventures", adventures_books, 300)
     paginator = Paginator(adventures_books, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -35,11 +34,10 @@ def adventures(request):
 
 def detective(request):
     detective_sort = request.GET.get('detective_sort', '-count_buy')
-    print(detective_sort)
     detective_books = cache.get(detective_sort + "detective")
     if not detective_books:
         detective_books = Book.objects.filter(cat = 4).order_by(detective_sort)
-        cache.set(detective_sort + "detective", detective_books, 3)
+        cache.set(detective_sort + "detective", detective_books, 300)
     paginator = Paginator(detective_books, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -49,35 +47,44 @@ def detective(request):
 
 
 def fantasy(request):
-    sort = request.GET.get('sort', '-count_buy')
-    books = Book.objects.filter(cat = 3).order_by(sort)
-    paginator = Paginator(books, 12)
+    fantasy_sort = request.GET.get('fantasy_sort', '-count_buy')
+    fantasy_books = cache.get(fantasy_sort + 'fantasy')
+    if not fantasy_books:
+        fantasy_books = Book.objects.filter(cat = 3).order_by(fantasy_sort)
+        cache.set(fantasy_sort + 'fantasy', fantasy_books, 300)
+    paginator = Paginator(fantasy_books, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
-    return render(request, 'books/fantasy.html', {'books': books, "page_obj": page_obj, 'sort': sort,
+    return render(request, 'books/fantasy.html', {'books': fantasy_books, "page_obj": page_obj, 'sort': fantasy_sort,
                                                      'cart_product_form': cart_product_form})
 
 
 def classical_prose(request):
-    sort = request.GET.get('sort', '-count_buy')
-    books = Book.objects.filter(cat = 2).order_by(sort)
-    paginator = Paginator(books, 12)
+    classical_prose_sort = request.GET.get('classical_prose_sort', '-count_buy')
+    classical_prose_books = cache.get(classical_prose_sort + 'classical_prose')
+    if not classical_prose_books:
+        classical_prose_books = Book.objects.filter(cat = 2).order_by(classical_prose_sort)
+        cache.set(classical_prose_sort + 'classical_prose', classical_prose_books, 300)
+    paginator = Paginator(classical_prose_books, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
-    return render(request, 'books/classical_prose.html', {'books': books, "page_obj": page_obj, 'sort': sort,
+    return render(request, 'books/classical_prose.html', {'books': classical_prose_books, "page_obj": page_obj, 'sort': classical_prose_sort,
                                                      'cart_product_form': cart_product_form})
 
 
 def modern_prose(request):
-    sort = request.GET.get('sort', '-count_buy')
-    books = Book.objects.filter(cat = 1).order_by(sort)
-    paginator = Paginator(books, 12)
+    modern_prose_sort = request.GET.get('modern_prose_sort', '-count_buy')
+    modern_prose_books = cache.get(modern_prose_sort + 'modern_prose')
+    if not modern_prose_books:
+        modern_prose_books = Book.objects.filter(cat = 1).order_by(modern_prose_sort)
+        cache.set(modern_prose_sort + 'modern_prose', modern_prose_books, 300)
+    paginator = Paginator(modern_prose_books, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
-    return render(request, 'books/modern_prose.html', {'books': books, "page_obj": page_obj, 'sort': sort,
+    return render(request, 'books/modern_prose.html', {'books': modern_prose_books, "page_obj": page_obj, 'sort': modern_prose_sort,
                                                      'cart_product_form': cart_product_form})
 
 def search(request):
@@ -91,14 +98,23 @@ def search(request):
     
 
 def book(request, post_slug):
-    book = Book.objects.filter(slug = post_slug)
-    #get_book = cache.get('get_book')
-    #if not get_book:
-    get_book = get_object_or_404(Book, slug=post_slug)
-        #cache.set('get_book', get_book, 100)
+    book = cache.get(post_slug)
+    if not book:
+        book = Book.objects.filter(slug = post_slug)
+        cache.set(post_slug, book, 300)
+    get_book = cache.get('get_book')
+    if not get_book:
+        get_book = get_object_or_404(Book, slug=post_slug)
+        cache.set('get_book', get_book, 300)
     new_comment = None
-    comments = Reviews.objects.filter(article_id__slug=post_slug).select_related('user')
-    avg_rating = Reviews.objects.filter(article_id__slug=post_slug).aggregate(avg = Avg("rating"))
+    comments = cache.get(post_slug + 'comments')
+    if not comments:
+        comments = Reviews.objects.filter(article_id__slug=post_slug).select_related('user')
+        cache.set(post_slug + 'comments', comments, 300)
+    avg_rating = cache.get(post_slug + 'rating')
+    if not avg_rating:
+        avg_rating = Reviews.objects.filter(article_id__slug=post_slug).aggregate(avg = Avg("rating"))
+        cache.set(post_slug + 'rating', avg_rating, 300)
     if request.method == 'POST':
         comment_form = Comment(data=request.POST)
         if comment_form.is_valid():
