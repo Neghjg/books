@@ -11,7 +11,7 @@ class NonAuthenticatedUserForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder" :"Имя", "id": "order_form"}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder" :"Фамилия", "id": "order_form"}))
     address = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder" :"Адрес", "id": "order_form"}))
-    email = forms.EmailField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder" :"Адрес", "id": "order_form"}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder" :"Email", "id": "order_form"}))
     recaptcha = ReCaptchaField()
     
     class Meta:
