@@ -56,7 +56,7 @@ def fantasy(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
-    return render(request, 'books/fantasy.html', {'books': fantasy_books, "page_obj": page_obj, 'sort': fantasy_sort,
+    return render(request, 'books/fantasy.html', {'books': fantasy_books, "page_obj": page_obj, 'fantasy_sort': fantasy_sort,
                                                      'cart_product_form': cart_product_form})
 
 
@@ -70,7 +70,7 @@ def classical_prose(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
-    return render(request, 'books/classical_prose.html', {'books': classical_prose_books, "page_obj": page_obj, 'sort': classical_prose_sort,
+    return render(request, 'books/classical_prose.html', {'books': classical_prose_books, "page_obj": page_obj, 'classical_prose_sort': classical_prose_sort,
                                                      'cart_product_form': cart_product_form})
 
 
@@ -84,7 +84,7 @@ def modern_prose(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
-    return render(request, 'books/modern_prose.html', {'books': modern_prose_books, "page_obj": page_obj, 'sort': modern_prose_sort,
+    return render(request, 'books/modern_prose.html', {'books': modern_prose_books, "page_obj": page_obj, 'modern_prose_sort': modern_prose_sort,
                                                      'cart_product_form': cart_product_form})
 
 def search(request):
