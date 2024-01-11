@@ -21,7 +21,7 @@ def registration(request):
             return redirect('/')
     else:
         form = RegistrationUserForm()
-    return render(request, 'authorization/registration.html', {'form': form})
+    return render(request, 'authorization/registration.html', {'form': form, 'title': 'Bookingcom - Регистрация'})
 
 
 def login(request):
@@ -36,7 +36,7 @@ def login(request):
                 return redirect('/')
     else:
         form = LoginUserForm()
-    return render(request, 'authorization/login.html', {'form': form})
+    return render(request, 'authorization/login.html', {'form': form, 'title': 'Bookingcom - Авторизация'})
 
 def logout_user(request):
     logout(request)

@@ -14,7 +14,7 @@ from django.core.cache import cache
 
 def index(request):
     books = Book.objects.all().order_by('-count_buy')[:10]
-    return render(request, 'books/index.html', {'books': books})
+    return render(request, 'books/index.html', {'books': books, 'title': 'Bookingcom - Главная'})
 
 
 def adventures(request):
@@ -29,7 +29,7 @@ def adventures(request):
     cart_product_form = CartAddProductForm()
     
     return render(request, 'books/adventures.html', {'books': adventures_books, "page_obj": page_obj, 'adventures_sort': adventures_sort,
-                                                     'cart_product_form': cart_product_form})
+                                                     'cart_product_form': cart_product_form, 'title': 'Bookingcom - Приключения'})
 
 
 def detective(request):
@@ -43,7 +43,7 @@ def detective(request):
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
     return render(request, 'books/detective.html', {'books':detective_books, "page_obj": page_obj, 'detective_sort': detective_sort,
-                                                     'cart_product_form': cart_product_form})
+                                                     'cart_product_form': cart_product_form, 'title': 'Bookingcom - Детектив'})
 
 
 def fantasy(request):
@@ -57,7 +57,7 @@ def fantasy(request):
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
     return render(request, 'books/fantasy.html', {'books': fantasy_books, "page_obj": page_obj, 'fantasy_sort': fantasy_sort,
-                                                     'cart_product_form': cart_product_form})
+                                                     'cart_product_form': cart_product_form, 'title': 'Bookingcom - Фэнтези'})
 
 
 def classical_prose(request):
@@ -71,7 +71,7 @@ def classical_prose(request):
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
     return render(request, 'books/classical_prose.html', {'books': classical_prose_books, "page_obj": page_obj, 'classical_prose_sort': classical_prose_sort,
-                                                     'cart_product_form': cart_product_form})
+                                                     'cart_product_form': cart_product_form, 'title': 'Bookingcom - Классическая проза'})
 
 
 def modern_prose(request):
@@ -85,7 +85,7 @@ def modern_prose(request):
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
     return render(request, 'books/modern_prose.html', {'books': modern_prose_books, "page_obj": page_obj, 'modern_prose_sort': modern_prose_sort,
-                                                     'cart_product_form': cart_product_form})
+                                                     'cart_product_form': cart_product_form, 'title': 'Bookingcom - Современная проза'})
 
 def search(request):
     result = []
