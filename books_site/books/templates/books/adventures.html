@@ -4,7 +4,7 @@
 {% block content %}
 
 <form action="{% url "adventures" %}" method="get">
-    <div class = 'div_select'><select name="adventures_sort" id="sort" class="form-select" aria-label="Пример выбора по умолчанию">
+    <div class = 'div_select'><select name="sort" id="sort" class="form-select" aria-label="Пример выбора по умолчанию">
         <option value="-count_buy">По популярности</option>
         <option value="price">Дешевле</option>
         <option value="-price">Дороже</option>

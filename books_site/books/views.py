@@ -18,73 +18,73 @@ def index(request):
 
 
 def adventures(request):
-    adventures_sort = request.GET.get('adventures_sort', '-count_buy')
-    adventures_books = cache.get(adventures_sort + "adventures")
+    sort = request.GET.get('sort', '-count_buy')
+    adventures_books = cache.get(sort + "adventures")
     if not adventures_books:
-        adventures_books = Book.objects.filter(cat = 5).order_by(adventures_sort)
-        cache.set(adventures_sort + "adventures", adventures_books, 300)
+        adventures_books = Book.objects.filter(cat = 5).order_by(sort)
+        cache.set(sort + "adventures", adventures_books, 300)
     paginator = Paginator(adventures_books, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
     
-    return render(request, 'books/adventures.html', {'books': adventures_books, "page_obj": page_obj, 'adventures_sort': adventures_sort,
+    return render(request, 'books/adventures.html', {'books': adventures_books, "page_obj": page_obj, 'sort': sort,
                                                      'cart_product_form': cart_product_form, 'title': 'Bookingcom - Приключения'})
 
 
 def detective(request):
-    detective_sort = request.GET.get('detective_sort', '-count_buy')
-    detective_books = cache.get(detective_sort + "detective")
+    sort = request.GET.get('sort', '-count_buy')
+    detective_books = cache.get(sort + "detective")
     if not detective_books:
-        detective_books = Book.objects.filter(cat = 4).order_by(detective_sort)
-        cache.set(detective_sort + "detective", detective_books, 300)
+        detective_books = Book.objects.filter(cat = 4).order_by(sort)
+        cache.set(sort + "detective", detective_books, 300)
     paginator = Paginator(detective_books, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
-    return render(request, 'books/detective.html', {'books':detective_books, "page_obj": page_obj, 'detective_sort': detective_sort,
+    return render(request, 'books/detective.html', {'books':detective_books, "page_obj": page_obj, 'sort': sort,
                                                      'cart_product_form': cart_product_form, 'title': 'Bookingcom - Детектив'})
 
 
 def fantasy(request):
-    fantasy_sort = request.GET.get('fantasy_sort', '-count_buy')
-    fantasy_books = cache.get(fantasy_sort + 'fantasy')
+    sort = request.GET.get('sort', '-count_buy')
+    fantasy_books = cache.get(sort + 'fantasy')
     if not fantasy_books:
-        fantasy_books = Book.objects.filter(cat = 3).order_by(fantasy_sort)
-        cache.set(fantasy_sort + 'fantasy', fantasy_books, 300)
+        fantasy_books = Book.objects.filter(cat = 3).order_by(sort)
+        cache.set(sort + 'fantasy', fantasy_books, 300)
     paginator = Paginator(fantasy_books, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
-    return render(request, 'books/fantasy.html', {'books': fantasy_books, "page_obj": page_obj, 'fantasy_sort': fantasy_sort,
+    return render(request, 'books/fantasy.html', {'books': fantasy_books, "page_obj": page_obj, 'sort': sort,
                                                      'cart_product_form': cart_product_form, 'title': 'Bookingcom - Фэнтези'})
 
 
 def classical_prose(request):
-    classical_prose_sort = request.GET.get('classical_prose_sort', '-count_buy')
-    classical_prose_books = cache.get(classical_prose_sort + 'classical_prose')
+    sort = request.GET.get('sort', '-count_buy')
+    classical_prose_books = cache.get(sort + 'classical_prose')
     if not classical_prose_books:
-        classical_prose_books = Book.objects.filter(cat = 2).order_by(classical_prose_sort)
-        cache.set(classical_prose_sort + 'classical_prose', classical_prose_books, 300)
+        classical_prose_books = Book.objects.filter(cat = 2).order_by(sort)
+        cache.set(sort + 'classical_prose', classical_prose_books, 300)
     paginator = Paginator(classical_prose_books, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
-    return render(request, 'books/classical_prose.html', {'books': classical_prose_books, "page_obj": page_obj, 'classical_prose_sort': classical_prose_sort,
+    return render(request, 'books/classical_prose.html', {'books': classical_prose_books, "page_obj": page_obj, 'sort': sort,
                                                      'cart_product_form': cart_product_form, 'title': 'Bookingcom - Классическая проза'})
 
 
 def modern_prose(request):
-    modern_prose_sort = request.GET.get('modern_prose_sort', '-count_buy')
-    modern_prose_books = cache.get(modern_prose_sort + 'modern_prose')
+    sort = request.GET.get('sort', '-count_buy')
+    modern_prose_books = cache.get(sort + 'modern_prose')
     if not modern_prose_books:
-        modern_prose_books = Book.objects.filter(cat = 1).order_by(modern_prose_sort)
-        cache.set(modern_prose_sort + 'modern_prose', modern_prose_books, 300)
+        modern_prose_books = Book.objects.filter(cat = 1).order_by(sort)
+        cache.set(sort + 'modern_prose', modern_prose_books, 300)
     paginator = Paginator(modern_prose_books, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     cart_product_form = CartAddProductForm()
-    return render(request, 'books/modern_prose.html', {'books': modern_prose_books, "page_obj": page_obj, 'modern_prose_sort': modern_prose_sort,
+    return render(request, 'books/modern_prose.html', {'books': modern_prose_books, "page_obj": page_obj, 'sort': sort,
                                                      'cart_product_form': cart_product_form, 'title': 'Bookingcom - Современная проза'})
 
 def search(request):
