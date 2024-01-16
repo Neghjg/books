@@ -19,28 +19,42 @@
     {% endfor %}-->
     <p>
         <label class="form_label" for="id_username">Логин: </label>
-        <input type='text' class='form-control' id= 'order_form' name='username'>
+        <input type='text' class='form-control' id= 'order_form' name='username'
+        value="{% if form.username.value %}{{ form.username.value }}{% endif %}">
     </p>
-    <div class="form_error">{{ form.username.errors }}</div>
+    {% if form.username.errors %}
+        <div class="alert alert-danger alert-dismissible fade show">{{ form.username.errors }}</div>
+    {% endif %}
     <p>
         <label class="form_label" for="id_email">Email: </label>
-        <input type='email' class='form-control' id= 'order_form' name='email'>
+        <input type='email' class='form-control' id= 'order_form' name='email'
+        value="{% if form.email.value %}{{ form.email.value }}{% endif %}">
     </p>
-    <div class="form_error">{{ form.email.errors }}</div>
+    {% if form.email.errors %}
+        <div class="alert alert-danger alert-dismissible fade show">{{ form.email.errors }}</div>
+    {% endif %}
     <p>
         <label class="form_label" for="id_password1">Пароль: </label>
-        <input type='password' class='form-control' id= 'order_form' name='password1'>
+        <input type='password' class='form-control' id= 'order_form' name='password1'
+        value="{% if form.password1.value %}{{ form.password1.value }}{% endif %}">
     </p>
-    <div class="form_error">{{ form.password1.errors }}</div>
+    {% if form.password1.errors %}
+        <div class="alert alert-danger alert-dismissible fade show">{{ form.password1.errors }}</div>
+    {% endif %}
     <p>
         <label class="form_label" for="id_password2">Повтор пароля: </label>
-        <input type='password' class='form-control' id= 'order_form' name='password2'>
+        <input type='password' class='form-control' id= 'order_form' name='password2'
+        value="{% if form.password2.value %}{{ form.password2.value }}{% endif %}">
     </p>
-        <div class="form_error">{{ form.password2.errors }}</div>
-    <p>
+    {% if form.password2.errors %}
+        <div class="alert alert-danger alert-dismissible fade show">{{ form.password2.errors }}</div>
+    {% endif %}
+        <p>
         {{ form.recaptcha }}
     </p>
-    <div class="form_error">{{ form.recaptcha.errors }}</div>
+    {% if form.recaptcha.errors %}
+        <div class="alert alert-danger alert-dismissible fade show">{{ form.recaptcha.errors }}</div>
+    {% endif %}
 
   <button type="sumbit" class="btn btn-primary">Регистрация</button>
 </form>
