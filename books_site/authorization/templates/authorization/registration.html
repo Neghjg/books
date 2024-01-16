@@ -1,4 +1,4 @@
-{% extends 'books/base.html' %}
+{% extends 'base.html' %}
 
 {% load static %}
 {% block content %}
@@ -17,15 +17,29 @@
     <p><label class="form_label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
     <div class="form_error">{{ f.errors }}</div>
     {% endfor %}-->
-    <p><label class="form_label" for="{{ form.username.id_for_label }}">{{form.username.label}}: </label>{{ form.username }}</p>
+    <p>
+        <label class="form_label" for="id_username">Логин: </label>
+        <input type='text' class='form-control' id= 'order_form' name='username'>
+    </p>
     <div class="form_error">{{ form.username.errors }}</div>
-    <p><label class="form_label" for="{{ form.email.id_for_label }}">{{form.email.label}}: </label>{{ form.email }}</p>
+    <p>
+        <label class="form_label" for="id_email">Email: </label>
+        <input type='email' class='form-control' id= 'order_form' name='email'>
+    </p>
     <div class="form_error">{{ form.email.errors }}</div>
-    <p><label class="form_label" for="{{ form.password1.id_for_label }}">{{form.password1.label}}: </label>{{ form.password1 }}</p>
+    <p>
+        <label class="form_label" for="id_password1">Пароль: </label>
+        <input type='password' class='form-control' id= 'order_form' name='password1'>
+    </p>
     <div class="form_error">{{ form.password1.errors }}</div>
-    <p><label class="form_label" for="{{ form.password2.id_for_label }}">{{form.password2.label}}: </label>{{ form.password2 }}</p>
-    <div class="form_error">{{ form.password2.errors }}</div>
-    <p>{{ form.recaptcha }}</p>
+    <p>
+        <label class="form_label" for="id_password2">Повтор пароля: </label>
+        <input type='password' class='form-control' id= 'order_form' name='password2'>
+    </p>
+        <div class="form_error">{{ form.password2.errors }}</div>
+    <p>
+        {{ form.recaptcha }}
+    </p>
     <div class="form_error">{{ form.recaptcha.errors }}</div>
 
   <button type="sumbit" class="btn btn-primary">Регистрация</button>

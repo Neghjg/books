@@ -14,10 +14,18 @@ from django_recaptcha.widgets import ReCaptchaV2Invisible
 
 
 class RegistrationUserForm(UserCreationForm):
-    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-control', "id": "order_form"}))
-    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control', "id": "order_form"}))
-    password1 = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={"class": "form-control", "id": "order_form"}))
-    password2 = forms.CharField(label="Повтор пароля", widget=forms.PasswordInput(attrs={"class": "form-control", "id": "order_form"}))
+    #backend
+    #username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-control', "id": "order_form"}))
+    #email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control', "id": "order_form"}))
+    #password1 = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={"class": "form-control", "id": "order_form"}))
+    #password2 = forms.CharField(label="Повтор пароля", widget=forms.PasswordInput(attrs={"class": "form-control", "id": "order_form"}))
+    #recaptcha = ReCaptchaField()
+    
+    # Frontend
+    username = forms.CharField()
+    email = forms.EmailField()
+    password1 = forms.CharField()
+    password2 = forms.CharField()
     recaptcha = ReCaptchaField()
     
     def clean_email(self):
