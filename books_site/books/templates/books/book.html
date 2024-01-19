@@ -53,7 +53,7 @@
                   <!--<a href="#" class="btn btn-primary" id="btn_card_price">Заказать</a>-->
                   
                   <div class="form_book_buy">
-                  <form action="{% url "cart_add" i.id %}" method="post">
+                  <form action="{% url "cart_add" i.slug %}" method="post">
                     <div class="producr_quantity">{{ cart_product_form.quantity }}</div>
                     {% csrf_token %}
                     

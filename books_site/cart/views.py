@@ -6,9 +6,9 @@ from .forms import CartAddProductForm, Promo
 
 
 @require_POST
-def cart_add(request, product_id):
+def cart_add(request, product_slug):
     cart = Cart(request)
-    product = get_object_or_404(Book, id=product_id)
+    product = get_object_or_404(Book, slug=product_slug)
     form = CartAddProductForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
@@ -17,9 +17,12 @@ def cart_add(request, product_id):
                  update_quantity=cd['update'])
     return redirect('cart_detail')
 
-def cart_remove(request, product_id):
+#def cart_change(request, product_id):
+    
+
+def cart_remove(request, product_slug):
     cart = Cart(request)
-    product = get_object_or_404(Book, id=product_id)
+    product = get_object_or_404(Book, slug=product_slug)
     cart.remove(product)
     return redirect('cart_detail')
 

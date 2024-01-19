@@ -7,6 +7,7 @@ from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmVie
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import UserForgotPasswordForm, UserSetNewPasswordForm
+from django.contrib import messages
 # Create your views here.
 
 def registration(request):
@@ -18,6 +19,7 @@ def registration(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login_user(request, user)
+            messages.success(request, f'{username}, Вы успешно зарегестрированны и вошли в аккаунт')
             return redirect('/')
     else:
         form = RegistrationUserForm()
@@ -33,12 +35,14 @@ def login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login_user(request, user)
+                messages.success(request, f'{username}, Вы успешно вошли в аккаунт')
                 return redirect('/')
     else:
         form = LoginUserForm()
     return render(request, 'authorization/login.html', {'form': form, 'title': 'Bookingcom - Авторизация'})
 
 def logout_user(request):
+    messages.success(request, f'{request.user.username}, Вы вышли из аккаунта')
     logout(request)
     return redirect("login")
 
