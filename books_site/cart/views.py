@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST
 from books.models import Book
 from .cart import Cart
 from .forms import CartAddProductForm, Promo
+from django.contrib import messages
 
 
 @require_POST
@@ -15,10 +16,11 @@ def cart_add(request, product_slug):
         cart.add(product=product,
                  quantity=cd['quantity'],
                  update_quantity=cd['update'])
-    return redirect('cart_detail')
+        messages.success(request, f'"{product}" успешно добавлена в корзину')
+    return redirect(request.META['HTTP_REFERER'])
 
-#def cart_change(request, product_id):
-    
+def cart_change(request, product_id):
+    return product_id
 
 def cart_remove(request, product_slug):
     cart = Cart(request)
