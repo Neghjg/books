@@ -71,12 +71,12 @@
         <div class="card-body" id="cart-body3">
             <del><h5 class="card-subtitle" >{{ item.total_price }} р.</h5></del>
             <h4 class="card-subtitle" id="price_product_cart">{{ item.total_price|div:10|mul:9 }} р.</h4>
-            <a class="btn btn-primary" id="delete_product" href="{% url "cart_remove" product.id%}"><div class = "tab_a_rem">Удалить</div></a>
+            <a class="btn btn-primary" id="delete_product" href="{% url "cart_remove" product.slug %}"><div class = "tab_a_rem">Удалить</div></a>
         </div>
         {% else %}
         <div class="card-body" id="cart-body2">
             <h4 class="card-subtitle" id="price_product_cart">{{ item.total_price }} р.</h4>
-            <a class="btn btn-primary" id="delete_product" href="{% url "cart_remove" product.id%}"><div class = "tab_a_rem">Удалить</div></a>
+            <a class="btn btn-primary" id="delete_product" href="{% url "cart_remove" product.slug %}"><div class = "tab_a_rem">Удалить</div></a>
         </div>
         {% endif %}
       </div>
