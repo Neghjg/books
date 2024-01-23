@@ -83,11 +83,12 @@
 
 
 </div>
-<br>
-<div>
 
-    
+
+<div>
     {% if request.user.is_authenticated %}
+    <hr>
+    <h1 class='comment_h1_book'>Оставить отзыв</h1>
     <form method="post"> 
         {% csrf_token %}
             <input id="rating-input" type="radio" name="rating" value="1" data-min=0 data-max=5 data-step=1 checked>
@@ -101,14 +102,20 @@
           </select>-->
         <p><label class="form_label" for="{{ comment_form.comment.id_for_label }}"></label>
             {{ comment_form.comment }}
-        </p>   
+        </p>
+        <!--<p><label class="form_label" for="comment"></label>
+            <textarea class="form-control" type="text" name="comment" cols="40" rows="10" placeholder="Комментарий" required></textarea>
+        </p> -->
       <button type="submit" class="btn btn-primary">Отправить</button>
     </form>
     {% endif %}
     
-    <br>
-    <br>
-
+    {% if comments %}
+        <br>
+        <hr>
+        <br>
+        <h1 class='comment_h1_book'>Отзывы</h1>
+    {% endif %}
         {% for i in comments %}
         <div class="card" id = "comments">
             <div class="card-body">
@@ -120,6 +127,8 @@
             </div>
         </div>
         {% endfor %}
+        
+
 
         <script> 
             jQuery(document).ready(function () {

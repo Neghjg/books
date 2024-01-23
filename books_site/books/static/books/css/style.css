@@ -118,6 +118,11 @@ select#sort.form-select{
     line-height: 24px;
 }
 
+.comment_h1_book{
+    font-size: 22px;
+    line-height: 24px;
+}
+
 .book_box{
     margin: 20px 0 0 0;
     
@@ -139,8 +144,6 @@ select#sort.form-select{
 .book_description{
     margin: 35px 0 0 0;
     font-family: Inter,sans-serif;
-    
-
     word-break: break-word;
     color:#464958;
 }
@@ -153,12 +156,10 @@ select#sort.form-select{
 #comments{
     background-color: rgb(216, 255, 220);
     width: 80%;
-    
 }
 
 .book_rating_p{
     margin: 10px 0 0 0;
-
 }
 
 .a_book{

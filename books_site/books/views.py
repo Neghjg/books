@@ -9,6 +9,7 @@ from django.core.paginator import Paginator
 from datetime import datetime 
 from datetime import timedelta 
 from django.core.cache import cache
+from django.contrib import messages
 
 
 def index(request):
@@ -122,6 +123,7 @@ def book(request, post_slug):
             new_comment.user = request.user
             new_comment.article_id = book[0]
             new_comment.save()
+            messages.success(request, f'{request.user.username}, комментарий оставлен')
     else:
         comment_form = Comment()
         
