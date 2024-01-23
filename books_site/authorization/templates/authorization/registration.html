@@ -31,7 +31,7 @@
         value="{% if form.email.value %}{{ form.email.value }}{% endif %}">
     </p>
     {% if form.email.errors %}
-        <div class="alert alert-danger alert-dismissible fade show">{{ form.email.errors }}</div>
+        <div style="max-width:400px" class="alert alert-danger alert-dismissible fade show">{{ form.email.errors }}</div>
     {% endif %}
     <p>
         <label class="form_label" for="id_password1">Пароль: </label>

@@ -2,17 +2,22 @@ from django.db import models
 from books.models import Book
 from django.contrib.auth.models import User
 
+
 class Order(models.Model):
     first_name = models.CharField(max_length=50, verbose_name="Имя")
     last_name = models.CharField(max_length=50, verbose_name="Фамилия")
-    email = models.EmailField()
-    address = models.CharField(max_length=250, verbose_name="Адрес")
+    email = models.EmailField(verbose_name="email")
+    address = models.CharField(max_length=250, verbose_name="Адрес", blank=True)
+    requires_delivery = models.BooleanField(default=False, verbose_name="Требуется доставка")
     postal_code = models.CharField(max_length=20)
     city = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    paid = models.BooleanField(default=False)
+    payment_on_get = models.BooleanField(default=False, verbose_name="Оплата при получении")
+    paid = models.BooleanField(default=False, verbose_name="Статус оплаты")
+    status = models.CharField(max_length=50, default='В обработке', verbose_name='Статус заказа')
     user = models.ManyToManyField(User)
+    
 
     class Meta:
         ordering = ('-created',)

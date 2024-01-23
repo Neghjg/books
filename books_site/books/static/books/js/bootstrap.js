@@ -5088,7 +5088,7 @@
               if (theme) {
                   thm = $.fn.ratingThemes[theme] || {};
               }
-              if (lang !== 'en' && !$h.isEmpty($.fn.ratingLocales[lang])) {
+              if (lang !== 'ru' && !$h.isEmpty($.fn.ratingLocales[lang])) {
                   loc = $.fn.ratingLocales[lang];
               }
               opts = $.extend(true, {}, $.fn.rating.defaults, thm, $.fn.ratingLocales.en, loc, options, self.data());
@@ -5112,7 +5112,7 @@
 
   $.fn.rating.defaults = {
       theme: 'krajee-svg',
-      language: 'en',
+      language: 'ru',
       stars: 5,
       tabindex: 0,
       keyboardEnabled: true,
@@ -5153,26 +5153,26 @@
       zeroAsNull: true
   };
 
-  $.fn.ratingLocales.en = {
+  $.fn.ratingLocales.ru = {
       defaultCaption: '{rating} Stars',
       starCaptions: {
-          0.5: 'Half Star',
-          1: 'One Star',
-          1.5: 'One & Half Star',
-          2: 'Two Stars',
-          2.5: 'Two & Half Stars',
-          3: 'Three Stars',
-          3.5: 'Three & Half Stars',
-          4: 'Four Stars',
-          4.5: 'Four & Half Stars',
-          5: 'Five Stars'
+        0.5: 'Половина звезды',
+        1: 'Одна звезда',
+        1.5: 'Полторы звезды',
+        2: 'Две звезды',
+        2.5: 'Две с половиной звезды',
+        3: 'Три звезды',
+        3.5: 'Три с половиной звезды',
+        4: 'Четыре звезды',
+        4.5: 'Четыре с половиной звезды',
+        5: 'Пять звёзд'
       },
       starTitles: {
-          1: 'One Star',
-          2: 'Two Stars',
-          3: 'Three Stars',
-          4: 'Four Stars',
-          5: 'Five Stars'
+          1: '1 Звезда',
+          2: '2 звезды',
+          3: '3 звезды',
+          4: '4 звезды',
+          5: '5 звезд'
       },
       clearButtonTitle: 'Clear',
       clearCaption: 'Not Rated'
@@ -5191,4 +5191,33 @@
   });
 }));
 
+(function (factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+      define(['jquery'], factory);
+  } else if (typeof module === 'object' && typeof module.exports === 'object') { 
+      factory(require('jquery'));
+  } else { 
+      factory(window.jQuery);
+  }
+}(function ($) {
+  "use strict";
+  $.fn.ratingLocales['ru'] = {
+      defaultCaption: '{rating} Звёзды',
+      starCaptions: {
+          0.5: 'Половина звезды',
+          1: 'Одна звезда',
+          1.5: 'Полторы звезды',
+          2: 'Две звезды',
+          2.5: 'Две с половиной звезды',
+          3: 'Три звезды',
+          3.5: 'Три с половиной звезды',
+          4: 'Четыре звезды',
+          4.5: 'Четыре с половиной звезды',
+          5: 'Пять звёзд'
+      },
+      clearButtonTitle: 'Очистить',
+      clearCaption: 'Без рейтинга'
+  };
+}));
 //# sourceMappingURL=bootstrap.js.map

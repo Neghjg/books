@@ -1,78 +1,110 @@
 {% extends "base.html" %}
 
-{% block title %}Checkout{% endblock %}
+{% block title %}{% endblock %}
 {% load mathfilters %}
 {% block content %}
 <br>
 <h3 class="title_h1">Заказ</h3>
-
-
 <div class="card" id="card_buy" style="width: 21rem;">
+
     <div class="card-body">
         {% if my_promo == "1" %}
-        <div class="float_right"><h5 class="card-title">{{ cart.get_total_price|div:10|mul:9 }} ₽</h5></div>
-        <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
+            <div class="float_right"><h5 class="card-title">{{ cart.get_total_price|div:10|mul:9 }} ₽</h5></div>
+            <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
         {% else %}
-        <div class="float_right"><h5 class="card-title">{{ cart.get_total_price }} ₽</h5></div>
-        <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
+            <div class="float_right"><h5 class="card-title">{{ cart.get_total_price }} ₽</h5></div>
+            <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
         {% endif %}
         {% with total_items=cart|length %}
-        <div class="float_right"><h6 class="card-subtitle">{{ total_items }} шт.</h6></div>
-        <div class="card_title_div"><h6 class="card-subtitle mb-2">Количество: </h6></div>
+            <div class="float_right"><h6 class="card-subtitle">{{ total_items }} шт.</h6></div>
+            <div class="card_title_div"><h6 class="card-subtitle mb-2">Количество: </h6></div>
         {% endwith %}
         {% if my_promo == "1" %}
-        {% for item in cart %}
-        <div class="float_right">{{ item.total_price|div:10|mul:9 }}₽</div>
-        <div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} x {{ item.product.title|truncatechars:23 }}</h6></div>
+            {% for item in cart %}
+                <div class="float_right">{{ item.total_price|div:10|mul:9 }}₽</div>
+                <div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} x {{ item.product.title|truncatechars:23 }}</h6></div>
         {% endfor %}  
         {% else %}
-        {% for item in cart %}
-        <div class="float_right">{{ item.total_price }}₽</div>
-        <div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} x {{ item.product.title|truncatechars:23 }}</h6></div>
-        
-        
+            {% for item in cart %}
+            <div class="float_right">{{ item.total_price }}₽</div>
+            <div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} x {{ item.product.title|truncatechars:23 }}</h6></div>
         {% endfor %}   
-         
         {% endif %}
         </div>
     </div> 
         
-        <!--{% with total_items=cart|length %}
-      <div class="float_right"><h6 class="card-subtitle mb-2 text-body-secondary">{{ total_items }} шт.</h6></div><div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">Количество: </h6></div>
-      {% endwith %}-->
-      
-      
 
-
-    
-    
-    
-    
-    
-  
-
-
-    <!--<div class="order-info">
-        <h3 class = "h3_order_info">Ваш заказ</h3>
-        <ul class = "ul_create">
-            {% for item in cart %}
-                <li class = "li_create">
-                    {{ item.quantity }} x {{ item.product.title|truncatechars:25 }}
-                    <span class = "span_order_info">{{ item.total_price }}₽</span>
-                </li>
-            {% endfor %}
-        </ul>
-        <h3 class = "h3_o_f">Итого: {{ cart.get_total_price }} ₽</h3>
-    </div>-->
     <div class="form_cart_create">
-    <form action="." method="post" class="order-form">
-        {% for f in form %}
-        <p><label class="form_label" for="{{ f.id_for_label }}"></label>{{ f }}</p>
-        <div class="form_error">{{ f.errors }}</div>
-        {% endfor %}
-        <!--<label class="form_label">{{ form.as_p }}</label>-->
-        <p><input type="submit" class="btn btn-primary mb-3" value="Заказать"></p>
+    <form action="{% url 'order_create' %}" method="post" class="order-form">
         {% csrf_token %}
+        <p><label class="form_label" for="id_first_name"></label>
+            <input type"text" class="form-control", id="order_form" 
+                value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" 
+                name="first_name" placeholder="Имя" required>
+        </p>
+        {% if form.first_name.errors %}
+            <div class="alert alert-danger alert-dismissible fade show">{{ form.first_name.errors }}</div>
+        {% endif %}
+        <p><label class="form_label" for="id_last_name"></label>
+            <input type"text" class="form-control", id="order_form" 
+                value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
+                name="last_name" placeholder="Фамилия" required>
+        </p>
+        {% if form.last_name.errors %}
+            <div class="alert alert-danger alert-dismissible fade show">{{ form.last_name.errors }}</div>
+        {% endif %}
+        <p><div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="requires_delivery" id="flexRadioDefault1" value="1" checked>
+            <label class="form-check-label" for="flexRadioDefault1">
+                Нужна доставка
+            </label>
+
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="requires_delivery" value="0" id="flexRadioDefault2" >
+            <label class="form-check-label" for="flexRadioDefault2">
+                Самовывоз
+            </label>
+          </div></p>
+          {% if form.requires_delivery.errors %}
+            <div class="alert alert-danger alert-dismissible fade show">{{ form.requires_delivery.errors }}</div>
+          {% endif %}
+        <p><label class="form_label" for="id_address">Необязательное поле*</label>
+            <input type"text" class="form-control", id="order_form"
+                value="{% if form.adress.value %}{{ form.adress.value }}{% endif %}"
+                name="address" placeholder="Адрес">
+        </p>
+        {% if form.adress.errors %}
+            <div class="alert alert-danger alert-dismissible fade show">{{ form.adress.errors }}</div>
+        {% endif %}
+        <p><div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="payment_on_get" id="flexRadioDefault1" value="0" checked>
+            <label class="form-check-label" for="flexRadioDefault1">
+                Оплата картой
+            </label>
+
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="payment_on_get" value="1" id="flexRadioDefault2" >
+            <label class="form-check-label" for="flexRadioDefault2">
+                Наличными/картой при получении
+            </label>
+          </div></p>
+          {% if form.payment_on_get.errors %}
+            <div class="alert alert-danger alert-dismissible fade show">{{ form.payment_on_get.errors }}</div>
+        {% endif %}
+
+          <!--<form action="." method="post" class="order-form">
+            {% for f in form %}
+            <p><label class="form_label" for="{{ f.id_for_label }}"></label>{{ f }}</p>
+            <div class="form_error">{{ f.errors }}</div>
+            {% endfor %}-->
+            <!--<label class="form_label">{{ form.as_p }}</label>-->
+            <!--{% csrf_token %}-->
+        <!--<label class="form_label">{{ form.as_p }}</label>-->
+        
+        <p><input type="submit" class="btn btn-primary mb-3" value="Заказать"></p>
     </form>
     </div>
+
 {% endblock %}

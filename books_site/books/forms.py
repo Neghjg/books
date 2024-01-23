@@ -10,8 +10,8 @@ class Comment(forms.ModelForm):
     #    super().__init__(*args, **kwargs)
     CHOICES = [('1','1'),('2','2'), ('3','3'),('4','4'), ('5', '5')]
     #CHOICES = zip([1,2,3, 4, 5], ['1','2','3', '4', '5'])
-    rating = forms.IntegerField(max_value = 5, widget=forms.RadioSelect(choices=CHOICES, attrs={"id": "rating-input"}))
-    #rating = forms.ChoiceField(choices=((1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")))
+    #rating = forms.IntegerField(max_value = 5, widget=forms.RadioSelect(choices=CHOICES, attrs={"id": "rating-input"}))
+    rating = forms.ChoiceField(choices=(('1', "1"), ('2', "2"), ('3', "3"), ('4', "4"), ('5', "5")))
     comment = forms.CharField( widget=forms.Textarea(attrs={"class": "form-control", "placeholder" :"Комментарий"}))
     
     

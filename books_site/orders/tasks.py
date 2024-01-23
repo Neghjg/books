@@ -1,14 +1,7 @@
-from django.conf import settings
 from huey import crontab
-from huey.contrib.djhuey import db_periodic_task
 from orders.models import Order
-from django.contrib.auth.models import User
 from huey import RedisHuey, crontab
 #import huey
-from huey.contrib.djhuey import db_task
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 from django.core.mail import send_mail
 from huey.contrib import djhuey as huey
 

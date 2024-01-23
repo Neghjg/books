@@ -10,7 +10,6 @@ from datetime import datetime
 from datetime import timedelta 
 from django.core.cache import cache
 
-# Create your views here.
 
 def index(request):
     books = Book.objects.all().order_by('-count_buy')[:10]
@@ -101,20 +100,20 @@ def book(request, post_slug):
     book = cache.get(post_slug)
     if not book:
         book = Book.objects.filter(slug = post_slug)
-        cache.set(post_slug, book, 300)
+        cache.set(post_slug, book, 1)
     get_book = cache.get('get_book')
     if not get_book:
         get_book = get_object_or_404(Book, slug=post_slug)
-        cache.set('get_book', get_book, 300)
+        cache.set('get_book', get_book, 1)
     new_comment = None
     comments = cache.get(post_slug + 'comments')
     if not comments:
         comments = Reviews.objects.filter(article_id__slug=post_slug).select_related('user')
-        cache.set(post_slug + 'comments', comments, 300)
+        cache.set(post_slug + 'comments', comments, 1)
     avg_rating = cache.get(post_slug + 'rating')
     if not avg_rating:
         avg_rating = Reviews.objects.filter(article_id__slug=post_slug).aggregate(avg = Avg("rating"))
-        cache.set(post_slug + 'rating', avg_rating, 300)
+        cache.set(post_slug + 'rating', avg_rating, 1)
     if request.method == 'POST':
         comment_form = Comment(data=request.POST)
         if comment_form.is_valid():
@@ -130,7 +129,6 @@ def book(request, post_slug):
     
     date_delivary = datetime.now() + timedelta(days=7)
     date_delivary_to_shop = datetime.now() + timedelta(days=3)
-    
     
     return render(request, 'books/book.html', {'book': book, 'get_book': get_book, 
                                                'cart_product_form': cart_product_form,

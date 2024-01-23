@@ -19,9 +19,6 @@ def cart_add(request, product_slug):
         messages.success(request, f'"{product}" успешно добавлена в корзину')
     return redirect(request.META['HTTP_REFERER'])
 
-def cart_change(request, product_id):
-    return product_id
-
 def cart_remove(request, product_slug):
     cart = Cart(request)
     product = get_object_or_404(Book, slug=product_slug)
@@ -32,7 +29,6 @@ def cart_detail(request):
     cart = Cart(request)
     my_promo = request.session.get('promokod', '0')
     if request.method == 'POST':
-        
         promo = Promo(request.POST)
         if promo.is_valid():
             cd = promo.cleaned_data
@@ -44,12 +40,7 @@ def cart_detail(request):
                 elif request.session.get('promokod', '0') != "0":
                     request.session['promokod'] = "2"
                     my_promo = request.session.get('promokod', '0')
-            
-            
                 return redirect('cart_detail')
-            
     else:
         promo = Promo()
-        
-        
     return render(request, 'cart/detail.html', {'cart': cart, 'promo': promo, "my_promo": my_promo})

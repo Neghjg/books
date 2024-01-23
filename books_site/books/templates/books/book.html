@@ -92,21 +92,22 @@
         {% csrf_token %}
         
         
+            <input id="rating-input" type="radio" name="rating" value="1" data-min=0 data-max=5 data-step=1 checked>
+            
     
         
-        <select class="form-select" name = "rating" aria-label="Default select example">
+        <!--<select class="form-select" name = "rating" aria-label="Default select example">
             <option selected>Ваша оценка </option>
             <option value="1">1 звезда </option>
             <option value="2">2 звезды</option>
             <option value="3">3 звезды</option>
             <option value="4">4 звезды</option>
             <option value="5">5 звезд</option>
-          </select>
-        <p><label class="form_label" for="{{ comment_form.comment.id_for_label }}"></label>{{ comment_form.comment }}</p>
-        
-        
-
-        
+          </select>-->
+        <p><label class="form_label" for="{{ comment_form.comment.id_for_label }}"></label>
+            {{ comment_form.comment }}
+        </p>
+               
         
       <button type="submit" class="btn btn-primary">Отправить</button>
     </form>
@@ -212,7 +213,7 @@
                     min: 0,
                     max: 5,
                     step: 1,
-                    size: 'lg',
+                    size: 'md',
                     showClear: false
                 });
     
@@ -250,6 +251,35 @@
                     min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
                 });
             });
+            (function (factory) {
+                'use strict';
+                if (typeof define === 'function' && define.amd) {
+                    define(['jquery'], factory);
+                } else if (typeof module === 'object' && typeof module.exports === 'object') { 
+                    factory(require('jquery'));
+                } else { 
+                    factory(window.jQuery);
+                }
+            }(function ($) {
+                "use strict";
+                $.fn.ratingLocales['ru'] = {
+                    defaultCaption: '{rating} Звёзды',
+                    starCaptions: {
+                        0.5: 'Половина звезды',
+                        1: 'Одна звезда',
+                        1.5: 'Полторы звезды',
+                        2: 'Две звезды',
+                        2.5: 'Две с половиной звезды',
+                        3: 'Три звезды',
+                        3.5: 'Три с половиной звезды',
+                        4: 'Четыре звезды',
+                        4.5: 'Четыре с половиной звезды',
+                        5: 'Пять звёзд'
+                    },
+                    clearButtonTitle: 'Очистить',
+                    clearCaption: 'Без рейтинга'
+                };
+            }));
         </script>
     </div>
     

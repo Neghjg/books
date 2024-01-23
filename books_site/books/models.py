@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-# Create your models here.
+
 class Book(models.Model):
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     title = models.CharField(max_length=255, verbose_name='Название')
@@ -10,7 +10,7 @@ class Book(models.Model):
     cat = models.ForeignKey('Category', on_delete=models.PROTECT)
     photo = models.ImageField(upload_to='photos/', default='photos/book-preload.svg', verbose_name='Изображение')
     price = models.IntegerField(verbose_name='Цена')
-    is_published = models.BooleanField(default=True)
+    is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     count_buy = models.IntegerField(verbose_name='Количесвто покупок')
     author = models.CharField(max_length=255, verbose_name='автор')
     year_of_publication = models.IntegerField(verbose_name='Год издания')
@@ -55,8 +55,6 @@ class Reviews(models.Model):
     
     def __str__(self):
         return str(self.user)
-    
-    
     
     
     class Meta:
