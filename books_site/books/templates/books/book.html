@@ -90,12 +90,7 @@
     {% if request.user.is_authenticated %}
     <form method="post"> 
         {% csrf_token %}
-        
-        
             <input id="rating-input" type="radio" name="rating" value="1" data-min=0 data-max=5 data-step=1 checked>
-            
-    
-        
         <!--<select class="form-select" name = "rating" aria-label="Default select example">
             <option selected>Ваша оценка </option>
             <option value="1">1 звезда </option>
@@ -106,16 +101,14 @@
           </select>-->
         <p><label class="form_label" for="{{ comment_form.comment.id_for_label }}"></label>
             {{ comment_form.comment }}
-        </p>
-               
-        
+        </p>   
       <button type="submit" class="btn btn-primary">Отправить</button>
     </form>
     {% endif %}
     
     <br>
     <br>
-    
+
         {% for i in comments %}
         <div class="card" id = "comments">
             <div class="card-body">
@@ -127,66 +120,6 @@
             </div>
         </div>
         {% endfor %}
-
-        <!--{% for i in comments %}
-        <div class="comments">
-            
-                <p class="comments_user">{{ i.user }}</p>
-                <p class="comments_rat">{{ i.rating }}</p>
-                <p class="comments_com">{{ i.comment }}</p>
-            
-        </div>
-        {% endfor %}-->
-        
-    <!--<form method="post">
-        {% csrf_token %}
-       
-        <p><label class="form_label" for="{{ comment_form.rating.id_for_label }}">{{ comment_form.rating.label }}: </label>{{ comment_form.rating }}</p>
-        <div class="form_error">{{ comment_form.rating.errors }}</div>
-        <div >
-            
-            <input id="rating-input" type="checkbox" value={{ comment_form.rating.choices }}/>
-        
-            {{ comment_form.field_name.label_tag }}
-            {% for pk, choice in comment_form.field_name.field.widget.choices %}
-            <div >
-                <input id="id_{{comment_form.field_name.name}}_{{ forloop.counter0 }}" name="{{comment_form.field_name.name}}" type="{{comment_form.field_name.field.widget.input_type}}" value="{{pk}}" >
-                 
-                 {% endfor %}
-        
-        </div>
-        
-
-             
-
-
-
-        <p><label class="form_label" for="{{ comment_form.comment.id_for_label }}">{{ comment_form.comment.label }}: </label>{{ comment_form.comment }}</p>
-        <div class="form_error">{{ comment_form.comment.errors }}</div>
-
-        <button type="submit" class="btn btn-primary">Отправить</button>
-    </form>-->
-
-
-     <!--<form method="post"> 
-        {% csrf_token %}
-        <p><label class="form_label" for="{{ comment_form.rating.id_for_label }}">Оценка: </label><input id="rating-input" type="text" title=""/></p>
-        
-        <div class="form_error">{{ comment_form.rating.errors }}</div>
-        
-           
-
-        <p><label class="form_label" >Комментарий: </label>{{ comment_form.comment }}</p>
-        <div class="form_error">{{ comment_form.comment.errors }}</div>
-        
-        <div class="form_error">{{ form.non_field_errors }}</div>
-    
-        
-      
-      <button type="submit" class="btn btn-primary">Отправить</button>
-    </form>-->
-     
-        
 
         <script> 
             jQuery(document).ready(function () {

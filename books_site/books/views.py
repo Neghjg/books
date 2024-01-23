@@ -104,7 +104,7 @@ def book(request, post_slug):
     get_book = cache.get('get_book')
     if not get_book:
         get_book = get_object_or_404(Book, slug=post_slug)
-        cache.set('get_book', get_book, 1)
+        cache.set('get_book', get_book, 300)
     new_comment = None
     comments = cache.get(post_slug + 'comments')
     if not comments:
@@ -113,7 +113,7 @@ def book(request, post_slug):
     avg_rating = cache.get(post_slug + 'rating')
     if not avg_rating:
         avg_rating = Reviews.objects.filter(article_id__slug=post_slug).aggregate(avg = Avg("rating"))
-        cache.set(post_slug + 'rating', avg_rating, 1)
+        cache.set(post_slug + 'rating', avg_rating, 300)
     if request.method == 'POST':
         comment_form = Comment(data=request.POST)
         if comment_form.is_valid():
