@@ -107,10 +107,10 @@ def book(request, post_slug):
         get_book = get_object_or_404(Book, slug=post_slug)
         cache.set('get_book', get_book, 300)
     new_comment = None
-    comments = cache.get(post_slug + 'comments')
-    if not comments:
-        comments = Reviews.objects.filter(article_id__slug=post_slug).select_related('user')
-        cache.set(post_slug + 'comments', comments, 1)
+    #comments = cache.get(post_slug + 'comments')
+    #if not comments:
+    comments = Reviews.objects.filter(article_id__slug=post_slug).select_related('user')
+        #cache.set(post_slug + 'comments', comments, 1)
     avg_rating = cache.get(post_slug + 'rating')
     if not avg_rating:
         avg_rating = Reviews.objects.filter(article_id__slug=post_slug).aggregate(avg = Avg("rating"))
