@@ -1,7 +1,7 @@
 from django import forms
 
 
-PRODUCT_QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 31)]
+PRODUCT_QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 128)]
 
 class CartAddProductForm(forms.Form):
     quantity = forms.TypedChoiceField(label="Количество", choices=PRODUCT_QUANTITY_CHOICES, coerce=int, initial = '1',widget=forms.Select(attrs={"class":"form-select buy_count"}))

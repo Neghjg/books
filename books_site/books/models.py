@@ -9,6 +9,7 @@ class Book(models.Model):
     description = models.TextField(blank=True, verbose_name='Описание')
     cat = models.ForeignKey('Category', on_delete=models.PROTECT)
     photo = models.ImageField(upload_to='photos/', default='photos/book-preload.svg', verbose_name='Изображение')
+    quantity = models.PositiveIntegerField(default=0, verbose_name='Количество')
     price = models.IntegerField(verbose_name='Цена')
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     count_buy = models.IntegerField(verbose_name='Количесвто покупок')

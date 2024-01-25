@@ -4,6 +4,7 @@ from books.models import Book
 from .cart import Cart
 from .forms import CartAddProductForm, Promo
 from django.contrib import messages
+from django.forms import ValidationError
 
 
 @require_POST
@@ -12,11 +13,20 @@ def cart_add(request, product_slug):
     product = get_object_or_404(Book, slug=product_slug)
     form = CartAddProductForm(request.POST)
     if form.is_valid():
-        cd = form.cleaned_data
-        cart.add(product=product,
-                 quantity=cd['quantity'],
-                 update_quantity=cd['update'])
-        messages.success(request, f'"{product}" успешно добавлена в корзину')
+        try:
+            cd = form.cleaned_data
+            quantity = cd['quantity']
+            if product.quantity < quantity:
+                raise ValidationError(f"Недостаточное количество товара на складе\
+                                        В наличии - {product.quantity}")
+            cart.add(product=product,
+                     quantity=cd['quantity'],
+                     update_quantity=cd['update'])
+            messages.success(request, f'"{product}" успешно добавлена в корзину')
+        except ValidationError as e:
+            messages.error(request, str(e))
+            return redirect(request.META['HTTP_REFERER'])
+            
     return redirect(request.META['HTTP_REFERER'])
 
 def cart_remove(request, product_slug):

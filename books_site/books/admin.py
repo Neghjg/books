@@ -12,7 +12,7 @@ class ReviewsTabAdmin(admin.TabularInline):
 
 class BookAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('title',)}
-    list_display = ('id', 'title', 'cat', 'is_published')
+    list_display = ('id', 'title', 'cat', 'is_published', 'quantity')
     list_display_links = ("id", "title")
     search_fields = ("title", 'author')
     list_editable=('is_published',)
@@ -23,6 +23,7 @@ class BookAdmin(admin.ModelAdmin):
           'description',
           'cat',
           'photo',
+          'quantity',
           'price',
           'is_published',
           'count_buy',
@@ -51,7 +52,6 @@ class ReviewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'rating', 'comment')
     list_display_links = ("id", "user")
     search_fields = ("user", 'id')
-    list_filter=("rating",)
     
 
 admin.site.register(Book, BookAdmin)
