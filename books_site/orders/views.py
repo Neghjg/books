@@ -28,6 +28,13 @@ def order_create_authenticated_users(request):
                                                  price=((item['price'])/10)*9,
                                                  quantity=item['quantity']
                                                  )
+                            book = Book.objects.get(title = item['product'])
+                            if book.quantity < item['quantity']:
+                                raise ValidationError(f'Недостаточное количество товара на складе\
+                                                       В наличии - {book.quantity}')
+                            book.quantity -= item['quantity']
+                            book.count_buy += item['quantity'] 
+                            book.save()
                         request.session["promokod"] = "2"
                     else:
                         for item in cart:
@@ -71,6 +78,13 @@ def order_create_non_authenticated_users(request):
                                              product=item['product'],
                                              price=((item['price'])/10)*9,
                                              quantity=item['quantity'])
+                    book = Book.objects.get(title = item['product'])
+                    if book.quantity < item['quantity']:
+                        raise ValidationError(f'Недостаточное количество товара на складе\
+                                                В наличии - {book.quantity}')
+                    book.quantity -= item['quantity']
+                    book.count_buy += item['quantity'] 
+                    book.save()
                 request.session["promokod"] = "2"
             else:
                 for item in cart:
@@ -78,6 +92,13 @@ def order_create_non_authenticated_users(request):
                                              product=item['product'],
                                              price=item['price'],
                                              quantity=item['quantity'])
+                    book = Book.objects.get(title = item['product'])
+                    if book.quantity < item['quantity']:
+                        raise ValidationError(f'Недостаточное количество товара на складе\
+                                                       В наличии - {book.quantity}')
+                    book.quantity -= item['quantity']
+                    book.count_buy += item['quantity'] 
+                    book.save()
             # очистка корзины
             cart.clear()
             order_created_non_auth(order.id)

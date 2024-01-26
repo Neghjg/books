@@ -12,7 +12,7 @@ class ReviewsTabAdmin(admin.TabularInline):
 
 class BookAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('title',)}
-    list_display = ('id', 'title', 'cat', 'is_published', 'quantity')
+    list_display = ('id', 'title', 'author', 'cat', 'is_published', 'quantity')
     list_display_links = ("id", "title")
     search_fields = ("title", 'author')
     list_editable=('is_published',)

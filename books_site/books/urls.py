@@ -11,6 +11,6 @@ urlpatterns = [
     path('modern_prose/', modern_prose, name= 'modern_prose'),
     path('search/', search, name='search'),
     path('book/<slug:post_slug>/', book, name='book'),
-    path('author/<slug:post_slug>/', author, name='author'),
+    path('author/<str:book_author>/', author, name='author'),
     
 ]
