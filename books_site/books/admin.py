@@ -52,6 +52,7 @@ class ReviewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'rating', 'comment')
     list_display_links = ("id", "user")
     search_fields = ("user", 'id')
+    readonly_fields = ('user',)
     
 
 admin.site.register(Book, BookAdmin)

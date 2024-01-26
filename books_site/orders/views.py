@@ -19,7 +19,7 @@ def order_create_authenticated_users(request):
         form = AuthenticatedUserForm(request.POST)
         if form.is_valid():
             try:
-                with transaction.atomic():
+                with transaction.atomic(): 
                     order = form.save()
                     if request.session.get('promokod', '0') == "1":
                         for item in cart:
@@ -51,7 +51,7 @@ def order_create_authenticated_users(request):
                             book.count_buy += item['quantity'] 
                             book.save()
                     # очистка корзины
-                    Order.objects.filter(id = order.id).update(email = user_em)
+                    Order.objects.filter(id = order.id).update(email = user_em, user = us)
                     cart.clear()
                     order_created(order.id, user_em)
                     messages.success(request, 'Заказ оформлен!')

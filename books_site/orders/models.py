@@ -16,7 +16,7 @@ class Order(models.Model):
     payment_on_get = models.BooleanField(default=False, verbose_name="Оплата при получении")
     paid = models.BooleanField(default=False, verbose_name="Статус оплаты")
     status = models.CharField(max_length=50, default='В обработке', verbose_name='Статус заказа')
-    user = models.ManyToManyField(User)
+    user = models.ForeignKey(User, on_delete=models.SET_DEFAULT, blank=True, null=True, verbose_name="user", default=None)
     
 
     class Meta:
