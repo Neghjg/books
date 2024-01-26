@@ -14,7 +14,7 @@ class Book(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     count_buy = models.IntegerField(verbose_name='Количесвто покупок')
     author = models.CharField(max_length=255, verbose_name='автор')
-    author_slug_URL = models.SlugField(default=0, max_length=255, verbose_name='author_slug_URL')
+    author_slug_URL = models.SlugField(max_length=255, verbose_name='author_slug_URL')
     year_of_publication = models.IntegerField(verbose_name='Год издания')
     publisher = models.CharField(max_length=100, verbose_name='Издательсво')
     ISBN = models.CharField(max_length=255, verbose_name='ISBN', default="978-5-38-924083-4")

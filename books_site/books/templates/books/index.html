@@ -42,7 +42,7 @@
     </div>
     <div class="index_card">
       {% load cache %}
-{% cache 600 books_index %}
+{% cache 1 books_index %}
 {% for i in books  %}
   
 <a href="{{ i.get_absolute_url }}"><div class="card" id="index_card_minicards" >
@@ -55,7 +55,7 @@
       <div class="card-body">
         <div class="index_body_card">
         <h6 class="card-title">{{ i.title|truncatechars:23 }}</h6>
-        <p class="card-text">{{ i.author|truncatechars:15 }}</p>
+        <p class="card-text"><a class="a_book" href="{% url 'author' i.author_slug_URL %}">{{ i.author|truncatechars:15 }}<a></p>
         </div>
         
         <div class="price_index"><h5 class="card-subtitle" id="price_product_cart" >{{ i.price }} ₽</h5></div>

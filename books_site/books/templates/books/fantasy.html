@@ -27,7 +27,7 @@
       <div class="col-md-8" id="flex_tab" >
         <div class="card-body">
           <a class="a_href_title" href="{{ i.get_absolute_url }}"><h5 class="card-title">{{ i.title|truncatechars:29 }}</h5></a>
-          <p class="card-text">{{ i.author }}</p>
+          <p class="card-text"><a class="a_book" href="{% url 'author' i.author_slug_URL %}">{{ i.author }}</a></p>
           <h5 class="card-subtitle" id="price_product_cart" >{{ i.price }} ₽</h5>
           <div>
           <div class="form_book_buy2">

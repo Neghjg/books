@@ -11,12 +11,12 @@ class ReviewsTabAdmin(admin.TabularInline):
 
 
 class BookAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug':('title',)}
+    prepopulated_fields = {'slug':['title'], 'author_slug_URL': ['author']}
     list_display = ('id', 'title', 'author', 'cat', 'is_published', 'quantity')
     list_display_links = ("id", "title")
     search_fields = ("title", 'author')
     list_editable=('is_published',)
-    list_filter=("cat", 'is_published')
+    list_filter=("cat", 'is_published', 'author')
     fields = (
           'title',
           'slug',
@@ -28,12 +28,12 @@ class BookAdmin(admin.ModelAdmin):
           'is_published',
           'count_buy',
           'author',
+          'author_slug_URL',
           'year_of_publication',
           'publisher',
           'ISBN',
           'number_of_pages',
           ('size', 'type_of_cover'),
-          
           'weight',
           'age_restrictions',
     )

@@ -158,7 +158,7 @@ def book(request, post_slug):
                                                "date_delivary_to_shop":date_delivary_to_shop})
 
 def author(request, book_author):
-    author = Book.objects.filter(author=book_author)
+    author = Book.objects.filter(author_slug_URL=book_author)
     return render(request, 'books/author.html', {'author': author})
 #<!--{% url 'author' i.author %}-->
 
