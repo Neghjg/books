@@ -12,6 +12,7 @@ class OrderAdmin(admin.ModelAdmin):
                     'address', 'postal_code', 'city', 'paid',
                     'created', 'updated']
     list_filter = ['paid', 'created', 'updated']
+    readonly_fields = ('user',)
     inlines = [OrderItemInline]
     
 

@@ -52,7 +52,7 @@ class Reviews(models.Model):
     article_id = models.ForeignKey(Book, on_delete=models.CASCADE, null=True, blank=True, related_name='comments_book')
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     rating = models.IntegerField(verbose_name='Оценка')
-    comment = models.CharField(max_length=255, verbose_name='Комментарий')
+    comment = models.CharField(max_length=1024, verbose_name='Комментарий')
     
     def __str__(self):
         return str(self.user)
