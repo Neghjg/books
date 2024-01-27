@@ -6,6 +6,7 @@ urlpatterns = [
     path('login/', login, name = 'login'),
     path("logout/", logout_user, name="logout"),
     path("registration/", registration, name="registration"),
+    path('profile/', profile, name='profile'),
     #path('', include('django.contrib.auth.urls')),
     path('reset_password/', UserForgotPasswordView.as_view(template_name='authorization/password_reset_form.html'),
          name ='reset_password'),

@@ -7,14 +7,24 @@ class OrderItemInline(admin.TabularInline):
     raw_id_fields = ['product']
 
 
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ["order", "product", "price", "quantity"]
+
+
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'user' ,'first_name', 'last_name', 'email',
                     'address', 'postal_code', 'city', 'paid',
                     'created', 'updated']
     list_filter = ['paid', 'created', 'updated']
-    readonly_fields = ('user','user' ,'first_name', 'last_name', 'email',)
+    readonly_fields = ('user' ,'first_name', 'last_name', 'email',)
     search_fields = ['id', ]
     inlines = [OrderItemInline]
     
+    
+class OrderTabularAdmin(admin.TabularInline):
+    model = Order
+    fields = ["requires_delivery", "payment_on_get", "paid"]
+
 
 admin.site.register(Order, OrderAdmin)
+admin.site.register(OrderItem, OrderItemAdmin)

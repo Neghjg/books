@@ -344,6 +344,12 @@ svg.bi.bi-cart3{
     margin: 150px 0 0 0;
 }
 
+.profile{
+    display: block;
+    width: 420px;
+    margin: 30px 0 0 10px;
+}
+
 .empty_cart{
     margin: 200px 0 0 0;
     font-family: Inter, sans-serif;
@@ -533,4 +539,8 @@ svg.bi.bi-cart3{
 
 #cat_a_author{
     color: #707783
+}
+
+#profile_row{
+    width: 400px;
 }

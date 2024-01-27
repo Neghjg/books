@@ -1,9 +1,7 @@
 from django import forms
 from .models import *
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 from django.conf import settings
 from django_recaptcha.fields import ReCaptchaField
 from django_recaptcha.widgets import ReCaptchaV2Invisible
@@ -22,6 +20,8 @@ class RegistrationUserForm(UserCreationForm):
     #recaptcha = ReCaptchaField()
     
     # Frontend
+    first_name = forms.CharField()
+    last_name = forms.CharField()
     username = forms.CharField()
     email = forms.EmailField()
     password1 = forms.CharField()
@@ -36,7 +36,7 @@ class RegistrationUserForm(UserCreationForm):
     
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        fields = ("first_name", "last_name", "username", "email", "password1", "password2")
         
     
 class LoginUserForm(AuthenticationForm):
@@ -79,3 +79,20 @@ class UserSetNewPasswordForm(SetPasswordForm):
                 "id": "order_form",
                 'autocomplete': 'off'
             })
+
+
+class ProfileForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = (
+            "image",
+            "first_name",
+            "last_name",
+            "username",
+            "email",)
+
+    image = forms.ImageField(required=False)
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    username = forms.CharField()
+    email = forms.CharField()

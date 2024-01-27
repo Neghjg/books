@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import *
+from orders.models import Order, OrderItem
+from django.db.models import Prefetch
 from .forms import *
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_user, logout
@@ -8,6 +12,7 @@ from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import UserForgotPasswordForm, UserSetNewPasswordForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def registration(request):
@@ -45,6 +50,26 @@ def logout_user(request):
     messages.success(request, f'{request.user.username}, Вы вышли из аккаунта')
     logout(request)
     return redirect("login")
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Профайл успешно обновлен")
+            return HttpResponseRedirect(reverse('profile'))
+    else:
+        form = ProfileForm(instance=request.user)
+
+    orders = Order.objects.filter(user=request.user).prefetch_related(
+                Prefetch(
+                    "orderitem_set",
+                    queryset=OrderItem.objects.select_related("product"),
+                )
+            ).order_by("-id")
+
+    return render(request, 'authorization/profile.html', {"form": form, "orders": orders})
 
 
 class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):

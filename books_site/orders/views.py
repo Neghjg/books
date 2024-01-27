@@ -51,7 +51,7 @@ def order_create_authenticated_users(request):
                             book.count_buy += item['quantity'] 
                             book.save()
                     # очистка корзины
-                    Order.objects.filter(id = order.id).update(email = user_em, user = us)
+                    Order.objects.filter(id = order.id).update(email = user_em, user = us, first_name = us.first_name, last_name = us.last_name )
                     cart.clear()
                     order_created(order.id, user_em)
                     messages.success(request, 'Заказ оформлен!')
