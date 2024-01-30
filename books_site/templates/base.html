@@ -66,9 +66,25 @@
                   {% endif %}
               </div></a></li>
               {% endwith %}
-                <li class="nav-item"><a class="nav-link disabled" href="{% url "logout" %}">{{user.username|truncatechars:8}}</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url "profile" %}">Профиль</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url "logout" %}">Выйти</a></li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="{% url "logout" %}">{{user.username|truncatechars:8}}
+                  </a>
+                </li>
+                {% with total_items_order=orders_users|length %}
+                  <li class="nav-item">
+                    <a class="nav-link position-relative" href="{% url "profile" %}">
+                      <div class="cart_div_a">
+                      Профиль
+                      {% if total_items_order > 0 %}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ total_items_order }}
+                        </span>
+                      {% endif %}
+                      </div>
+                    </a>
+                  </li>
+                {% endwith %}
+                <li class="nav-item" id="logout_li"><a class="nav-link position-relative" href="{% url "logout" %}">Выйти</a></li>
             {% else %}
             {% with total_items=cart|length %}
             <li class="nav-item" id='authenticate'>
@@ -117,7 +133,6 @@
         {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
         <li class="page-item"><a class="page-link" href="?page={{ p }}&sort={{sort}}">{{ p }}</a></li>
         {% endif %}
-        
         {% endfor %}
   
         {% if page_obj.has_next %}

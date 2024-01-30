@@ -36,7 +36,7 @@ html, body {
 }
 
 #authenticate{
-    margin: 0 0 0 270px;
+    margin: 0 0 0 260px;
 }
 
 .profile_title_order{
@@ -556,4 +556,8 @@ svg.bi.bi-cart3{
 .profile{
     float: left;
     display: block;
+}
+
+#logout_li{
+    margin: 0 0 0 11px
 }
