@@ -9,8 +9,8 @@ class Order(models.Model):
     email = models.EmailField(verbose_name="email")
     address = models.CharField(max_length=250, verbose_name="Адрес", blank=True)
     requires_delivery = models.BooleanField(default=False, verbose_name="Требуется доставка")
-    postal_code = models.CharField(max_length=20)
-    city = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=20, blank=True)
+    city = models.CharField(max_length=100, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     payment_on_get = models.BooleanField(default=False, verbose_name="Оплата при получении")
@@ -41,6 +41,7 @@ class OrderItem(models.Model):
     class Meta:
         verbose_name = 'Проданные товары'
         verbose_name_plural = 'Проданные товары'
+        
 
     def __str__(self):
         return '{}'.format(self.id)

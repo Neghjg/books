@@ -36,9 +36,15 @@ html, body {
 }
 
 #authenticate{
-    margin: 0 12px 0 350px;
+    margin: 0 0 0 270px;
+}
 
-    
+.profile_title_order{
+    text-indent: 800px;
+}
+
+.profile_title_div{
+    margin: 20px 0 20px 0;
 }
 
 .card{
@@ -47,8 +53,6 @@ html, body {
     width: 700px;
     height: 900px;
     display: block;
-    
-    
 }
 
 .cart_table{
@@ -333,6 +337,10 @@ svg.bi.bi-cart3{
     width: 400px;
 }
 
+#profile_form{
+    width: 370px;
+}
+
 .empty_cart_parent{
     display: flex;
     justify-content: center;
@@ -346,8 +354,8 @@ svg.bi.bi-cart3{
 
 .profile{
     display: block;
-    width: 420px;
-    margin: 30px 0 0 10px;
+    width: 390px;
+    margin: -44px 0 0 10px;
 }
 
 .empty_cart{
@@ -543,4 +551,9 @@ svg.bi.bi-cart3{
 
 #profile_row{
     width: 400px;
+}
+
+.profile{
+    float: left;
+    display: block;
 }

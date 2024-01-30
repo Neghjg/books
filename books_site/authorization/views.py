@@ -62,14 +62,11 @@ def profile(request):
     else:
         form = ProfileForm(instance=request.user)
 
-    orders = Order.objects.filter(user=request.user).prefetch_related(
-                Prefetch(
-                    "orderitem_set",
-                    queryset=OrderItem.objects.select_related("product"),
-                )
-            ).order_by("-id")
+    orders = OrderItem.objects.filter(order__user=request.user).select_related("product").select_related("order")
 
-    return render(request, 'authorization/profile.html', {"form": form, "orders": orders})
+    #orders = Order.objects.filter(user=request.user).prefetch_related("orderitem_set")
+
+    return render(request, 'authorization/profile.html', {"form": form, "orders": orders, 'title': 'Bookingcom - Профиль'})
 
 
 class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):

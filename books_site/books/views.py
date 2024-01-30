@@ -155,7 +155,8 @@ def book(request, post_slug):
                                                'comments': comments,
                                                'avg_rating':avg_rating,
                                                'date_delivary':date_delivary,
-                                               "date_delivary_to_shop":date_delivary_to_shop})
+                                               "date_delivary_to_shop":date_delivary_to_shop,
+                                               "title": book[0]})
 
 def author(request, book_author):
     author = Book.objects.filter(author_slug_URL=book_author)

@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title
+    <title>{{ title }}</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'books/img/favicon.png' %}"/>
     <link type="text/css" href="{% static 'books/css/style.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'books/css/style.css' %}">
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
@@ -52,18 +53,6 @@
             </li>
             {% if request.user.is_authenticated %}
                 {% with total_items=cart|length %}
-                <!--<li class="nav-item" id='authenticate'>
-                <button type="button" class="btn position-relative" id="icon_cart">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
-                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                  </svg>
-                  
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ total_items }}
-                    <span class="visually-hidden">unread messages</span>
-                  </span>
-
-                </button></li>-->
                 <li class="nav-item" id='authenticate'>
                 <a class="btn position-relative" href="{% url "cart_detail" %}"><div class="cart_div_a">
                   <svg width="20" height="20" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
@@ -77,7 +66,8 @@
                   {% endif %}
               </div></a></li>
               {% endwith %}
-                <li class="nav-item"><a class="nav-link disabled" href="{% url "logout" %}">{{user.username|truncatechars:8}} </a></li>
+                <li class="nav-item"><a class="nav-link disabled" href="{% url "logout" %}">{{user.username|truncatechars:8}}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url "profile" %}">Профиль</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url "logout" %}">Выйти</a></li>
             {% else %}
             {% with total_items=cart|length %}
@@ -104,29 +94,12 @@
             {% endif %}
           </ul>
           
-        
-          
-          
-          
-                      
-                    
-        
-  <!--<div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
-  </div>-->
 <br>
 <br>
-
-
-
 {% include 'includes/messages.html' %}
     {% block content %}
     
     {% endblock %}
-    
   
     <div style="clear:both"></div>
     <div class="pagination">

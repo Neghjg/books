@@ -3,6 +3,58 @@
 {% block content %}
 
 
+<div id="cart_div">
+    {% if orders %}
+    <div class="card-body">
+        <div class="profile_title_div"><h5 class="profile_title_order">
+            Заказы
+        </h5></div>
+    <div class="card" id="card_buy" style="width: 46rem;">
+                <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Товар</th>
+                                    <th>Количество</th>
+                                    <th>Цена</th>
+                                    <th>Общая стоимость</th>
+                                    <th>Статус</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in orders %}
+                                <!--{{ i.order.id }}-->
+                                {% if i.order.status != "Получен" %}
+                                <tr>
+                                    <td>{{ i.product.title|truncatechars:23 }}</td>
+                                    <td>{{ i.quantity }}</td>
+                                    <td>{{ i.price }}</td>
+                                    <td>{{ i.get_cost }}</td>
+                                    <td>{{ i.order.status }}</td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    <!--{% for i in orders %}
+                {{ i.order.first_name }}
+                {{ i.price }}
+                {{ i.product.title }}
+            {% endfor %}-->
+                    
+                        <!--<div class="float_right"><h5 class="card-title" id="price_product_cart"> ₽</h5></div>
+                        <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
+                        <div class="float_right"><h6 class="card-subtitle mb-2 text-body-secondary"><del></del> ₽</h6></div>
+                        <div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">Итого без учета скидки: </h6></div>
+                    
+                        <div class="float_right"><h5 class="card-title"> ₽</h5></div>
+                        <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
+                    
+                        <div class="float_right"><h6 class="card-subtitle mb-2 text-body-secondary"> шт.</h6></div><div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">Количество: </h6></div>-->
+              </div>  
+    </div>
+    {% endif %}
+
 <div class="profile">
     <div>
     <div style="width:350px;"><h5 class="authorization_h5_center">Профиль</h5></div>
@@ -10,7 +62,7 @@
     {% csrf_token %}
         <p>
             <label for="id_first_name" class="form-label">Имя*</label>
-            <input type="text" class="form-control" id= 'order_form'
+            <input type="text" class="form-control" id= 'profile_form'
                 name="first_name"
                 placeholder="Введите ваше имя"
                 value="{{ form.first_name.value }}"
@@ -21,7 +73,7 @@
         </p>
         <p>
             <label for="id_last_name" class="form-label">Фамилия*</label>
-            <input type="text" class="form-control" id= 'order_form'
+            <input type="text" class="form-control" id= 'profile_form'
                 name="last_name"
                 placeholder="Введите вашу фамилию"
                 value="{{ form.last_name.value }}"
@@ -32,7 +84,7 @@
         </p>
         <p>
             <label for="id_username" class="form-label">Логин*</label>
-            <input type="text" class="form-control" id= 'order_form'
+            <input type="text" class="form-control" id= 'profile_form'
                 name="username"
                 placeholder="Введите ваше имя пользователя"
                 value="{{ form.username.value }}"
@@ -43,7 +95,7 @@
         </p>
         <p>
             <label for="id_email" class="form-label">Email*</label>
-            <input type="email" class="form-control" id= 'order_form'
+            <input type="email" class="form-control" id= 'profile_form'
                 name="email"
                 placeholder="Введите ваш email *youremail@example.com"
                 value="{{ form.email.value }}"
@@ -56,11 +108,5 @@
 </form>
 </div>
 </div>
-
-
-    {% for order in orders %}
-        {{ order.id}}
-    {% endfor %}
-
 
 {% endblock %}
