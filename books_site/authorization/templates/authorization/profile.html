@@ -9,8 +9,13 @@
         <div class="profile_title_div"><h5 class="profile_title_order">
             Заказы
         </h5></div>
+        {% for j in orders_users %}
+        {% if j.status != "Получен" %}
     <div class="card" id="card_buy" style="width: 46rem;">
                 <div class="card-body">
+                        <div class="float_right"><h5 class="card-title">{{ j.status }}</h5></div>
+                        <div class="card_title_div"><h5 class="card-title">Заказ № - {{ j.id }}</h5></div>
+                        <div class="card_title_div"><h5 class="card-title">{{ j.created }}</h5></div>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -23,36 +28,26 @@
                             </thead>
                             <tbody>
                                 {% for i in orders %}
-                                <!--{{ i.order.id }}-->
+                                {% if i.order.id == j.id %}
                                 {% if i.order.status != "Получен" %}
                                 <tr>
-                                    <td>{{ i.product.title|truncatechars:23 }}</td>
+                                    <td><a class="a_book" href="{% url 'book' i.product.slug %}">{{ i.product.title|truncatechars:23 }}</a></td>
                                     <td>{{ i.quantity }}</td>
-                                    <td>{{ i.price }}</td>
-                                    <td>{{ i.get_cost }}</td>
+                                    <td>{{ i.price }} ₽</td>
+                                    <td>{{ i.get_cost }} ₽</td>
                                     <td>{{ i.order.status }}</td>
                                 </tr>
+                                {% endif %}
                                 {% endif %}
                                 {% endfor %}
                             </tbody>
                         </table>
-                    <!--{% for i in orders %}
-                {{ i.order.first_name }}
-                {{ i.price }}
-                {{ i.product.title }}
-            {% endfor %}-->
-                    
-                        <!--<div class="float_right"><h5 class="card-title" id="price_product_cart"> ₽</h5></div>
+                        <div class="float_right"><h5 class="card-title">{{ j.get_total_cost }} ₽</h5></div>
                         <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
-                        <div class="float_right"><h6 class="card-subtitle mb-2 text-body-secondary"><del></del> ₽</h6></div>
-                        <div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">Итого без учета скидки: </h6></div>
-                    
-                        <div class="float_right"><h5 class="card-title"> ₽</h5></div>
-                        <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
-                    
-                        <div class="float_right"><h6 class="card-subtitle mb-2 text-body-secondary"> шт.</h6></div><div class="card_title_div"><h6 class="card-subtitle mb-2 text-body-secondary">Количество: </h6></div>-->
               </div>  
     </div>
+    {% endif %}
+    {% endfor %}
     {% endif %}
 
 <div class="profile">

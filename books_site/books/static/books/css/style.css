@@ -356,6 +356,7 @@ svg.bi.bi-cart3{
     display: block;
     width: 390px;
     margin: -44px 0 0 10px;
+    position: absolute;
 }
 
 .empty_cart{
@@ -469,6 +470,15 @@ svg.bi.bi-cart3{
     float:left;
 }
 
+.login_p_social_authorization{
+    margin: 80px 0 15px 0;
+    text-indent: 25%;
+}
+
+.social_icons{
+    margin: 0 0 0 150px;
+}
+
 .forgot_password{
     display:block;
     float:left;
@@ -561,3 +571,4 @@ svg.bi.bi-cart3{
 #logout_li{
     margin: 0 0 0 11px
 }
+
