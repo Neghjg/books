@@ -24,7 +24,9 @@ def order_created(order_id, user_em):
     #try:
     mail_sent = send_mail(subject,
                           message,
-                          'jovannymoriarty@yandex.ru',
+                          # Яндекс
+                          #'jovannymoriarty@yandex.ru',
+                          'neghjg17@gmail.com',
                           [user_em])
     #except smtplib.SMTPException:
     #    print("Ошибка: Невозможно отправить сообщение")
@@ -42,6 +44,8 @@ def order_created_non_auth(order_id):
     
     mail_sent = send_mail(subject,
                           message,
-                          'jovannymoriarty@yandex.ru',
+                          # Яндекс
+                          #'jovannymoriarty@yandex.ru',
+                          'neghjg17@gmail.com',
                           [order.email])
     return mail_sent
