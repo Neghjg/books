@@ -34,7 +34,7 @@ class Book(models.Model):
     class Meta:
         verbose_name = 'Книги'
         verbose_name_plural = 'Книги'
-        #ordering = ['time_create', 'title']
+        
     
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True, verbose_name="Наименование группы")

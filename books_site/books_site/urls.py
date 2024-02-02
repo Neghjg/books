@@ -27,7 +27,6 @@ urlpatterns = [
     path('authorization/', include('authorization.urls')),
     path('social-auth/', include('social_django.urls')),
     path('cart/', include('cart.urls')),
-    
 ]
 
 
@@ -37,7 +36,6 @@ if settings.DEBUG:
        path("__debug__/", include("debug_toolbar.urls")), 
     ] + urlpatterns
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

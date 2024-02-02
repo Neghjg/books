@@ -2,13 +2,7 @@ from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
-from django.conf import settings
 from django_recaptcha.fields import ReCaptchaField
-from django_recaptcha.widgets import ReCaptchaV2Invisible
-
-
-
-
 
 
 class RegistrationUserForm(UserCreationForm):
@@ -44,12 +38,10 @@ class LoginUserForm(AuthenticationForm):
     password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={"class": "form-control", "id": "order_form"}))
     
     
-
 class UserForgotPasswordForm(PasswordResetForm):
     """
     Запрос на восстановление пароля
     """
-
     def __init__(self, *args, **kwargs):
         """
         Обновление стилей формы

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
 
+{% block content %}
 
 <div id="cart_div">
     {% if orders %}
@@ -10,9 +10,9 @@
             Заказы
         </h5></div>
         {% for j in orders_users %}
-        {% if j.status != "Получен" %}
-    <div class="card" id="card_buy" style="width: 46rem;">
-                <div class="card-body">
+            {% if j.status != "Получен" %}
+                <div class="card" id="card_buy" style="width: 46rem;">
+                    <div class="card-body">
                         <div class="float_right"><h5 class="card-title">{{ j.status }}</h5></div>
                         <div class="card_title_div"><h5 class="card-title">Заказ № - {{ j.id }}</h5></div>
                         <div class="card_title_div"><h5 class="card-title">{{ j.created }}</h5></div>
@@ -31,7 +31,9 @@
                                 {% if i.order.id == j.id %}
                                 {% if i.order.status != "Получен" %}
                                 <tr>
-                                    <td><a class="a_book" href="{% url 'book' i.product.slug %}">{{ i.product.title|truncatechars:23 }}</a></td>
+                                    <td><a class="a_book" href="{% url 'book' i.product.slug %}">
+                                        {{ i.product.title|truncatechars:23 }}
+                                    </a></td>
                                     <td>{{ i.quantity }}</td>
                                     <td>{{ i.price }} ₽</td>
                                     <td>{{ i.get_cost }} ₽</td>
@@ -44,64 +46,64 @@
                         </table>
                         <div class="float_right"><h5 class="card-title">{{ j.get_total_cost }} ₽</h5></div>
                         <div class="card_title_div"><h5 class="card-title">Итого: </h5></div>
-              </div>  
-    </div>
-    {% endif %}
-    {% endfor %}
+                    </div>  
+                </div>
+            {% endif %}
+        {% endfor %}
     {% endif %}
 
-<div class="profile">
-    <div>
-    <div style="width:350px;"><h5 class="authorization_h5_center">Профиль</h5></div>
-<form action="{% url "profile" %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-        <p>
-            <label for="id_first_name" class="form-label">Имя*</label>
-            <input type="text" class="form-control" id= 'profile_form'
-                name="first_name"
-                placeholder="Введите ваше имя"
-                value="{{ form.first_name.value }}"
-                required>
-                {% if form.first_name.errors %}
-                <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
-                {% endif %}
-        </p>
-        <p>
-            <label for="id_last_name" class="form-label">Фамилия*</label>
-            <input type="text" class="form-control" id= 'profile_form'
-                name="last_name"
-                placeholder="Введите вашу фамилию"
-                value="{{ form.last_name.value }}"
-                required>
-                {% if form.last_name.errors %}
-                <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
-                {% endif %}
-        </p>
-        <p>
-            <label for="id_username" class="form-label">Логин*</label>
-            <input type="text" class="form-control" id= 'profile_form'
-                name="username"
-                placeholder="Введите ваше имя пользователя"
-                value="{{ form.username.value }}"
-                required>
-                {% if form.username.errors %}
-                <div class="alert alert-danger alert-dismissible fade show">{{form.username.errors}}</div>
-                {% endif %}
-        </p>
-        <p>
-            <label for="id_email" class="form-label">Email*</label>
-            <input type="email" class="form-control" id= 'profile_form'
-                name="email"
-                placeholder="Введите ваш email *youremail@example.com"
-                value="{{ form.email.value }}"
-                required>
-                {% if form.email.errors %}
-                <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
-                {% endif %}
-        </p>
-    <button type="submit" class="btn btn-primary">Сохранить</button>
-</form>
-</div>
-</div>
+    <div class="profile">
+        <div>
+            <div style="width:350px;"><h5 class="authorization_h5_center">Профиль</h5></div>
+            <form action="{% url "profile" %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>
+                    <label for="id_first_name" class="form-label">Имя*</label>
+                    <input type="text" class="form-control" id= 'profile_form'
+                        name="first_name"
+                        placeholder="Введите ваше имя"
+                        value="{{ form.first_name.value }}"
+                        required>
+                    {% if form.first_name.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+                    {% endif %}
+                </p>
+                <p>
+                    <label for="id_last_name" class="form-label">Фамилия*</label>
+                    <input type="text" class="form-control" id= 'profile_form'
+                        name="last_name"
+                        placeholder="Введите вашу фамилию"
+                        value="{{ form.last_name.value }}"
+                        required>
+                    {% if form.last_name.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
+                    {% endif %}
+                </p>
+                <p>
+                    <label for="id_username" class="form-label">Логин*</label>
+                    <input type="text" class="form-control" id= 'profile_form'
+                        name="username"
+                        placeholder="Введите ваше имя пользователя"
+                        value="{{ form.username.value }}"
+                        required>
+                    {% if form.username.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.username.errors}}</div>
+                    {% endif %}
+                </p>
+                <p>
+                    <label for="id_email" class="form-label">Email*</label>
+                    <input type="email" class="form-control" id= 'profile_form'
+                        name="email"
+                        placeholder="Введите ваш email *youremail@example.com"
+                        value="{{ form.email.value }}"
+                        required>
+                    {% if form.email.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
+                    {% endif %}
+                </p>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </form>
+        </div>
+    </div>
 
 {% endblock %}

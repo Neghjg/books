@@ -53,4 +53,7 @@ def cart_detail(request):
                 return redirect('cart_detail')
     else:
         promo = Promo()
-    return render(request, 'cart/detail.html', {'cart': cart, 'promo': promo, "my_promo": my_promo, 'title': 'Bookingcom - Корзина'})
+    return render(request, 'cart/detail.html', {'cart': cart,
+                                                'promo': promo,
+                                                "my_promo": my_promo,
+                                                'title': 'Bookingcom - Корзина'})

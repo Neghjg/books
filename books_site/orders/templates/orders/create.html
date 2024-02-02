@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-
 {% block title %}{% endblock %}
 {% load mathfilters %}
+
 {% block content %}
 
 <br>
@@ -78,16 +78,7 @@
           {% if form.payment_on_get.errors %}
             <div class="alert alert-danger alert-dismissible fade show">{{ form.payment_on_get.errors }}</div>
         {% endif %}
-
-          <!--<form action="." method="post" class="order-form">
-            {% for f in form %}
-            <p><label class="form_label" for="{{ f.id_for_label }}"></label>{{ f }}</p>
-            <div class="form_error">{{ f.errors }}</div>
-            {% endfor %}-->
-            <!--<label class="form_label">{{ form.as_p }}</label>-->
-            <!--{% csrf_token %}-->
-        <!--<label class="form_label">{{ form.as_p }}</label>-->
-        
+    
         <p><input type="submit" class="btn btn-primary mb-3" value="Заказать"></p>
     </form>
     </div>

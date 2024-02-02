@@ -12,5 +12,4 @@ urlpatterns = [
     path('search/', search, name='search'),
     path('book/<slug:post_slug>/', book, name='book'),
     path('author/<str:book_author>/', author, name='author'),
-    
 ]

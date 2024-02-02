@@ -2,13 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import *
-from orders.models import Order, OrderItem
-from django.db.models import Prefetch
+from orders.models import OrderItem
 from .forms import *
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_user, logout
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView
-from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import UserForgotPasswordForm, UserSetNewPasswordForm
 from django.contrib import messages
@@ -28,7 +26,8 @@ def registration(request):
             return redirect('/')
     else:
         form = RegistrationUserForm()
-    return render(request, 'authorization/registration.html', {'form': form, 'title': 'Bookingcom - Регистрация'})
+    return render(request, 'authorization/registration.html', {'form': form,
+                                                               'title': 'Bookingcom - Регистрация'})
 
 
 def login(request):
@@ -44,7 +43,8 @@ def login(request):
                 return redirect('/')
     else:
         form = LoginUserForm()
-    return render(request, 'authorization/login.html', {'form': form, 'title': 'Bookingcom - Авторизация'})
+    return render(request, 'authorization/login.html', {'form': form,
+                                                        'title': 'Bookingcom - Авторизация'})
 
 def logout_user(request):
     messages.success(request, f'{request.user.username}, Вы вышли из аккаунта')
@@ -66,7 +66,9 @@ def profile(request):
 
     #orders = Order.objects.filter(user=request.user).prefetch_related("orderitem_set")
 
-    return render(request, 'authorization/profile.html', {"form": form, "orders": orders, 'title': 'Bookingcom - Профиль'})
+    return render(request, 'authorization/profile.html', {"form": form,
+                                                          "orders": orders,
+                                                          'title': 'Bookingcom - Профиль'})
 
 
 class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):

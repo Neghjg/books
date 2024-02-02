@@ -1,8 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from .models import *
 from .forms import *
-import requests
-from django.db.models import Q
 from django.db.models import Avg
 from cart.forms import CartAddProductForm
 from django.core.paginator import Paginator
@@ -162,5 +160,4 @@ def author(request, book_author):
     author = Book.objects.filter(author_slug_URL=book_author)
     author_name = author[0].author
     return render(request, 'books/author.html', {'author': author, 'author_name': author_name, 'title':author_name})
-#<!--{% url 'author' i.author %}-->
 

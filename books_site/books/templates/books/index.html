@@ -1,71 +1,63 @@
 {% extends 'base.html' %}
-
 {% load static %}
+
 {% block content %}
 
 <div class= "title_h1_div"><h1 class="title_h1">Бестселлеры</h1></div>
-
 <div class="index">
     <div class="sidebar_index">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'adventures' %}">Приключения</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'detective' %}">Детектив</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'fantasy' %}">Фэнтези</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'classical_prose' %}">Классическая проза</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'modern_prose' %}">Современная проза</a>
-        </li>
-      </ul>
-      <div class="sales">
-        <a style="text-decoration: none" href="{% url 'classical_prose' %}">
-        <div><img  src="{% static 'books/img/sales.b01f8a1.svg' %}" ></div>
-        <div class="hot_sales"><h5 class="card-subtitle" id="price_product_cart" >Горячие скидки 
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
-          <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
-          <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
-          <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
-        </svg></h5></div>
-        </a>
-      </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'adventures' %}">Приключения</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'detective' %}">Детектив</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'fantasy' %}">Фэнтези</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'classical_prose' %}">Классическая проза</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'modern_prose' %}">Современная проза</a>
+            </li>
+        </ul>
+        <div class="sales">
+            <a style="text-decoration: none" href="{% url 'classical_prose' %}">
+                <div><img  src="{% static 'books/img/sales.b01f8a1.svg' %}" ></div>
+                <div class="hot_sales"><h5 class="card-subtitle" id="price_product_cart" >Горячие скидки 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+                        <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+                        <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+                        <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
+                    </svg></h5>
+                </div>
+            </a>
+        </div>
     </div>
     <div class="index_card">
-      {% load cache %}
-{% cache 300 books_index %}
-{% for i in books  %}
-  
-<a href="{{ i.get_absolute_url }}"><div class="card" id="index_card_minicards" >
-  
-      {% if i.photo %}
-      <a href="{{ i.get_absolute_url }}"><img class="img-fluid rounded-start" src="{{i.photo.url}}"></a>
-      {% endif %}
-    
-    
-      <div class="card-body">
-        <div class="index_body_card">
-        <h6 class="card-title"><a class="a_href_title" href="{{ i.get_absolute_url }}">{{ i.title|truncatechars:23 }}</a></h6>
-        <p class="card-text"><a class="a_book" id="cat_a_author" href="{% url 'author' i.author_slug_URL %}">{{ i.author|truncatechars:15 }}<a></p>
-        </div>
-        
-        <div class="price_index"><h5 class="card-subtitle" id="price_product_cart" >{{ i.price }} ₽</h5></div>
-        
-      </div>
-      
-    
-</div></a>
-{% endfor %}
-{% endcache %}
+        {% load cache %}
+        {% cache 300 books_index %}
+        {% for i in books  %}
+            <a href="{{ i.get_absolute_url }}"><div class="card" id="index_card_minicards" >
+                {% if i.photo %}
+                    <a href="{{ i.get_absolute_url }}"><img class="img-fluid rounded-start" src="{{i.photo.url}}"></a>
+                {% endif %}
+            <div class="card-body">
+                <div class="index_body_card">
+                    <h6 class="card-title"><a class="a_href_title" href="{{ i.get_absolute_url }}">{{ i.title|truncatechars:23 }}</a></h6>
+                    <p class="card-text"><a class="a_book" id="cat_a_author" href="{% url 'author' i.author_slug_URL %}">{{ i.author|truncatechars:15 }}<a></p>
+                </div>
+               <div class="price_index"><h5 class="card-subtitle" id="price_product_cart" >{{ i.price }} ₽</h5></div>
+            </div>
+        </div></a>
+        {% endfor %}
+        {% endcache %}
 <div>
 </div>
 
