@@ -62,7 +62,7 @@ def order_create_authenticated_users(request):
                 messages.error(request, str(e))
                 return redirect('home')
     else:
-        form = AuthenticatedUserForm()
+        form = AuthenticatedUserForm(instance=request.user)
     return render(request, 'orders/create.html',
                   {'cart': cart, 'form': form, "my_promo": my_promo})
     

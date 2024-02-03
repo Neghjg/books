@@ -38,6 +38,19 @@
     <div class="form_cart_create">
     <form action="{% url 'order_create' %}" method="post" class="order-form">
         {% csrf_token %}
+
+        <p>
+            <label for="id_email" class="form-label">Email*</label>
+            <input type="email" class="form-control" id= 'profile_form'
+                name="email"
+                placeholder="Введите ваш email *youremail@example.com"
+                value="{{ form.email.value }}"
+                required>
+            {% if form.email.errors %}
+                <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
+            {% endif %}
+        </p>
+
         <p><div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="requires_delivery" id="flexRadioDefault1" value="1" checked>
             <label class="form-check-label" for="flexRadioDefault1">

@@ -23,6 +23,7 @@ class AuthenticatedUserForm(forms.ModelForm):
     #address = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "id": "order_form", "placeholder" :"Адрес"}))
     #payment_on_get = forms.ChoiceField(widget=forms.RadioSelect(attrs={"class": "form-check-input", "placeholder" :"Оплата при получении"}))
     
+    email = forms.EmailField()
     requires_delivery = forms.ChoiceField(choices=[
             ("0", False),
             ("1", True),
@@ -35,5 +36,5 @@ class AuthenticatedUserForm(forms.ModelForm):
     
     class Meta:
         model = Order
-        fields = ['requires_delivery', 'address', 'payment_on_get']
+        fields = ['requires_delivery', 'address', 'payment_on_get', 'email']
         
