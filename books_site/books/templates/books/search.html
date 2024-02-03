@@ -24,6 +24,14 @@
             </div>
         </a>
     {% endfor %}
+{% else %}
+    <div class="empty_cart_parent">
+        <div class="empty_cart">
+            <img class="search_none_img" src="{% static 'books/img/mailcorgy.svg' %}" >
+            <h5 class="search_none">Похоже, у нас такого нет</h5>
+            <p id="cat_a_author">Но на всякий случай советуем проверить опечатки в запросе</p>
+        </div>
+    </div>
 {% endif %}
 
 {% endblock %}

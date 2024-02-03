@@ -572,3 +572,12 @@ svg.bi.bi-cart3{
     margin: 0 0 0 11px
 }
 
+.search_none{
+    font-size:24px;
+    font-family: Inter,sans-serif;
+    text-align: center;
+}
+
+.search_none_img{
+    margin: 0 0 0 100px;
+}
