@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load mathfilters %}
 {% load static %}
-{% block title %} Корзина {% endblock %}
+
 {% block content %}
 
 {% if cart %}
@@ -38,7 +38,7 @@
                     <div class="buy_deatail_div">Заказать</div>
                     </a>
                 {% else %}
-                    <a class="btn btn-primary" id="btn_card_price2" href="{% url "order_create_non_authenticated" %}" class="button">
+                    <a class="btn btn-primary" id="btn_card_price2" href="{% url "orders:order_create_non_authenticated" %}" class="button">
                     <div class="buy_deatail_div">Заказать</div>
                     </a>
                 {% endif %}

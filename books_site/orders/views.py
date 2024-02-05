@@ -64,7 +64,7 @@ def order_create_authenticated_users(request):
     else:
         form = AuthenticatedUserForm(instance=request.user)
     return render(request, 'orders/create.html',
-                  {'cart': cart, 'form': form, "my_promo": my_promo})
+                  {'cart': cart, 'form': form, "my_promo": my_promo, 'title': 'Bookingcom - Заказ'})
     
 def order_create_non_authenticated_users(request):
     cart = Cart(request)
@@ -107,4 +107,4 @@ def order_create_non_authenticated_users(request):
     else:
         form = NonAuthenticatedUserForm()
     return render(request, 'orders/create_non-authenticated.html',
-                  {'cart': cart, 'form': form})
+                  {'cart': cart, 'form': form, 'title': 'Bookingcom - Заказ'})

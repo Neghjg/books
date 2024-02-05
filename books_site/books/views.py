@@ -107,7 +107,7 @@ def search(request):
         if query == '':
             query = 'None'
         result = Book.objects.filter(title__icontains = query) | Book.objects.filter(author__icontains = query) | Book.objects.filter(title__icontains = query.capitalize()) | Book.objects.filter(author__icontains = query.capitalize())
-        return render(request, 'books/search.html', {'query': query, 'result': result})
+        return render(request, 'books/search.html', {'query': query, 'result': result, 'title': 'Bookingcom - Поиск'})
     
 
 def book(request, post_slug):
