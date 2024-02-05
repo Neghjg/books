@@ -30,8 +30,8 @@
               </form>
               
               <p class="login_p_social_authorization">Авторизоваться через:</p>
-              <a class="social_icons" href="/social-auth/login/vk-oauth2/"><img style="width: 35px;" src="{% static 'books/img/vk.png' %}" ></a>
-              <a href="/social-auth/login/google-oauth2/"><img style="width: 35px;" src="{% static 'books/img/google.png' %}" ></a>
+              <a class="social_icons" href="{% url "social:begin" "vk-oauth2" %}"><img style="width: 35px;" src="{% static 'books/img/vk.png' %}" ></a>
+              <a href="{% url "social:begin" "google-oauth2" %}"><img style="width: 35px;" src="{% static 'books/img/google.png' %}" ></a>
               
     </div>
 </div>

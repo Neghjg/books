@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .models import *
 from orders.models import OrderItem
 from .forms import *
@@ -77,7 +77,7 @@ class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
     """
     form_class = UserForgotPasswordForm
     template_name = 'authorization/password_reset_form.html'
-    #success_url = reverse_lazy('home')
+    success_url = reverse_lazy('authorization:password_reset_done')
     #success_message = 'Письмо с инструкцией по восстановлению пароля отправлена на ваш email'
     #subject_template_name = 'system/email/password_subject_reset_mail.txt'
     #email_template_name = 'system/email/password_reset_mail.html'
@@ -94,7 +94,7 @@ class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView
     """
     form_class = UserSetNewPasswordForm
     template_name = 'authorization/password_reset_confirm.html'
-    #success_url = reverse_lazy('home')
+    success_url = reverse_lazy('authorization:password_reset_complete')
     #success_message = 'Пароль успешно изменен. Можете авторизоваться на сайте.'
                
     def get_context_data(self, **kwargs):
