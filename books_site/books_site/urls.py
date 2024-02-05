@@ -22,11 +22,11 @@ from books.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('orders/', include('orders.urls')),
-    path("", include('books.urls')),
-    path('authorization/', include('authorization.urls')),
-    path('social-auth/', include('social_django.urls')),
-    path('cart/', include('cart.urls')),
+    path('orders/', include('orders.urls', namespace="orders")),
+    path("", include('books.urls', namespace="main")),
+    path('authorization/', include('authorization.urls', namespace="authorization")),
+    path('social-auth/', include('social_django.urls', namespace="social-auth")),
+    path('cart/', include('cart.urls', namespace="cart")),
 ]
 
 

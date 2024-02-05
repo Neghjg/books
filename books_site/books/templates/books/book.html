@@ -11,7 +11,7 @@
         {% endif %}
         <h1 class='title_h1_book'>{{i.title}}</h1>
         <div class='a_book'>
-            <a class="a_book" href="{% url 'author' i.author_slug_URL %}">{{ i.author }}</a>
+            <a class="a_book" href="{% url 'main:author' i.author_slug_URL %}">{{ i.author }}</a>
         </div>
         {% if avg_rating.avg != None %}
             <p class="book_rating_p">
@@ -59,7 +59,7 @@
                         В наличии
                     </h6>
                     <div class="form_book_buy">
-                        <form action="{% url "cart_add" i.slug %}" method="post">
+                        <form action="{% url "cart:cart_add" i.slug %}" method="post">
                             <div class="producr_quantity">
                                 <div class="number">
                                     <button class="number-minus" type="button" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.onchange();">-</button>
@@ -84,7 +84,7 @@
                     </h6>
                     <h6 class="card-text" id="card_p_date"> до {{ date_delivary_to_shop|date:"d.m.Y" }}</h6>
                     <br>
-                    <h6 class="card-text" id="card_p"><img  src="{% static 'books/img/car.c38a3b2.svg' %}" > Доставка курьером, 120 ₽</h6>
+                    <h6 class="card-text" id="card_p"><img src="{% static 'books/img/car.c38a3b2.svg' %}" > Доставка курьером, 120 ₽</h6>
                     <h6 class="card-text" id="card_p_date">до {{ date_delivary|date:"d.m.Y" }}</h6>
                 </div>
             </div>
@@ -107,8 +107,8 @@
     {% else %}
         <hr>
         <h5 style="font-size: 1.06rem;">Чтобы оставить отзыв, необходимо 
-            <a class="a_book" href="{% url "login" %}">Войти</a> | 
-            <a class="a_book" href="{% url "registration" %}">Зарегистрироваться</a>
+            <a class="a_book" href="{% url "authorization:login" %}">Войти</a> | 
+            <a class="a_book" href="{% url "authorization:registration" %}">Зарегистрироваться</a>
         </h5>
     {% endif %}
     {% if comments %}

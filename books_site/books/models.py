@@ -29,7 +29,7 @@ class Book(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse('book', kwargs={'post_slug': self.slug})
+        return reverse('main:book', kwargs={'post_slug': self.slug})
     
     class Meta:
         verbose_name = 'Книги'

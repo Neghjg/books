@@ -36,7 +36,7 @@
         
 
     <div class="form_cart_create">
-    <form action="{% url 'order_create' %}" method="post" class="order-form">
+    <form action="{% url 'orders:order_create' %}" method="post" class="order-form">
         {% csrf_token %}
 
         <p>

@@ -34,7 +34,7 @@
                     </form>
 
                 {% if request.user.is_authenticated %}
-                    <a class="btn btn-primary" id="btn_card_price2" href="{% url "order_create" %}" class="button">
+                    <a class="btn btn-primary" id="btn_card_price2" href="{% url "orders:order_create" %}" class="button">
                     <div class="buy_deatail_div">Заказать</div>
                     </a>
                 {% else %}
@@ -70,7 +70,7 @@
             {% else %}
                 <div class="card-body" id="cart-body2">
                     <h4 class="card-subtitle" id="price_product_cart">{{ item.total_price }} р.</h4>
-                    <a class="btn btn-primary" id="delete_product" href="{% url "cart_remove" product.slug %}"><div class = "tab_a_rem">Удалить</div></a>
+                    <a class="btn btn-primary" id="delete_product" href="{% url "cart:cart_remove" product.slug %}"><div class = "tab_a_rem">Удалить</div></a>
                 </div>
             {% endif %}
             </div>

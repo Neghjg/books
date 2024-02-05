@@ -49,7 +49,7 @@ def login(request):
 def logout_user(request):
     messages.success(request, f'{request.user.username}, Вы вышли из аккаунта')
     logout(request)
-    return redirect("login")
+    return redirect("authorization:login")
 
 @login_required
 def profile(request):
@@ -58,7 +58,7 @@ def profile(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Профайл успешно обновлен")
-            return HttpResponseRedirect(reverse('profile'))
+            return HttpResponseRedirect(reverse('authorization:profile'))
     else:
         form = ProfileForm(instance=request.user)
 

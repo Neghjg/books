@@ -6,7 +6,7 @@
 <br>
 <h1 class="title_h1">Современная проза</h1>
 <hr>
-<form action="{% url "modern_prose" %}" method="get">
+<form action="{% url "main:modern_prose" %}" method="get">
     <div class = 'div_select'><select name="sort" id="sort" class="form-select" aria-label="Пример выбора по умолчанию">
         <option value="-count_buy">По популярности</option>
         <option value="price">Дешевле</option>
@@ -27,11 +27,11 @@
               <div class="col-md-8" id="flex_tab" >
                   <div class="card-body">
                       <a class="a_href_title" href="{{ i.get_absolute_url }}"><h5 class="card-title">{{ i.title|truncatechars:29 }}</h5></a>
-                      <p class="card-text"><a class="a_book" id="cat_a_author" href="{% url 'author' i.author_slug_URL %}">{{ i.author }}</a></p>
+                      <p class="card-text"><a class="a_book" id="cat_a_author" href="{% url 'main:author' i.author_slug_URL %}">{{ i.author }}</a></p>
                       <h5 class="card-subtitle" id="price_product_cart" >{{ i.price }} ₽</h5>
                       <div>
                           <div class="form_book_buy2">
-                              <form action="{% url "cart_add" i.slug %}" method="post">
+                              <form action="{% url "cart:cart_add" i.slug %}" method="post">
                                   <div class="number">
                                       <button class="number-minus" type="button" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.onchange();">-</button>
                                       <input type="number" name="quantity" min="1" value="1" >

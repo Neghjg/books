@@ -60,7 +60,7 @@ def order_create_authenticated_users(request):
                     
             except ValidationError as e:
                 messages.error(request, str(e))
-                return redirect('home')
+                return redirect('main:home')
     else:
         form = AuthenticatedUserForm(instance=request.user)
     return render(request, 'orders/create.html',

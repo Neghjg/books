@@ -31,7 +31,7 @@
                                 {% if i.order.id == j.id %}
                                 {% if i.order.status != "Получен" %}
                                 <tr>
-                                    <td><a class="a_book" href="{% url 'book' i.product.slug %}">
+                                    <td><a class="a_book" href="{% url 'main:book' i.product.slug %}">
                                         {{ i.product.title|truncatechars:23 }}
                                     </a></td>
                                     <td>{{ i.quantity }}</td>
@@ -55,7 +55,7 @@
     <div class="profile">
         <div>
             <div style="width:350px;"><h5 class="authorization_h5_center">Профиль</h5></div>
-            <form action="{% url "profile" %}" method="post" enctype="multipart/form-data">
+            <form action="{% url "authorization:profile" %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <p>
                     <label for="id_first_name" class="form-label">Имя*</label>

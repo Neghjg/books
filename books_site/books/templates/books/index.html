@@ -8,23 +8,23 @@
     <div class="sidebar_index">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'adventures' %}">Приключения</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'main:adventures' %}">Приключения</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'detective' %}">Детектив</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'main:detective' %}">Детектив</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'fantasy' %}">Фэнтези</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'main:fantasy' %}">Фэнтези</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'classical_prose' %}">Классическая проза</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'main:classical_prose' %}">Классическая проза</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'modern_prose' %}">Современная проза</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'main:modern_prose' %}">Современная проза</a>
             </li>
         </ul>
         <div class="sales">
-            <a style="text-decoration: none" href="{% url 'classical_prose' %}">
+            <a style="text-decoration: none" href="{% url 'main:classical_prose' %}">
                 <div><img  src="{% static 'books/img/sales.b01f8a1.svg' %}" ></div>
                 <div class="hot_sales"><h5 class="card-subtitle" id="price_product_cart" >Горячие скидки 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
@@ -51,7 +51,7 @@
             <div class="card-body">
                 <div class="index_body_card">
                     <h6 class="card-title"><a class="a_href_title" href="{{ i.get_absolute_url }}">{{ i.title|truncatechars:23 }}</a></h6>
-                    <p class="card-text"><a class="a_book" id="cat_a_author" href="{% url 'author' i.author_slug_URL %}">{{ i.author|truncatechars:15 }}<a></p>
+                    <p class="card-text"><a class="a_book" id="cat_a_author" href="{% url 'main:author' i.author_slug_URL %}">{{ i.author|truncatechars:15 }}<a></p>
                 </div>
                <div class="price_index"><h5 class="card-subtitle" id="price_product_cart" >{{ i.price }} ₽</h5></div>
             </div>

@@ -34,7 +34,7 @@
     </div>
   </div>
    
-    <form action="{% url 'order_create_non_authenticated' %}" method="post" class="order-form">
+    <form action="{% url 'orders:order_create_non_authenticated' %}" method="post" class="order-form">
         <p><label class="form_label" for="id_first_name"></label>
             <input type"text" class="form-control", id="order_form" 
                 value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" 

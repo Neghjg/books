@@ -25,7 +25,7 @@
                     <h5 class="card-subtitle" id="price_product_cart" >{{ i.price }} ₽</h5>
                     <div>
                         <div class="form_book_buy2">
-                            <form action="{% url "cart_add" i.slug %}" method="post">
+                            <form action="{% url "cart:cart_add" i.slug %}" method="post">
                                 <div class="number">
                                     <button class="number-minus" type="button" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.onchange();">-</button>
                                     <input type="number" name="quantity" min="1" value="1" >

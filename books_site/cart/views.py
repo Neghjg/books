@@ -33,7 +33,7 @@ def cart_remove(request, product_slug):
     cart = Cart(request)
     product = get_object_or_404(Book, slug=product_slug)
     cart.remove(product)
-    return redirect('cart_detail')
+    return redirect('cart:cart_detail')
 
 def cart_detail(request):
     cart = Cart(request)
@@ -50,7 +50,7 @@ def cart_detail(request):
                 elif request.session.get('promokod', '0') != "0":
                     request.session['promokod'] = "2"
                     my_promo = request.session.get('promokod', '0')
-                return redirect('cart_detail')
+                return redirect('cart:cart_detail')
     else:
         promo = Promo()
     return render(request, 'cart/detail.html', {'cart': cart,

@@ -26,7 +26,7 @@
                         </div>
                     {% endif %}
                 {% endfor %}
-                <div class="login_btn"><button type="submit" class="btn btn-primary">Отправить</button></div><a href="{% url 'reset_password' %}"><div class="forgot_password"><h6>Забыл пароль?</h6></div></a>
+                <div class="login_btn"><button type="submit" class="btn btn-primary">Отправить</button></div><a href="{% url 'authorization:reset_password' %}"><div class="forgot_password"><h6>Забыл пароль?</h6></div></a>
               </form>
               
               <p class="login_p_social_authorization">Авторизоваться через:</p>
