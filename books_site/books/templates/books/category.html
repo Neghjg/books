@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<br>
+<h1 class="title_h1">{{ title_category }}</h1>
+<hr>
+    <form action="{% url "main:category" slug_url %}" method="get">
+        <div class = 'div_select'>
+            <select name="sort" id="sort" class="form-select" aria-label="Пример выбора по умолчанию">
+                <option value="-count_buy">По популярности</option>
+                <option value="price">Дешевле</option>
+                <option value="-price">Дороже</option>
+            </select>
+        </div>
+        <div class = 'input_div'><input type="submit" class="btn btn-primary" value="Сортировать"></div>
+    </form>
+
+{% include "books/includes/included_books.html" %}
+  
+
+{% endblock %}

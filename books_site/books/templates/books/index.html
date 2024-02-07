@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load books_tags %}
 
 {% block content %}
 
@@ -7,24 +8,14 @@
 <div class="index">
     <div class="sidebar_index">
         <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'main:adventures' %}">Приключения</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'main:detective' %}">Детектив</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'main:fantasy' %}">Фэнтези</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'main:classical_prose' %}">Классическая проза</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'main:modern_prose' %}">Современная проза</a>
-            </li>
+            {% tag_categories as categories %}
+            {% for category in categories %}
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'main:category' category.slug %}">{{category.name}}</a></li>
+            {% endfor %}
+            
         </ul>
         <div class="sales">
-            <a style="text-decoration: none" href="{% url 'main:classical_prose' %}">
+            <a style="text-decoration: none" href="#">
                 <div><img  src="{% static 'books/img/sales.b01f8a1.svg' %}" ></div>
                 <div class="hot_sales"><h5 class="card-subtitle" id="price_product_cart" >Горячие скидки 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
