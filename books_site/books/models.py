@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 
 class Book(models.Model):
@@ -23,6 +24,7 @@ class Book(models.Model):
     type_of_cover = models.CharField(max_length=255, verbose_name='Тип обложки', default="Твердый переплёт")
     weight = models.IntegerField(verbose_name='Вес', default=2010)
     age_restrictions = models.IntegerField(verbose_name='Возрастные ограничения', default=8)
+    tags = TaggableManager()
 
     
     def __str__(self):

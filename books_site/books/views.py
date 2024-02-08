@@ -8,6 +8,7 @@ from datetime import datetime
 from datetime import timedelta 
 from django.core.cache import cache
 from django.contrib import messages
+from books.utils import q_search
 
 
 def index(request):
@@ -120,15 +121,24 @@ def category(request, category_slug=None):
 #                                                       'cart_product_form': cart_product_form,
 #                                                       'title': 'Bookingcom - Современная проза'})
 
+#def search(request):
+#    result = []
+#    if request.method == 'GET':
+#        query = request.GET.get('search')
+#        if query == '':
+#            query = 'None'
+#        result = Book.objects.filter(title__icontains = query) | Book.objects.filter(author__icontains = query) | Book.objects.filter(title__icontains = query.capitalize()) | Book.objects.filter(author__icontains = query.capitalize())
+#        return render(request, 'books/search.html', {'query': query, 'page_obj': result, 'title': 'Bookingcom - Поиск'})
+    
+    
 def search(request):
-    result = []
     if request.method == 'GET':
         query = request.GET.get('search')
         if query == '':
             query = 'None'
-        result = Book.objects.filter(title__icontains = query) | Book.objects.filter(author__icontains = query) | Book.objects.filter(title__icontains = query.capitalize()) | Book.objects.filter(author__icontains = query.capitalize())
-        return render(request, 'books/search.html', {'query': query, 'page_obj': result, 'title': 'Bookingcom - Поиск'})
-    
+        result = q_search(query)
+    return render(request, 'books/search.html', {"page_obj": result})
+
 
 def book(request, post_slug):
     book = cache.get(post_slug)

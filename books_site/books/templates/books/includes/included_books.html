@@ -16,10 +16,26 @@
               <div class="col-md-8" id="flex_tab" >
                   <div class="card-body">
                       <h5 class="card-title">
-                          <a class="a_href_title" href="{{ i.get_absolute_url }}">{{ i.title|truncatechars:29 }}</a>
+                          <a class="a_href_title" href="{{ i.get_absolute_url }}">
+                            {% autoescape off %}
+                            {% if i.headline %}
+                                {{ i.headline }}
+                            {% else %}
+                                {{ i.title|truncatechars:29 }}
+                            {% endif %}
+                            {% endautoescape %}
+                          </a>
                       </h5>
                       <p class="card-text">
-                          <a class="a_book" id="cat_a_author" href="{% url 'main:author' i.author_slug_URL %}">{{ i.author }}</a>
+                          <a class="a_book" id="cat_a_author" href="{% url 'main:author' i.author_slug_URL %}">
+                            {% autoescape off %}
+                            {% if i.authorline %}
+                                {{ i.authorline }}
+                            {% else %}
+                                {{ i.author }}
+                            {% endif %}
+                            {% endautoescape %}
+                          </a>
                       </p>
                       <h5 class="card-subtitle" id="price_product_cart" >{{ i.price }} ₽</h5>
                       <div>

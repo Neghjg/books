@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'social_django',
     'django_extensions',
     'books.apps.BooksConfig',
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'mathfilters',
     'huey.contrib.djhuey',
     'django_recaptcha',
+    'taggit',
     
 ]
 
@@ -74,7 +76,7 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 # Для PostgreSQL
-#SOCIAL_AUTH_JSONFIELD_ENABLED = True
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '49411574675-o4g7cnrnsg8c2febdaon0ff1skl9b4rr.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
@@ -127,24 +129,25 @@ WSGI_APPLICATION = 'books_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# For Postgresql
+# For sqllite
 #DATABASES = {
 #    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'bookingcom',
-#        'USER': 'bookingcom',
-#        'PASSWORD': '1234',
-#        'HOST': 'localhost',
-#        'PORT': '5432',
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
 #    }
 #}
+
+# For Postgresql
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bookingcom',
+        'USER': 'bookingcom',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
