@@ -48,7 +48,7 @@
                     value="{% if form.password1.value %}{{ form.password1.value }}{% endif %}">
             </p>
             {% if form.password1.errors %}
-                <div class="alert alert-danger alert-dismissible fade show">{{ form.password1.errors }}</div>
+                <div style="max-width:400px" class="alert alert-danger alert-dismissible fade show">{{ form.password1.errors }}</div>
             {% endif %}
             <p>
                 <label class="form_label" for="id_password2">Повтор пароля: </label>
@@ -56,7 +56,7 @@
                 value="{% if form.password2.value %}{{ form.password2.value }}{% endif %}">
             </p>
             {% if form.password2.errors %}
-                <div class="alert alert-danger alert-dismissible fade show">{{ form.password2.errors }}</div>
+                <div style="max-width:400px" class="alert alert-danger alert-dismissible fade show">{{ form.password2.errors }}</div>
             {% endif %}
             <p>
                 {{ form.recaptcha }}

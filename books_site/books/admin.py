@@ -36,6 +36,7 @@ class BookAdmin(admin.ModelAdmin):
           ('size', 'type_of_cover'),
           'weight',
           'age_restrictions',
+          'tags',
     )
     inlines = [ReviewsTabAdmin,]
     

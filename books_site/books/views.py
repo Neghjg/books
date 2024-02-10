@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
 from .forms import *
+from orders.models import Order
 from django.db.models import Avg
 from cart.forms import CartAddProductForm
 from django.core.paginator import Paginator
@@ -9,11 +10,25 @@ from datetime import timedelta
 from django.core.cache import cache
 from django.contrib import messages
 from books.utils import q_search
+from django.db.models import Count
+from taggit.models import Tag
 
 
 def index(request):
     books = Book.objects.all().order_by('-count_buy')[:10]
-    return render(request, 'books/index.html', {'books': books, 'title': 'Bookingcom - Главная'})
+    
+    if request.user.is_authenticated:
+        orders_user = Order.objects.filter(user=request.user).order_by('-created')[:10].prefetch_related("items").values_list("items__product", flat=True)
+        books_order = Book.objects.filter(id__in=orders_user).prefetch_related("tags")
+        books_tags_ids = books_order.values_list('tags__id', flat=True)
+        simular_books = Book.objects.filter(tags__in=books_tags_ids).exclude(id__in=orders_user)
+        simular_books = simular_books.annotate(same_tags=Count('tags')).order_by('-same_tags','-count_buy')[:6]
+    else:
+        simular_books = None
+    
+    return render(request, 'books/index.html', {'books': books,
+                                                'simular_books': simular_books,
+                                                'title': 'Bookingcom - Главная'})
 
 
 def category(request, category_slug=None):

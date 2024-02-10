@@ -390,6 +390,7 @@ svg.bi.bi-cart3{
     flex-wrap: wrap;
     float: left;
     max-width: 1000px;
+    min-width: 1000px;
     margin: 50px 0 0 260px;
     
     
@@ -580,4 +581,12 @@ svg.bi.bi-cart3{
 
 .search_none_img{
     margin: 0 0 0 100px;
+}
+
+.recomended{
+    margin: 15px 0 0 40px;
+}
+
+.recomended_h1{
+    margin: 15px 0 0 40px;
 }

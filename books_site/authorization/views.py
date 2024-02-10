@@ -62,7 +62,16 @@ def profile(request):
     else:
         form = ProfileForm(instance=request.user)
 
-    orders = OrderItem.objects.filter(order__user=request.user).select_related("product").select_related("order")
+    orders = OrderItem.objects.filter(order__user=request.user).select_related("product").select_related("order").only(
+        "product__title",
+        "product__price",
+        "order__created",
+        "order__status",
+        "product__id",
+        "product__slug",
+        "id",
+        "quantity",
+        "price")
 
     #orders = Order.objects.filter(user=request.user).prefetch_related("orderitem_set")
 
