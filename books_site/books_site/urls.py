@@ -19,6 +19,16 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from books_site import settings
 from books.views import *
+from django.contrib.sitemaps.views import sitemap
+from books.sitemaps import BookSitemap, CatsSitemap, HomeSitemap
+from django.views.decorators.cache import cache_page
+
+
+sitemaps = {
+    'books': BookSitemap,
+    'cats': CatsSitemap,
+    'main_page': HomeSitemap,
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +37,8 @@ urlpatterns = [
     path('authorization/', include('authorization.urls', namespace="authorization")),
     path('social-auth/', include('social_django.urls', namespace="social")),
     path('cart/', include('cart.urls', namespace="cart")),
+    path('sitemap.xml', cache_page(60 * 15)(sitemap), {'sitemaps': sitemaps},
+        name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 

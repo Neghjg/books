@@ -31,6 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mysite.com']
 
+SITE_ID = 1
 
 # Application definition
 
@@ -53,7 +54,8 @@ INSTALLED_APPS = [
     'huey.contrib.djhuey',
     'django_recaptcha',
     'taggit',
-    
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 ]
 
 AUTHENTICATION_BACKENDS = [
