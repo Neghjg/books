@@ -63,6 +63,7 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.vk.VKOAuth2',
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'authorization.authentication.EmailAuthBackend',
 ]
 
 SOCIAL_AUTH_PIPELINE = (

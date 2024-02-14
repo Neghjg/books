@@ -6,9 +6,10 @@ def q_search(query):
     vector = SearchVector(
             "title",
             "author",
-#            "description"
+#            "description",
+            config="russian",
             )
-    query = SearchQuery(query)
+    query = SearchQuery(query, config="russian")
     result = Book.objects.annotate(rank=SearchRank(vector, query)).filter(rank__gt=0).order_by("-rank")
     
     result = result.annotate(headline=SearchHeadline(
