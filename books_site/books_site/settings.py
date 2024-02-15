@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'taggit',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'payment.apps.PaymentConfig',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -249,3 +250,7 @@ MESSAGE_TAGS = {
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
  }
+
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51Ok22ACWrxSbdqrGdmUOQl1FknrVrNj9WsQM2E4K6uu4Q4uHb9MMNHld0Kyt0n4cdK7ZHHkNpGzKCKbSxcx4WGhm00NypnWe61'
+STRIPE_SECRET_KEY = 'sk_test_51Ok22ACWrxSbdqrGS6ZuT98oQk9XX6h86YR5LdGHL0FXe725SFUPffcFGfNtlrXofjK6wjKJOwzzFr2HGPbQAnnS00B4d7lDpx'
+STRIPE_API_VERSION = '2023-10-16'

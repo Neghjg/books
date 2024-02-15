@@ -7,6 +7,7 @@ from .forms import NonAuthenticatedUserForm, AuthenticatedUserForm
 from django.contrib import messages
 from django.db import transaction
 from django.forms import ValidationError
+from django.urls import reverse
 
 
 @login_required
@@ -55,8 +56,10 @@ def order_create_authenticated_users(request):
                     cart.clear()
                     order_created(order.id, user_em)
                     messages.success(request, 'Заказ оформлен!')
-                    return render(request, 'orders/created.html',
-                          {'order': order, "my_promo": my_promo})
+                    #return render(request, 'orders/created.html',
+                    #      {'order': order, "my_promo": my_promo})
+                    request.session['order_id'] = order.id
+                    return redirect(reverse("payment:process"))
                     
             except ValidationError as e:
                 messages.error(request, str(e))

@@ -39,6 +39,7 @@ urlpatterns = [
     path('cart/', include('cart.urls', namespace="cart")),
     path('sitemap.xml', cache_page(60 * 15)(sitemap), {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
+    path('payment/', include('payment.urls', namespace='payment')),
 ]
 
 

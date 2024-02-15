@@ -1,15 +1,15 @@
 // Когда html документ готов (прорисован)
 $(document).ready(function () {
     // берем в переменную элемент разметки с id jq-notification для оповещений от ajax
-    var successMessage = $("#jq-notification");
+    var successMessage = $("#messages");
 
     // Ловим собыитие клика по кнопке добавить в корзину
-    $(document).on("click", ".add-to-cart", function (e) {
+    $(document).on("click", "#btn_card_price", function (e) {
         // Блокируем его базовое действие
         e.preventDefault();
 
         // Берем элемент счетчика в значке корзины и берем оттуда значение
-        var goodsInCartCount = $("#goods-in-cart-count");
+        var goodsInCartCount = $("#base_cart_total_items");
         var cartCount = parseInt(goodsInCartCount.text() || 0);
 
         // Получаем id товара из атрибута data-product-id
@@ -40,7 +40,7 @@ $(document).ready(function () {
                 goodsInCartCount.text(cartCount);
 
                 // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
-                var cartItemsContainer = $("#cart-items-container");
+                var cartItemsContainer = $("#cart_ajax");
                 cartItemsContainer.html(data.cart_items_html);
 
             },
