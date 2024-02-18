@@ -19,10 +19,10 @@
             {% for item in order.items.all %}
                 <tr class="row{% cycle "1" "2" %}">
                     <td>
-                        <img src="{% if item.product.image %}{{ item.product.image.url }}
+                        <img src="{% if item.product.photo %}{{ item.product.photo.url }}
                             {% else %}{% static "img/no_image.png" %}{% endif %}">
                     </td>
-                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.title }}</td>
                     <td class="num">${{ item.price }}</td>
                     <td class="num">{{ item.quantity }}</td>
                     <td class="num">${{ item.get_cost }}</td>

@@ -26,17 +26,17 @@ def payment_process(request):
             'cancel_url': cancel_url,
             'line_items': []
     }
-    for item in order.items.all():
-        session_data['line_items'].append({
-            'price_data': {
-            'unit_amount': item.price,
-            'currency': 'rub',
-            'product_data': {
-            'name': item.product.title,
-            },
-        },
-        'quantity': item.quantity,
-    })
+        for item in order.items.all():
+            session_data['line_items'].append({
+                'price_data': {
+                'unit_amount':  int(item.price * Decimal('100')),
+                'currency': 'rub',
+                'product_data': {
+                'name': item.product.title,
+                },
+           },
+            'quantity': item.quantity,
+        })
  # создать сеанс оформления платежа Stripe
         session = stripe.checkout.Session.create(**session_data)
  # перенаправить к платежной форме Stripe
@@ -46,5 +46,6 @@ def payment_process(request):
 
 def payment_completed(request):
     return render(request, 'payment/completed.html')
+
 def payment_canceled(request):
     return render(request, 'payment/canceled.html')
