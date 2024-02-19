@@ -205,9 +205,9 @@ $(document).ready(function () {
         var selectedValue = $(this).val();
         // Скрываем или отображаем input ввода адреса доставки
         if (selectedValue === "1") {
-            $("#deliveryAddressField").show();
+            $("#id_address").show();
         } else {
-            $("#deliveryAddressField").hide();
+            $("#id_address").hide();
         }
     });
 });

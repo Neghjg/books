@@ -109,8 +109,8 @@ def order_create_non_authenticated_users(request):
             # очистка корзины
             cart.clear()
             order_created_non_auth(order.id)
-            return render(request, 'orders/created.html',
-                          {'order': order})
+            request.session['order_id'] = order.id
+            return payment_process(request)
     else:
         form = NonAuthenticatedUserForm()
     return render(request, 'orders/create_non-authenticated.html',
