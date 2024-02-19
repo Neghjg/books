@@ -2,6 +2,7 @@
 from orders.models import Order
 from huey.contrib.djhuey import periodic_task, task
 from django.core.mail import send_mail
+import smtplib
 
 
 #huey
@@ -12,15 +13,15 @@ def order_created(order_id, user_em):
     message = '{},\n\nВаш заказ оформлен.\
                 Номер вашего заказа: {}.'.format(order.first_name,
                                              order.id)
-    #try:
-    mail_sent = send_mail(subject,
+    try:
+        mail_sent = send_mail(subject,
                           message,
                           # Яндекс
                           #'jovannymoriarty@yandex.ru',
                           'neghjg17@gmail.com',
                           [user_em])
-    #except smtplib.SMTPException:
-    #    print("Ошибка: Невозможно отправить сообщение")
+    except smtplib.SMTPException:
+        print("Ошибка: Невозможно отправить сообщение")
     return mail_sent
 
 

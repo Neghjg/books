@@ -18,7 +18,7 @@ def index(request):
     books = Book.objects.all().order_by('-count_buy')[:10]
     
     if request.user.is_authenticated:
-        orders_user = Order.objects.filter(user=request.user).order_by('-created')[:10].prefetch_related("items").values_list("items__product", flat=True)
+        orders_user = Order.objects.filter(user=request.user).order_by('-created').prefetch_related("items").values_list("items__product", flat=True)
         books_order = Book.objects.filter(id__in=orders_user).prefetch_related("tags")
         books_tags_ids = books_order.values_list('tags__id', flat=True)
         simular_books = Book.objects.filter(tags__in=books_tags_ids).exclude(id__in=orders_user)

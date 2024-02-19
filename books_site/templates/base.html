@@ -102,7 +102,7 @@
                 {% endif %}
             </div></a></li>
               {% endwith %}
-            <li class="nav-item"><a  class="nav-link" href="{% url "authorization:login" %}">Войти</a></li>
+            <li class="nav-item" id='login_non_auth' ><a  class="nav-link" href="{% url "authorization:login" %}">Войти</a></li>
                 <li class="nav-item"><a  class="nav-link" href="{% url "authorization:registration" %}">Регистрация</a></li>
             {% endif %}
           </ul>

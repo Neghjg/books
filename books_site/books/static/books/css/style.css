@@ -36,7 +36,7 @@ html, body {
 }
 
 #authenticate{
-    margin: 0 0 0 260px;
+    margin: 0 0 0 255px;
 }
 
 .profile_title_order{
@@ -570,7 +570,11 @@ svg.bi.bi-cart3{
 }
 
 #logout_li{
-    margin: 0 0 0 11px
+    margin: 0 0 0 15px
+}
+
+#login_non_auth{
+    margin: 0 0 0 20px;
 }
 
 .search_none{
@@ -589,4 +593,9 @@ svg.bi.bi-cart3{
 
 .recomended_h1{
     margin: 15px 0 0 40px;
+}
+
+#payment_img{
+    width: 175px;
+    height: 248px;
 }

@@ -53,6 +53,7 @@
     {% if request.user.is_authenticated %}
         {% with total_items_order=orders_users|length %}
             {% if total_items_order > 0 %}
+                {% if simular_books|length > 0 %}
                 <div class="recomended_h1"><h1 class="title_h1">Рекомендации для Вас</h1></div>
                     <div class="recomended">
                     {% for i in simular_books %}
@@ -69,6 +70,7 @@
                         </div>
                     </div></a>
                     {% endfor %}
+                {% endif %}
             {% endif %}
         {% endwith %}
     {% endif %}

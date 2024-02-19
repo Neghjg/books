@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.db import transaction
 from django.forms import ValidationError
 from django.urls import reverse
+from payment.views import payment_process
 
 
 @login_required
@@ -20,7 +21,8 @@ def order_create_authenticated_users(request):
         form = AuthenticatedUserForm(request.POST)
         if form.is_valid():
             try:
-                with transaction.atomic(): 
+                with transaction.atomic():
+                    
                     order = form.save()
                     if request.session.get('promokod', '0') == "1":
                         for item in cart:
@@ -52,14 +54,16 @@ def order_create_authenticated_users(request):
                             book.count_buy += item['quantity'] 
                             book.save()
                     # очистка корзины
-                    Order.objects.filter(id = order.id).update(email = user_em, user = us, first_name = us.first_name, last_name = us.last_name )
+                    send_email = form.cleaned_data.get('email')
+                    Order.objects.filter(id = order.id).update(email = send_email, user = us, first_name = us.first_name, last_name = us.last_name )
                     cart.clear()
-                    order_created(order.id, user_em)
+                    order_created(order.id, send_email)
                     messages.success(request, 'Заказ оформлен!')
                     #return render(request, 'orders/created.html',
                     #      {'order': order, "my_promo": my_promo})
                     request.session['order_id'] = order.id
-                    return redirect(reverse("payment:process"))
+                    return payment_process(request)
+                    
                     
             except ValidationError as e:
                 messages.error(request, str(e))

@@ -15,7 +15,7 @@ def payment_process(request):
     order = get_object_or_404(Order, id=order_id)
     if request.method == 'POST':
         success_url = request.build_absolute_uri(
-            reverse('payment:completed'))
+            reverse('main:home'))
         cancel_url = request.build_absolute_uri(
             reverse('payment:canceled'))
  # данные сеанса оформления платежа Stripe
@@ -41,11 +41,7 @@ def payment_process(request):
         session = stripe.checkout.Session.create(**session_data)
  # перенаправить к платежной форме Stripe
         return redirect(session.url, code=303)
-    else:
-        return render(request, 'payment/process.html', locals())
 
-def payment_completed(request):
-    return render(request, 'payment/completed.html')
 
 def payment_canceled(request):
     return render(request, 'payment/canceled.html')
