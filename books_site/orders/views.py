@@ -9,6 +9,7 @@ from django.db import transaction
 from django.forms import ValidationError
 from django.urls import reverse
 from payment.views import payment_process
+from orders.utils import requires_delivery, payment_on_get
 
 
 @login_required
@@ -58,11 +59,19 @@ def order_create_authenticated_users(request):
                     Order.objects.filter(id = order.id).update(email = send_email, user = us, first_name = us.first_name, last_name = us.last_name )
                     cart.clear()
                     order_created(order.id, send_email)
-                    messages.success(request, 'Заказ оформлен!')
+                    
                     #return render(request, 'orders/created.html',
                     #      {'order': order, "my_promo": my_promo})
                     request.session['order_id'] = order.id
-                    return payment_process(request)
+                    pay = form.cleaned_data.get('payment_on_get')
+                    if pay == '0':
+                        return payment_process(request)
+                    else:
+                        messages.success(request, f'Заказ №{order.id} оформлен! ' 
+                            f'Способ доставки: {requires_delivery(form.cleaned_data.get("requires_delivery"),form.cleaned_data.get("address"))} \n'
+                            f'Оплата: {payment_on_get(form.cleaned_data.get("payment_on_get"))}')
+                        return render(request, 'orders/created.html',
+                          {'order': order, "my_promo": my_promo})
                     
                     
             except ValidationError as e:
