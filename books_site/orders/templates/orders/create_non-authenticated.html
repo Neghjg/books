@@ -75,11 +75,11 @@
           {% if form.requires_delivery.errors %}
             <div class="alert alert-danger alert-dismissible fade show">{{ form.requires_delivery.errors }}</div>
           {% endif %}
-        <p><label class="form_label" for="id_address">Необязательное поле*</label>
+        <div id='id_address'><p><!--<label class="form_label" for="id_address">Необязательное поле*</label>-->
             <input type"text" class="form-control", id="order_form"
                 value="{% if form.adress.value %}{{ form.adress.value }}{% endif %}"
                 name="address" placeholder="Адрес">
-        </p>
+        </p></div>
         {% if form.adress.errors %}
             <div class="alert alert-danger alert-dismissible fade show">{{ form.adress.errors }}</div>
         {% endif %}

@@ -15,7 +15,6 @@ from orders.utils import requires_delivery, payment_on_get
 @login_required
 def order_create_authenticated_users(request):
     us = request.user
-    user_em = us.email
     cart = Cart(request)
     my_promo = request.session.get('promokod', '0')
     if request.method == 'POST':
@@ -59,9 +58,6 @@ def order_create_authenticated_users(request):
                     Order.objects.filter(id = order.id).update(email = send_email, user = us, first_name = us.first_name, last_name = us.last_name )
                     cart.clear()
                     order_created(order.id, send_email)
-                    
-                    #return render(request, 'orders/created.html',
-                    #      {'order': order, "my_promo": my_promo})
                     request.session['order_id'] = order.id
                     pay = form.cleaned_data.get('payment_on_get')
                     if pay == '0':
@@ -70,8 +66,9 @@ def order_create_authenticated_users(request):
                         messages.success(request, f'Заказ №{order.id} оформлен! ' 
                             f'Способ доставки: {requires_delivery(form.cleaned_data.get("requires_delivery"),form.cleaned_data.get("address"))} \n'
                             f'Оплата: {payment_on_get(form.cleaned_data.get("payment_on_get"))}')
-                        return render(request, 'orders/created.html',
-                          {'order': order, "my_promo": my_promo})
+                        return redirect('main:home')
+                        #return render(request, 'orders/created.html',
+                        #  {'order': order, "my_promo": my_promo})
                     
                     
             except ValidationError as e:
@@ -119,7 +116,16 @@ def order_create_non_authenticated_users(request):
             cart.clear()
             order_created_non_auth(order.id)
             request.session['order_id'] = order.id
-            return payment_process(request)
+            pay = form.cleaned_data.get('payment_on_get')
+            if pay == '0':
+                return payment_process(request)
+            else:
+                messages.success(request, f'Заказ №{order.id} оформлен! ' 
+                    f'Способ доставки: {requires_delivery(form.cleaned_data.get("requires_delivery"),form.cleaned_data.get("address"))} \n'
+                    f'Оплата: {payment_on_get(form.cleaned_data.get("payment_on_get"))}')
+                return redirect('main:home')
+                #return render(request, 'orders/created.html',
+                #          {'order': order})
     else:
         form = NonAuthenticatedUserForm()
     return render(request, 'orders/create_non-authenticated.html',
