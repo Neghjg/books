@@ -4,7 +4,7 @@ $(document).ready(function () {
     var successMessage = $("#messages");
 
     // Ловим собыитие клика по кнопке добавить в корзину
-    $(document).on("click", "#btn_card_price", function (e) {
+    $(document).on("click", "#btn_card_price_ajax", function (e) {
         // Блокируем его базовое действие
         e.preventDefault();
 
@@ -107,13 +107,14 @@ $(document).ready(function () {
 
     // Теперь + - количества товара 
     // Обработчик события для уменьшения значения
-    $(document).on("click", ".decrement", function () {
+    $(document).on("click", "#decrement", function () {
         // Берем ссылку на контроллер django из атрибута data-cart-change-url
         var url = $(this).data("cart-change-url");
         // Берем id корзины из атрибута data-cart-id
         var cartID = $(this).data("cart-id");
+        var itemID = $(this).data("item-id");
         // Ищем ближайшеий input с количеством 
-        var $input = $(this).closest('.input-group').find('.number');
+        var $input = $(this).closest('.number').find('#number');
         // Берем значение количества товара
         var currentValue = parseInt($input.val());
         // Если количества больше одного, то только тогда делаем -1
@@ -121,18 +122,19 @@ $(document).ready(function () {
             $input.val(currentValue - 1);
             // Запускаем функцию определенную ниже
             // с аргументами (id карты, новое количество, количество уменьшилось или прибавилось, url)
-            updateCart(cartID, currentValue - 1, -1, url);
+            updateCart(cartID, itemID, currentValue - 1, -1, url);
         }
     });
 
     // Обработчик события для увеличения значения
-    $(document).on("click", ".increment", function () {
+    $(document).on("click", "#increment", function () {
         // Берем ссылку на контроллер django из атрибута data-cart-change-url
         var url = $(this).data("cart-change-url");
         // Берем id корзины из атрибута data-cart-id
         var cartID = $(this).data("cart-id");
+        var itemID = $(this).data("item-id");
         // Ищем ближайшеий input с количеством 
-        var $input = $(this).closest('.input-group').find('.number');
+        var $input = $(this).closest('.number').find('#number');
         // Берем значение количества товара
         var currentValue = parseInt($input.val());
 
@@ -140,15 +142,16 @@ $(document).ready(function () {
 
         // Запускаем функцию определенную ниже
         // с аргументами (id карты, новое количество, количество уменьшилось или прибавилось, url)
-        updateCart(cartID, currentValue + 1, 1, url);
+        updateCart(cartID, itemID, currentValue + 1, 1, url);
     });
 
-    function updateCart(cartID, quantity, change, url) {
+    function updateCart(cartID, itemID, quantity, change, url) {
         $.ajax({
             type: "POST",
             url: url,
             data: {
                 cart_id: cartID,
+                item_id: itemID,
                 quantity: quantity,
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
@@ -201,13 +204,72 @@ $(document).ready(function () {
     });
 
     // Обработчик события радиокнопки выбора способа доставки
-    $("input[name='requires_delivery']").change(function () {
-        var selectedValue = $(this).val();
-        // Скрываем или отображаем input ввода адреса доставки
-        if (selectedValue === "1") {
-            $("#id_address").show();
-        } else {
-            $("#id_address").hide();
-        }
-    });
+    $(document).ready(function () {
+        $("input[name='requires_delivery']").change(function () {
+            var selectedValue = $(this).val();
+            // Скрываем или отображаем input ввода адреса доставки
+            if (selectedValue === "1") {
+                $("#id_address").show();
+                $("#id_address input").prop("required", true); // Устанавливаем поле обязательным
+            } else {
+                $("#id_address").hide();
+                $("#id_address input").prop("required", false); // Убираем обязательность поля
+            }
+        });
+    }); 
+
+
+    
 });
+
+function incrementQuantity(productId) {
+    let quantityInput = document.getElementById('quantity_' + productId);
+    let newQuantity = parseInt(quantityInput.value) + 1;
+    updateQuantity(productId, newQuantity);
+}
+
+function decrementQuantity(productId) {
+    let quantityInput = document.getElementById('quantity_' + productId);
+    let newQuantity = parseInt(quantityInput.value) - 1;
+    if (newQuantity < 1) {
+        newQuantity = 1;  // Чтобы количество товаров не стало меньше 1
+    }
+    updateQuantity(productId, newQuantity);
+}
+
+function changeQuantity(productId) {
+    let quantityInput = document.getElementById('quantity_' + productId);
+    let newQuantity = parseInt(quantityInput.value);
+    if (newQuantity < 1) {
+        newQuantity = 1;  // Чтобы количество товаров не стало меньше 1
+    }
+    updateQuantity(productId, newQuantity);
+}
+
+function updateQuantity(productId, newQuantity) {
+    let url = '/cart/change_quantity/' + productId + '/' + newQuantity + '/';
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',  // Указываем, что это AJAX-запрос
+            'X-CSRFToken': '{{ csrf_token }}'  // Передаем CSRF-токен
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();  // Перезагрузим страницу после обновления количества товаров
+            // Обновляем только отдельные блоки на странице
+            //document.getElementById('quantity_' + productId).value = newQuantity;
+            // Обновляем сумму товара
+            //document.getElementById('total_price_' + productId).innerText = data.total_price;
+            // Обновляем общую сумму корзины
+            //document.getElementById('total_cart_price').innerText = data.total_cart_price;
+        } else {
+            console.error('Произошла ошибка при обновлении количества товаров в корзине');
+        }
+    })
+    .catch(error => {
+        console.error('Произошла ошибка при отправке запроса на сервер', error);
+    });
+}

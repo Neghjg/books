@@ -133,7 +133,7 @@
 
 
         <script> 
-            jQuery(document).ready(function () {
+            jQuery(document).ready(function ($) {
                 $("#input-21f").rating({
                     starCaptions: function (val) {
                         if (val < 3) {
@@ -152,7 +152,7 @@
                     hoverOnClear: false
                 });
                 var $inp = $('#rating-input');
-    
+            
                 $inp.rating({
                     min: 0,
                     max: 5,
@@ -160,28 +160,28 @@
                     size: 'md',
                     showClear: false
                 });
-    
+            
                 $('#btn-rating-input').on('click', function () {
                     $inp.rating('refresh', {
                         showClear: true,
                         disabled: !$inp.attr('disabled')
                     });
                 });
-    
-    
+            
+            
                 $('.btn-danger').on('click', function () {
                     $("#kartik").rating('destroy');
                 });
-    
+            
                 $('.btn-success').on('click', function () {
                     $("#kartik").rating('create');
                 });
-    
+            
                 $inp.on('rating.change', function () {
                     alert($('#rating-input').val());
                 });
-    
-    
+            
+            
                 $('.rb-rating').rating({
                     'showCaption': true,
                     'stars': '3',
@@ -195,6 +195,7 @@
                     min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
                 });
             });
+            
             (function (factory) {
                 'use strict';
                 if (typeof define === 'function' && define.amd) {

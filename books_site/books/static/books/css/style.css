@@ -599,3 +599,7 @@ svg.bi.bi-cart3{
     width: 175px;
     height: 248px;
 }
+
+#id_address{
+    display: none;
+}

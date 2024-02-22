@@ -5,6 +5,9 @@ from .cart import Cart
 from .forms import CartAddProductForm, Promo
 from django.contrib import messages
 from django.forms import ValidationError
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+
 
 
 @require_POST
@@ -57,3 +60,33 @@ def cart_detail(request):
                                                 'promo': promo,
                                                 "my_promo": my_promo,
                                                 'title': 'Bookingcom - Корзина'})
+    
+
+#def cart_change(request):
+#    cart_id = request.POST.get("cart_id")
+#    quantity = int(request.POST.get("quantity"))
+#    item_id = request.POST.get("item_id")
+#
+ #   cart = Cart(request)
+#    #product = get_object_or_404(Book, id=item_id)
+#    #product = Book.objects.get(id=item_id)
+#    #request.session['quantity'] = quantity
+#    cart.change_quantity(item_id, quantity)
+ #   cart.save()
+#    updated_quantity = cart[item_id]['quantity']
+#
+#    cart_items_html = render_to_string(
+#        "cart/detail.html", {"carts": cart}, request=request)
+#
+#    response_data = {
+#        "message": "Количество изменено",
+#        "cart_items_html": cart_items_html,
+#        "quaantity": updated_quantity,
+#    }
+#
+#    return JsonResponse(response_data)
+
+def cart_change_quantity(request, item_id, new_quantity):
+    cart = Cart(request)
+    cart.change_quantity(item_id, new_quantity)
+    return JsonResponse({'success': True})

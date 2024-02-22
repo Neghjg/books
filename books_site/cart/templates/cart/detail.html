@@ -55,6 +55,13 @@
                 <a class="a_title_cart" href="{{ product.get_absolute_url }}"><h5 class="card-title">{{product.title|truncatechars:53}}</h5></a>
                 <h6 class="card-subtitle mb-2 text-body-secondary">{{product.author}}</h6>
                 <h6 class="card-subtitle mb-2 text-body-secondary">{{ item.quantity }} шт.</h6>
+                <!--<h6 class="card-subtitle mb-2 text-body-secondary">{{ item.product.id }} шт.</h6>-->
+                
+                    <div class="number">
+                        <button class="number-minus" type="button" onclick="decrementQuantity({{ item.product.id }})">-</button>
+                        <input type="number" id="quantity_{{ item.product.id }}" name="quantity" min="1" value="{{ item.quantity }}" onchange="changeQuantity({{ item.product.id }})">
+                        <button class="number-plus" type="button" onclick="incrementQuantity({{ item.product.id }})">+</button>
+                    </div>
                 {% if my_promo == "1" %}
                     <h6 class="card-subtitle mb-2 text-body-secondary"><del>{{ item.price }}</del> {{ item.price|div:10|mul:9 }} р. за шт.</h6>
                 {% else %}
@@ -88,3 +95,4 @@
     {% endif %}
        
 {% endblock %}
+

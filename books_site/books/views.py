@@ -73,7 +73,7 @@ def book(request, post_slug):
     new_comment = None
     #comments = cache.get(post_slug + 'comments')
     #if not comments:
-    comments = Reviews.objects.filter(article_id__slug=post_slug).select_related('user')
+    comments = Reviews.objects.filter(article_id__slug=post_slug).order_by('-id').select_related('user')
         #cache.set(post_slug + 'comments', comments, 1)
     avg_rating = cache.get(post_slug + 'rating')
     if not avg_rating:
