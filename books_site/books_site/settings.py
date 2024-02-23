@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-j(ret1l-%#74gh83@o-9e)di4r5wcf7i++0einpnndev)amj^@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mysite.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mysite.com', 'bookingcom.pythonanywhere.com']
 
 SITE_ID = 1
 
