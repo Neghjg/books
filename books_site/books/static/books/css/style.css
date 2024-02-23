@@ -556,6 +556,10 @@ svg.bi.bi-cart3{
     transition: background-color .2s,color .2s,opacity .2s;
 }
 
+#cart_number{
+    margin: 0 0 10px 0;
+}
+
 #cat_a_author{
     color: #707783
 }

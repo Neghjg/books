@@ -273,3 +273,4 @@ function updateQuantity(productId, newQuantity) {
         console.error('Произошла ошибка при отправке запроса на сервер', error);
     });
 }
+
