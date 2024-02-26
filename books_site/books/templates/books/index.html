@@ -9,9 +9,12 @@
     <div class="sidebar_index">
         <ul class="nav flex-column">
             {% tag_categories as categories %}
+            {% load cache %}
+            {% cache 300 books_index_cats %}
             {% for category in categories %}
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'main:category' category.slug %}">{{category.name}}</a></li>
             {% endfor %}
+            {% endcache %}
             
         </ul>
         <div class="sales">

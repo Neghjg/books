@@ -38,6 +38,8 @@
               </svg> Каталог</a>
               <ul class="dropdown-menu">
                 {% tag_categories as categories %}
+                {% load cache %}
+                {% cache 300 books_base_cats %}
                 {% for category in categories %}
                 <li><a class="dropdown-item" href="{% url 'main:category' category.slug %}">{{category.name}}</a></li>
                 {% endfor %}
@@ -53,6 +55,7 @@
                 <button class="btn btn-outline-success" type="submit">Поиск</button>
               </form>
             </li>
+            {% endcache %}
             {% if request.user.is_authenticated %}
                 {% with total_items=cart|length %}
                 <li class="nav-item" id='authenticate'>
