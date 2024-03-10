@@ -36,8 +36,6 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
-    'chat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,7 +122,7 @@ TEMPLATES = [
                 'orders.context_processors.get_user_orders',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
-                'chat.context_processors.user_info',
+                
             ],
         },
     },
@@ -260,16 +258,3 @@ STRIPE_SECRET_KEY = 'sk_test_51Ok22ACWrxSbdqrGS6ZuT98oQk9XX6h86YR5LdGHL0FXe725SF
 STRIPE_API_VERSION = '2023-10-16'
 
 STRIPE_WEBHOOK_SECRET = 'whsec_cd58edca6b6037c0897692cd7e7d256fbe73af66af64cd98616653a63d51d0a9'
-
-ASGI_APPLICATION = "books_site.asgi.application"
-
-# Channels
-ASGI_APPLICATION = "books_site.asgi.application"
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-        },
-    },
-}
