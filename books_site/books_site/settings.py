@@ -57,7 +57,14 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'payment.apps.PaymentConfig',
+    'rest_framework',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly'
+    ]
+}
 
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.open_id.OpenIdAuth',

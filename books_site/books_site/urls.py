@@ -40,6 +40,7 @@ urlpatterns = [
     path('sitemap.xml', cache_page(60 * 15)(sitemap), {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
     path('payment/', include('payment.urls', namespace='payment')),
+    path('api/', include('books.api.urls', namespace='api'))
 ]
 
 
