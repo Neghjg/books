@@ -6,51 +6,78 @@ from books.models import Book, Category
 from books.api.serializers import BookSerializer, CatSerializer, OrderItemSerializer, OrderSerializer
 from orders.models import OrderItem, Order
 from django.forms import ValidationError
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework import viewsets
 
 
-class BookListView(generics.ListAPIView):
-    queryset = Book.objects.all()
+#class BookListView(generics.ListAPIView):
+#    queryset = Book.objects.all()
+#    serializer_class = BookSerializer
+    
+    
+#class BookDetailView(generics.RetrieveAPIView):
+#    queryset = Book.objects.all()
+#    serializer_class = BookSerializer
+    
+    
+class BookViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Book.objects.all().order_by("id")
     serializer_class = BookSerializer
     
-    
-class BookDetailView(generics.RetrieveAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
-    
-class CatList(generics.ListAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CatSerializer
-    
-class CatDetail(generics.RetrieveAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CatSerializer
+#class CatList(generics.ListAPIView):
+#    queryset = Category.objects.all()
+#    serializer_class = CatSerializer
     
     
-#class OrderItemListView(generics.ListAPIView):
-#    queryset = OrderItem.objects.all()
-#    serializer_class = OrderItemSerializer
-    
-#class OrderItemDetail(generics.RetrieveAPIView):
-#    queryset = OrderItem.objects.all()
-#    serializer_class = OrderItemSerializer
+#class CatDetail(generics.RetrieveAPIView):
+#    queryset = Category.objects.all()
+#    serializer_class = CatSerializer
 
-class OrderListView(generics.ListAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+class CatViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Category.objects.all().distinct()
+    serializer_class = CatSerializer
+
+#class OrderListView(generics.ListAPIView):
+#    queryset = Order.objects.all()
+#    serializer_class = OrderSerializer
     
-class OrderDetail(generics.RetrieveAPIView):
-    queryset = Order.objects.all()
+    
+#class OrderDetail(generics.RetrieveAPIView):
+#    queryset = Order.objects.all()
+#    serializer_class = OrderSerializer
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all().select_related("user").prefetch_related("items", "items__product")
     serializer_class = OrderSerializer
+    permission_classes = [IsAdminUser]
+    
     
 class OrderAddView(APIView):
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    
     def post(self, request, pk, quantity, format=None):
         book = Book.objects.get(id=pk)
-        order = Order.objects.create(
-            user = request.user,
-            email = request.user.email,
-            first_name = request.user.first_name,
-            last_name = request.user.last_name
-        )
+        if request.data['requires_delivery'] == 'True':
+            order = Order.objects.create(
+                user = request.user,
+                email = request.user.email,
+                first_name = request.user.first_name,
+                last_name = request.user.last_name,
+                address = request.data['address'],
+                requires_delivery = True,
+                payment_on_get = True
+            )
+        else:
+            order = Order.objects.create(
+                user = request.user,
+                email = request.user.email,
+                first_name = request.user.first_name,
+                last_name = request.user.last_name,
+                requires_delivery = False,
+                payment_on_get = True
+            )
         OrderItem.objects.create(order=order,
                                 product=book,
                                 price=book.price,
@@ -61,6 +88,7 @@ class OrderAddView(APIView):
                                     В наличии - {book.quantity}')
         book.quantity -= quantity
         book.count_buy += quantity
+        
         return Response({'succes': True})
         
         
