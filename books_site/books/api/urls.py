@@ -23,6 +23,6 @@ urlpatterns = [
     #path('order_api/', views.OrderListView.as_view(), name = "order_api"),
     #path('order_api/<int:pk>/', views.OrderDetail.as_view(), name = "order_api_detail"),
     path('order_add/<int:pk>/', views.OrderAddView.as_view(), name = 'order_add'),
-    path('api/v1/auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls')),
     re_path(r'^auth/', include('djoser.urls.authtoken'))
 ]

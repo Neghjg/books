@@ -63,7 +63,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 #class OrderAddView(APIView):
 class OrderAddView(generics.CreateAPIView):
     serializer_class = OrderSerializer
-    authentication_classes = [BasicAuthentication]
+    #authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
     
     @action(methods=['post'], detail=True)
