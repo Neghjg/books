@@ -13,6 +13,7 @@ app_name = "books"
 
 urlpatterns = [
     path('', include(router.urls)),
+    #path('b', views.BookAPIView.as_view()),
     #path('book_api/', views.BookListView.as_view(), name = "book_api"),
     #path('book_api/<int:pk>/', views.BookDetailView.as_view(), name = "book_api_detail"),
     #path('cat_api/', views.CatList.as_view(), name = "cat_api"),

@@ -9,6 +9,7 @@ from django.forms import ValidationError
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import viewsets
+from rest_framework.decorators import action
 
 
 #class BookListView(generics.ListAPIView):
@@ -20,6 +21,12 @@ from rest_framework import viewsets
 #    queryset = Book.objects.all()
 #    serializer_class = BookSerializer
     
+    
+#class BookAPIView(APIView):
+#    def get(self, request):
+#        queryset = Book.objects.all().order_by("id")
+#        return Response(BookSerializer(queryset, many=True).data)    
+
     
 class BookViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Book.objects.all().order_by("id")
@@ -53,12 +60,18 @@ class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAdminUser]
     
     
-class OrderAddView(APIView):
+#class OrderAddView(APIView):
+class OrderAddView(generics.CreateAPIView):
+    serializer_class = OrderSerializer
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
     
+    @action(methods=['post'], detail=True)
     def post(self, request, pk, quantity, format=None):
-        book = Book.objects.get(id=pk)
+        try:
+            book = Book.objects.get(id=pk)
+        except:
+            return Response({'error': 'Книги не существует'})
         if request.data['requires_delivery'] == 'True':
             order = Order.objects.create(
                 user = request.user,
