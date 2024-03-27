@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 from . import views
 from rest_framework import routers
 from books.api.views import BookViewSet, CatViewSet, OrderViewSet
@@ -22,5 +22,7 @@ urlpatterns = [
     #path('orderitem_api/<pk>/', views.OrderItemDetail.as_view(), name = "orderitem_api_detail"),
     #path('order_api/', views.OrderListView.as_view(), name = "order_api"),
     #path('order_api/<int:pk>/', views.OrderDetail.as_view(), name = "order_api_detail"),
-    path('order_api/<int:pk>/<int:quantity>/add_order', views.OrderAddView.as_view(), name = 'order_add')
+    path('order_add/<int:pk>/', views.OrderAddView.as_view(), name = 'order_add'),
+    path('api/v1/auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken'))
 ]

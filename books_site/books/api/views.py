@@ -67,7 +67,7 @@ class OrderAddView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
     
     @action(methods=['post'], detail=True)
-    def post(self, request, pk, quantity, format=None):
+    def post(self, request, pk, format=None):
         try:
             book = Book.objects.get(id=pk)
         except:
@@ -94,13 +94,13 @@ class OrderAddView(generics.CreateAPIView):
         OrderItem.objects.create(order=order,
                                 product=book,
                                 price=book.price,
-                                quantity=quantity,
+                                quantity=request.data['quantity'],
                                 )
-        if book.quantity < quantity:
+        if book.quantity < request.data['quantity']:
             raise ValidationError(f'Недостаточное количество товара на складе\
                                     В наличии - {book.quantity}')
-        book.quantity -= quantity
-        book.count_buy += quantity
+        book.quantity -= request.data['quantity']
+        book.count_buy += request.data['quantity']
         
         return Response({'succes': True})
         
