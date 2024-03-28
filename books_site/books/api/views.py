@@ -46,7 +46,7 @@ class OrderAddView(generics.CreateAPIView):
             book = Book.objects.get(id=pk)
         except:
             return Response({'error': 'Книги не существует'})
-        if request.data['requires_delivery'] == 'True':
+        if request.data['requires_delivery'] == True:
             order = Order.objects.create(
                 user = request.user,
                 email = request.user.email,
