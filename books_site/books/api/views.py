@@ -1,58 +1,23 @@
 from rest_framework import generics
-from django.shortcuts import get_object_or_404
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from books.models import Book, Category
-from books.api.serializers import BookSerializer, CatSerializer, OrderItemSerializer, OrderSerializer
+from books.api.serializers import BookSerializer, CatSerializer, OrderSerializer
 from orders.models import OrderItem, Order
 from django.forms import ValidationError
-from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import viewsets
 from rest_framework.decorators import action
-
-
-#class BookListView(generics.ListAPIView):
-#    queryset = Book.objects.all()
-#    serializer_class = BookSerializer
-    
-    
-#class BookDetailView(generics.RetrieveAPIView):
-#    queryset = Book.objects.all()
-#    serializer_class = BookSerializer
-    
-    
-#class BookAPIView(APIView):
-#    def get(self, request):
-#        queryset = Book.objects.all().order_by("id")
-#        return Response(BookSerializer(queryset, many=True).data)    
-
-    
+   
+  
 class BookViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Book.objects.all().order_by("id")
     serializer_class = BookSerializer
     
-#class CatList(generics.ListAPIView):
-#    queryset = Category.objects.all()
-#    serializer_class = CatSerializer
-    
-    
-#class CatDetail(generics.RetrieveAPIView):
-#    queryset = Category.objects.all()
-#    serializer_class = CatSerializer
 
 class CatViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all().distinct()
     serializer_class = CatSerializer
 
-#class OrderListView(generics.ListAPIView):
-#    queryset = Order.objects.all()
-#    serializer_class = OrderSerializer
-    
-    
-#class OrderDetail(generics.RetrieveAPIView):
-#    queryset = Order.objects.all()
-#    serializer_class = OrderSerializer
 
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all().select_related("user").prefetch_related("items", "items__product")
@@ -60,7 +25,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAdminUser]
     
     
-#class OrderAddView(APIView):
+
 class OrderAddView(generics.CreateAPIView):
     serializer_class = OrderSerializer
     #authentication_classes = [BasicAuthentication]
