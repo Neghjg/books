@@ -7,11 +7,19 @@ from django.forms import ValidationError
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
    
+  
+class PaginationBookAndOrder(PageNumberPagination):
+    page_size = 20
+    page_size_query_param = 'page_size'
+    max_page_size = 50
+  
   
 class BookViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Book.objects.all().order_by("id")
     serializer_class = BookSerializer
+    pagination_class = PaginationBookAndOrder
     
 
 class CatViewSet(viewsets.ReadOnlyModelViewSet):
@@ -23,6 +31,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all().select_related("user").prefetch_related("items", "items__product")
     serializer_class = OrderSerializer
     permission_classes = [IsAdminUser]
+    pagination_class = PaginationBookAndOrder
     
     
 
