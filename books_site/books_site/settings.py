@@ -14,6 +14,11 @@ from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
 from datetime import timedelta
+import os
+from dotenv import load_dotenv, find_dotenv
+
+
+load_dotenv(find_dotenv())
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j(ret1l-%#74gh83@o-9e)di4r5wcf7i++0einpnndev)amj^@'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -106,10 +111,10 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '49411574675-o4g7cnrnsg8c2febdaon0ff1skl9b4rr.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = '51783810'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = '5pfJJqMTtliZjflzypME'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_VK_OAUTH2_SECRET')
 
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ["email"]
 SOCIAL_AUTH_VK_OAUTH2_EXTRA_DATA = ['first_name', 'last_name']
@@ -236,7 +241,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "neghjg17@gmail.com"
-EMAIL_HOST_PASSWORD = "rkbhrodpeijlkrud"
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
@@ -257,7 +262,7 @@ INTERNAL_IPS = [
 
 
 RECAPTCHA_PUBLIC_KEY = '6LdRyD4pAAAAAIQPWTzrlzfdFnJq1ni3zJFDaTQW'
-RECAPTCHA_PRIVATE_KEY = '6LdRyD4pAAAAAAnFF2VVAn3QlDu0jlr2Ar-SJ8LJ'
+RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
 
 
 
@@ -277,7 +282,7 @@ MESSAGE_TAGS = {
  }
 
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51Ok22ACWrxSbdqrGdmUOQl1FknrVrNj9WsQM2E4K6uu4Q4uHb9MMNHld0Kyt0n4cdK7ZHHkNpGzKCKbSxcx4WGhm00NypnWe61'
-STRIPE_SECRET_KEY = 'sk_test_51Ok22ACWrxSbdqrGS6ZuT98oQk9XX6h86YR5LdGHL0FXe725SFUPffcFGfNtlrXofjK6wjKJOwzzFr2HGPbQAnnS00B4d7lDpx'
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 STRIPE_API_VERSION = '2023-10-16'
 
-STRIPE_WEBHOOK_SECRET = 'whsec_cd58edca6b6037c0897692cd7e7d256fbe73af66af64cd98616653a63d51d0a9'
+STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
