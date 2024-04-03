@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
 from datetime import timedelta
-import os
 from dotenv import load_dotenv, find_dotenv
 
 
@@ -35,7 +34,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mysite.com', 'bookingcom.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mysite.com', 'bookingcom.pythonanywhere.com', '32da-169-150-209-163.ngrok-free.app']
 
 SITE_ID = 1
 
@@ -175,8 +174,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'bookingcom',
-        'USER': 'bookingcom',
-        'PASSWORD': '1234',
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
