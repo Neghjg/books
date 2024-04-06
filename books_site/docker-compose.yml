@@ -1,0 +1,35 @@
+version: "3.7"
+
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    container_name: bookingcom_postgres
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+  bookingcom_site:
+    image: bookingcom_django:latest
+    restart: always
+    container_name: bookingcom_django
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+    command: sh -c "python manage.py collectstatic --noinput &&
+                    python manage.py makemigrations &&
+                    python manage.py migrate &&
+                    python manage.py loaddata fixtures/books/users.json &&
+                    python manage.py loaddata fixtures/books/cats.json &&
+                    python manage.py loaddata fixtures/books/book.json &&
+                    python manage.py loaddata fixtures/books/reviews.json &&
+                    python manage.py loaddata fixtures/books/order.json &&
+                    python manage.py loaddata fixtures/books/orderitems.json &&
+                    python manage.py runserver 0.0.0.0:8000"
+      

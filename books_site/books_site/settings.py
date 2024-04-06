@@ -32,9 +32,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.getenv('DEBUG', default=0))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mysite.com', 'bookingcom.pythonanywhere.com', '32da-169-150-209-163.ngrok-free.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mysite.com', 'bookingcom.pythonanywhere.com', '32da-169-150-209-163.ngrok-free.app', '0.0.0.0']
 
 SITE_ID = 1
 
@@ -173,11 +173,13 @@ WSGI_APPLICATION = 'books_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bookingcom',
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('POSTGRES_NAME', default='bookingcom'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        #'HOST': os.getenv('DB_HOST', default='localhost'),
+        #'HOST': 'localhost',
+        'HOST': 'bookingcom_postgres',
+        'PORT': os.getenv('POSTGRES_PORT', default=5432),
     }
 }
 
