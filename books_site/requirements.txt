@@ -50,7 +50,7 @@ parso==0.8.3
 Pillow==10.1.0
 prometheus_client==0.20.0
 prompt-toolkit==3.0.43
-psycopg2-binary==2.9.9
+psycopg2==2.9.9
 pure-eval==0.2.2
 pyasn1==0.5.1
 pyasn1-modules==0.3.0
