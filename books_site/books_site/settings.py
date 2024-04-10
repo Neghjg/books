@@ -177,8 +177,8 @@ DATABASES = {
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         #'HOST': os.getenv('DB_HOST', default='localhost'),
-        #'HOST': 'localhost',
-        'HOST': 'bookingcom_postgres',
+        'HOST': 'localhost',
+        #'HOST': 'bookingcom_postgres',
         'PORT': os.getenv('POSTGRES_PORT', default=5432),
     }
 }
